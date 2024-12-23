@@ -1,21 +1,98 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  button {
+    cursor: pointer;
   }
 }
 
+@theme {
+
+  --font-heading: var(--font-roboto);
+
+  --color-input: #242424;
+  --color-muted: #bbbbbb;
+  --color-text: white;
+  --color-background: black;
+  --color-purple-m: #6a11cb;
+  --color-mauve-m: #ad8cea;
+  --color-lavender-m: #f9e7fe;
+  --color-navy-m: #0007c4;
+  --color-sky-m: #79c1ff;
+  --color-azure-m: #2575fc;
+  --color-clear-sky-m: #dafcfc;
+  --color-teal-m: #50dfbc;
+
+  --shadow-glow-sm: 0px 0px 5px 0px;
+  --shadow-glow: 0px 0px 7.5px 0px;
+  --shadow-glow-md: 0px 0px 10px 0px;
+  --shadow-glow-lg: 0px 0px 12.5px 0px;
+
+  --animate-shimmer: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 0px 0px;
+  }
+  to {
+    background-position: -200% 0px;
+  }
+}
+
+
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  --bg-rd-opacity: 40%;
+  --bg-rd-dimmed: 25%;
+  --bg-rd-purple: color-mix(
+    in oklab,
+    var(--color-purple-m) var(--bg-rd-opacity),
+    transparent
+  );
+  --bg-rd-azure: color-mix(
+    in oklab,
+    var(--color-azure-m) var(--bg-rd-opacity),
+    transparent
+  );
+  --bg-rd-clear-sky: color-mix(
+    in oklab,
+    var(--color-clear-sky-m) var(--bg-rd-opacity),
+    transparent
+  );
+  --bg-rd-purple-d: color-mix(
+    in oklab,
+    var(--color-purple-m) var(--bg-rd-dimmed),
+    transparent
+  );
+  --bg-rd-azure-d: color-mix(
+    in oklab,
+    var(--color-azure-m) var(--bg-rd-dimmed),
+    transparent
+  );
+  --bg-rd-clear-sky-d: color-mix(
+    in oklab,
+    var(--color-clear-sky-m) 12.5%,
+    transparent
+  );
+
+  background: radial-gradient(
+      at 110% 110%,
+      var(--bg-rd-clear-sky),
+      var(--bg-rd-clear-sky-d) 30%,
+      transparent 50%
+    ),
+    radial-gradient(
+      at -10% 110%,
+      var(--bg-rd-purple),
+      var(--bg-rd-purple-d) 30%,
+      transparent 50%
+    ),
+    radial-gradient(
+      at -10% -10%,
+      var(--bg-rd-azure),
+      var(--bg-rd-azure-d) 30%,
+      transparent 50%
+    ),
+    black; /* Base background color */
+  background-blend-mode: screen;
 }
