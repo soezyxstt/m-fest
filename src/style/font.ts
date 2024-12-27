@@ -5,7 +5,7 @@ export const montserrat = Montserrat({
   adjustFontFallback: true,
   style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-montserrat',
+  variable: '--font-next-montserrat',
 });
 
 export const roboto = Roboto_Serif({
@@ -13,7 +13,7 @@ export const roboto = Roboto_Serif({
   adjustFontFallback: true,
   style: ['normal', 'italic'],
   subsets: ['latin'],
-  variable: '--font-roboto',
+  variable: '--font-next-roboto',
 });
 
 export const onest = Onest({
@@ -21,5 +21,5 @@ export const onest = Onest({
   adjustFontFallback: true,
   style: ['normal'],
   subsets: ['latin'],
-  variable: '--font-onest',
+  variable: '--font-next-onest',
 });

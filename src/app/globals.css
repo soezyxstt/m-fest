@@ -7,8 +7,10 @@
 }
 
 @theme {
-
   --font-heading: var(--font-roboto);
+  --font-montserrat: var(--font-next-montserrat);
+  --font-onest: var(--font-next-onest);
+  --font-roboto: var(--font-next-roboto);
 
   --color-input: #242424;
   --color-muted: #bbbbbb;
@@ -29,6 +31,7 @@
   --shadow-glow-lg: 0px 0px 12.5px 0px;
 
   --animate-shimmer: shimmer 2s linear infinite;
+  --animate-gradient-shift: gradientShift 2s ease-in-out infinite;
 }
 
 @keyframes shimmer {
@@ -40,6 +43,28 @@
   }
 }
 
+@keyframes gradientShift {
+  0% {
+    --tw-gradient-from: var(--color-purple-m);
+    --tw-gradient-via: var(--color-azure-m);
+    --tw-gradient-to: var(--color-green-600);
+  }
+  33% {
+    --tw-gradient-via: var(--color-purple-m);
+    --tw-gradient-to: var(--color-azure-m);
+    --tw-gradient-from: var(--color-green-600);
+  }
+  67% {
+    --tw-gradient-to: var(--color-purple-m);
+    --tw-gradient-from: var(--color-azure-m);
+    --tw-gradient-via: var(--color-green-600);
+  }
+  100% {
+    --tw-gradient-from: var(--color-purple-m);
+    --tw-gradient-via: var(--color-azure-m);
+    --tw-gradient-to: var(--color-green-600);
+  }
+}
 
 body {
   --bg-rd-opacity: 40%;
