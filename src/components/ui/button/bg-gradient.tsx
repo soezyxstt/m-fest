@@ -30,7 +30,7 @@ export default function GradientButton({
   variant,
   size,
   containerClassName,
-  isFullWIdth,
+  isFullWIdth = false,
   ...props
 }: ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof gradientButtonVariants> & {
@@ -40,7 +40,7 @@ export default function GradientButton({
   return (
     <div
       className={cn(
-        'relative flex **:cursor-pointer',
+        'relative flex **:cursor-pointer w-fit',
         containerClassName,
         isFullWIdth && 'w-full'
       )}

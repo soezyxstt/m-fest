@@ -7,7 +7,7 @@ function h1({ children, className, ...props }: HeadingProps) {
   return (
     <h1
       className={cn(
-        'font-heading text-white italic font-medium text-4xl',
+        'font-heading text-white italic font-medium text-4xl md:text-6xl',
         className
       )}
       {...props}
@@ -21,7 +21,7 @@ function h2({ children, className, ...props }: HeadingProps) {
   return (
     <h2
       className={cn(
-        'font-heading text-white italic font-medium text-3xl',
+        'font-heading text-white italic font-medium text-3xl md:text-5xl',
         className
       )}
       {...props}
@@ -35,7 +35,7 @@ function h3({ children, className, ...props }: HeadingProps) {
   return (
     <h3
       className={cn(
-        'font-heading text-white italic font-medium text-2xl',
+        'font-heading text-white italic font-medium text-2xl md:text-4xl',
         className
       )}
       {...props}
@@ -49,7 +49,7 @@ function h4({ children, className, ...props }: HeadingProps) {
   return (
     <h4
       className={cn(
-        'font-heading text-white italic font-medium text-xl',
+        'font-heading text-white italic font-medium text-xl md:text-3xl',
         className
       )}
       {...props}
@@ -63,7 +63,7 @@ function h5({ children, className, ...props }: HeadingProps) {
   return (
     <h5
       className={cn(
-        'font-heading text-white italic font-medium text-lg',
+        'font-heading text-white italic font-medium text-lg md:text-2xl',
         className
       )}
       {...props}
@@ -77,7 +77,7 @@ function h6({ children, className, ...props }: HeadingProps) {
   return (
     <h6
       className={cn(
-        'font-heading text-white italic font-medium text-base',
+        'font-heading text-white italic font-medium text-base md:text-xl',
         className
       )}
       {...props}

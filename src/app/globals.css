@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin 'tailwindcss-animate';
 
 :root {
   button {
@@ -11,6 +12,7 @@
   --font-montserrat: var(--font-next-montserrat);
   --font-onest: var(--font-next-onest);
   --font-roboto: var(--font-next-roboto);
+  --font-title: var(--font-montserrat);
 
   --color-input: #242424;
   --color-muted: #bbbbbb;
@@ -32,6 +34,27 @@
 
   --animate-shimmer: shimmer 2s linear infinite;
   --animate-gradient-shift: gradientShift 2s ease-in-out infinite;
+    /* Animations */
+  --animate-accordion-down: accordion-down 0.25s ease-out;
+  --animate-accordion-up: accordion-up 0.25s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0px;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0px;
+    }
+  }
 }
 
 @keyframes shimmer {
