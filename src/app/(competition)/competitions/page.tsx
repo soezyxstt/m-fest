@@ -11,7 +11,6 @@ import { montserrat, roboto } from '@/style/font';
 import Link from 'next/link';
 import { Instagram, Mail, Twitter } from 'lucide-react';
 import GradientText from '@/components/ui/text/gradient';
-import { BackgroundLines } from '@/components/ui/bg-lines';
 
 export default function CompetitionsPage() {
   const competitions: {
@@ -73,8 +72,7 @@ export default function CompetitionsPage() {
             Navigation
           </AccordionTrigger>
         </AccordionHeader>
-        <AccordionContent className='text-white overflow-hidden data-[state=closed]:w-0 data-[state=open]:w-[50vw] transition-all duration-750 ease-in-out relative'>
-          <BackgroundLines className='flex flex-col items-center justify-center gap-10'>
+        <AccordionContent className='text-white overflow-hidden data-[state=closed]:w-0 data-[state=open]:w-[50vw] transition-all duration-750 ease-in-out relative flex flex-col items-center justify-center gap-10'>
             <div className='flex gap-6 h-16 items-center mb-12'>
               <Image
                 src='/logo-white.png'
@@ -129,7 +127,6 @@ export default function CompetitionsPage() {
                 <Mail size={24} />
               </Link>
             </div>
-          </BackgroundLines>
         </AccordionContent>
       </AccordionItem>
       {competitions.map((competition, i) => (
