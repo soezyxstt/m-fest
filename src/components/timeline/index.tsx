@@ -3,44 +3,34 @@ import TimelineClient from './timeline';
 
 const timelineData = [
   {
-    date: '20 Dec 2024',
+    date: 'February 2025',
     title: 'Pre-Program',
-    content: 'Soft Launch',
+    content: 'M-Care: Klinik Mesin',
   },
   {
-    date: '21 Dec 2024 - 20 Jan 2025',
+    date: 'February 2025',
     title: 'Pre-Program',
-    content: 'Launch, Socialization',
+    content: 'M-Care: Hari Bermain Bersama (HMB)',
   },
   {
-    date: '21 Jan - 11 Feb 2025',
-    title: 'Pre-Program',
-    content: 'Close Registration & Applicants Selection',
+    date: 'February - April 2025',
+    title: 'Starting Phase',
+    content: 'Competitions Registration and Submission',
   },
   {
-    date: '11 - 14 Feb 2025',
-    title: 'Pre-Program',
-    content: 'Top 25 Announcement',
-  },
-  {
-    date: '17 Feb - 17 Mar 2025',
+    date: '13 April 2025',
     title: 'Acceleration Phase',
-    content: 'Boot Camp & Business Matchmaking',
+    content: 'M-Run and Engine Tune-Up',
   },
   {
-    date: '21 Mar - 11 April 2024',
-    title: 'Demo Day',
-    content: 'Top 6',
+    date: '2 May 2025',
+    title: 'Final Phase',
+    content: 'Competitions Final, M-Expo, and Solidarity Forever Summit',
   },
   {
-    date: 'April - Jun 2024',
-    title: 'Pilot Implementation',
-    content: 'Pilot Project (On-site)',
-  },
-  {
-    date: 'Jun 2024',
-    title: 'Post-program',
-    content: 'Pilot Publication',
+    date: '3 May 2025',
+    title: 'Ending Phase',
+    content: 'M-Talks, M-Expo, Solidarity Forever Summit, and Ceremony',
   },
 ];
 

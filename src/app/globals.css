@@ -37,6 +37,8 @@
     /* Animations */
   --animate-accordion-down: accordion-down 0.25s ease-out;
   --animate-accordion-up: accordion-up 0.25s ease-out;
+  --animate-accordion-left: accordion-left 0.75s ease-in-out;
+  --animate-accordion-right: accordion-right 0.5s ease-in-out;
 
   @keyframes accordion-down {
     from {
@@ -53,6 +55,24 @@
     }
     to {
       height: 0px;
+    }
+  }
+
+    @keyframes accordion-left {
+    from {
+      width: 50vw;
+    }
+    to {
+      width: 0vw;
+    }
+  }
+
+  @keyframes accordion-right {
+    from {
+      width: 0vw;
+    }
+    to {
+      width: 50vw;
     }
   }
 }
@@ -87,6 +107,10 @@
     --tw-gradient-via: var(--color-azure-m);
     --tw-gradient-to: var(--color-green-600);
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
