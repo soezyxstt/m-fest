@@ -34,11 +34,12 @@
 
   --animate-shimmer: shimmer 2s linear infinite;
   --animate-gradient-shift: gradientShift 2s ease-in-out infinite;
-    /* Animations */
+  /* Animations */
   --animate-accordion-down: accordion-down 0.25s ease-out;
   --animate-accordion-up: accordion-up 0.25s ease-out;
   --animate-accordion-left: accordion-left 0.75s ease-in-out;
   --animate-accordion-right: accordion-right 0.5s ease-in-out;
+  --animate-logo: logo 2s ease-in-out;
 
   @keyframes accordion-down {
     from {
@@ -58,7 +59,7 @@
     }
   }
 
-    @keyframes accordion-left {
+  @keyframes accordion-left {
     from {
       width: 50vw;
     }
@@ -109,11 +110,21 @@
   }
 }
 
+@keyframes logo {
+  0% {
+    clip-path: polygon(0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800);
+  }
+  100% {
+    clip-path: polygon(64.486 31.066, 92 5, 117.048 1.00, 153.478 0.000, 89.235 116.729, 36.670 147.800, 0 147.800)
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-body {
+body,
+.bg-grad {
   --bg-rd-opacity: 40%;
   --bg-rd-dimmed: 25%;
   --bg-rd-purple: color-mix(
