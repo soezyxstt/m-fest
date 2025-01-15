@@ -1,10 +1,11 @@
 import { auth, signIn } from '@/auth';
 import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { heading } from '@/components/ui/text/headings';
+import { title } from '@/components/ui/text/title';
 import SignInForm from './form';
 import GradientButton from '@/components/ui/button/bg-gradient';
 import Link from 'next/link';
+import GradientText from '@/components/ui/text/gradient';
 
 export default async function SignIn() {
   const session = await auth();
@@ -13,7 +14,7 @@ export default async function SignIn() {
   }
   return (
     <main className='h-screen flex flex-col justify-center items-center gap-6 md:gap-10'>
-      <heading.h1 className=''>Sign in to your account</heading.h1>
+      <title.h1 className='uppercase'>Sign In</title.h1>
       <div className='rounded-2xl w-full max-w-3xl border border-clear-sky-m bg-[#D9D9D922] backdrop:blur-md p-8 md:px-16 flex flex-col gap-4 '>
         <SignInForm />
         <form
@@ -46,7 +47,9 @@ export default async function SignIn() {
               href='/sign-up'
               className='text-azure-m'
             >
-              Create Account
+              <GradientText className='text-xs md:text-xs'>
+                Create Account
+              </GradientText>
             </Link>
           </div>
           <div className='flex gap-2'>
@@ -55,7 +58,9 @@ export default async function SignIn() {
               href='/forgot-password'
               className='text-purple-m'
             >
-              Reset Password
+              <GradientText className='text-xs md:text-xs'>
+                Reset Password
+              </GradientText>
             </Link>
           </div>
         </div>

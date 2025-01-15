@@ -88,6 +88,7 @@ export default function SignInForm() {
           type='submit'
           containerClassName='mt-10'
           variant='outline'
+          isFullWIdth
         >
           <Mail className='w-4 h-4' />
           Sign-in using email
