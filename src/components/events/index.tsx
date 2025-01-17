@@ -16,7 +16,36 @@ export default function Events() {
   const { height } = useWindowSize();
   const size = ref.current?.getBoundingClientRect();
   const [isExpanded, setIsExpanded] = useState(false);
-  const events = [1, 2, 3, 4, 5];
+  const events = [
+    {
+      title: 'M-Care',
+      desc: 'We want to show that we care, Save Blood Save Lives! Register yourself, donate your blood, and get a free medical check up!'
+    },
+    {
+      title: 'M-Run',
+      desc: 'Improve your health and build connection in the process, with us and M-Run.'
+    },
+    {
+      title: 'Engine Tune Up',
+      desc: 'Make sure your vehicle always at its prime, come visit us for free engine tune up service!'
+    },
+    {
+      title: 'M-Expo',
+      desc: 'Meet some exciting mechanical related companies, projects, machinery, and so many more in this mechanical exhibition.'
+    },
+    {
+      title: 'Solidarity Forever Summit',
+      desc: 'Address important issues, mechanical engineering related, and discuss how we might approach and even solve this problems.'
+    },
+    {
+      title: 'M-Talks',
+      desc: 'Delve deep into the conversation with professionals and experts to better understand the issues we\'re facing.'
+    },
+    {
+      title: 'Ceremony',
+      desc: 'End this journey with exhilarating celebration, together with us and our performers!'
+    }
+  ];
   const left = useTransform(scrollYProgress, [0, 0.5, 1], ['5vw', '70vw', '10vw']);
   const top = useTransform(scrollYProgress, [0, 0.5, 1], ['50vh', '15vh', '0vh']);
   const rotate = useTransform(scrollYProgress, [0, 0.5, 1], ['0deg', '45deg', '-45deg']);
@@ -33,7 +62,7 @@ export default function Events() {
     <section
       ref={ref}
       id='events'
-      className='grid grid-rows-1 relative'
+      className='grid grid-rows-1 relative w-full'
     >
       <div
         className={`sticky top-1/2 z-10 ml-6 md:ml-20 transition-all duration-500 ${
@@ -56,16 +85,16 @@ export default function Events() {
       </div>
       <motion.div
         style={{left, top, rotate}}
-        className='sticky w-0 h-0 z-[11] pointer-events-none'
+        className='sticky w-0 h-0 z-[11] pointer-events-none max-sm:hidden'
       >
         <div className='bg-radial w-96 h-96 from-cyan-200 via-azure-m to-80% to-transparent rounded-full absolute opacity-7.5  translate-12'></div>
         <div className='bg-radial w-72 h-72 from-mauve-m via-purple-m to-80% to-transparent rounded-full absolute opacity-10'></div>
       </motion.div>
-      {events.map((a, i) => (
+      {events.map((event, i) => (
         <EventsCard
           key={'events-card-' + i}
-          title='Event Name'
-          description='Brief Description'
+          title={event.title}
+          description={event.desc}
           image={i % 2 === 0 ? '/event/run.png' : '/event/house.png'}
         />
       ))}

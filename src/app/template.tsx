@@ -18,7 +18,7 @@ export default function RootTemplate({
           transition={{ delay: 1, duration: 0.5 }}
         >
           <motion.div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex'>
-            <div className='w-[400.4px] h-[147.8px] relative'>
+            <div className='w-[400.4px] h-[147.8px] relative scale-50 md:scale-100'>
               <motion.div
                 className='relative w-full h-full'
                 style={{

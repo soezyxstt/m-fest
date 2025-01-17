@@ -48,7 +48,7 @@ function TimelineCard({
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className='font-semibold [font-family:var(--font-next-parisienne)] text-2xl md:text-4xl text-accent-primary font-stretch-extra-condensed'
+          className='font-semibold [font-family:var(--font-next-parisienne)] text-2xl md:text-4xl text-accent-primary font-stretch-extra-condensed max-sm:hidden'
         >
           {`${index + 1}`.padStart(2, '0')}
         </motion.p>

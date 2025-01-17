@@ -12,45 +12,33 @@ function Faqs() {
   const faqs = [
     {
       id: '01',
-      title: 'What types of innovations are you looking for?',
+      title: 'Is the competition open to the public?',
       content:
-        'We seek tech-driven solutions addressing key challenges like urban farming, stunting reduction, tidal flood adaptation, and air pollution reduction. Solutions should be at minimum Technology Readiness Level 6.',
+        'For college students, the Business Case, Innovative Poster and Paper, and Pipeline Design competitions are open. For high school students, the Science, Technology, Engineering, or Mathematics (STEM) competition is open.',
     },
     {
       id: '02',
-      title: 'Which regions are eligible to participate?',
+      title: 'Do participants need to be from the same institution or school?',
       content:
-        'Our program is open to innovators from Southeast Asia and Japan who have secured operational funding and are ready to implement solutions at district and city levels.',
+        'Yes, for each competition, participants must be from the same institution or school',
     },
     {
       id: '03',
-      title: 'How do you support implementation in partner cities?',
+      title: 'Where will the competition be held?',
       content:
-        'We work closely with government partners in Bogor, Semarang, and Palembang to facilitate pilot programs and help scale successful solutions to regional and national levels.',
+        'The selection phase will be conducted online, while finalists will compete offline at ITB Ganesha.',
     },
     {
       id: '04',
-      title: 'What industries can participate in the program?',
+      title: 'How can I become a sponsor?',
       content:
-        'We welcome solutions from various sectors including Agriculture & Food, Healthcare, Energy & Resources, Environmental & Sustainability, Transportation & Logistics, and SaaS & AI among others.',
+        'You can contact us through the "Ask any question" button.',
     },
     {
       id: '05',
-      title: 'What are the key environmental challenges you address?',
+      title: 'Can one person participate in more than one competition?',
       content:
-        'Our focus areas include low carbon development, sanitation and wastewater management, food security, rapid urbanization, air pollution, waste management, and climate change adaptation.',
-    },
-    {
-      id: '06',
-      title: 'How does the program align with sustainable development goals?',
-      content:
-        'Our initiative directly supports multiple UN Sustainable Development Goals, including Zero Hunger, Good Health, Clean Water, Sustainable Cities, Climate Action, and Industry Innovation, with a particular focus on environmental impact.',
-    },
-    {
-      id: '07',
-      title: 'What kind of funding and support is available?',
-      content:
-        'While participants need to have secured operational funding, we provide strategic support through government partnerships, implementation guidance, and opportunities to scale solutions from district to national levels.',
+        'One person is only allowed to participate in 1 competition category in M-Fest 2025.',
     },
   ];
 

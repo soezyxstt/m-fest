@@ -32,11 +32,11 @@ export default function CompetitionsPage() {
       cover: '/competition/bcc-cover.png',
     },
     {
-      title: 'Paper Competition',
+      title: 'Inovative Poster and Paper Competition',
       logo: '/competition/logo/paper.png',
       desc: 'Showcase your research and analytical skills through academic papers on business and economics. Present your findings to distinguished scholars and industry professionals.',
       regLink: 'https://www.google.com',
-      abbreviation: 'Paper',
+      abbreviation: 'IPPC',
       cover: '/competition/paper-cover.png',
     },
     {
@@ -59,84 +59,84 @@ export default function CompetitionsPage() {
   return (
     <Accordion
       type='single'
-      orientation='horizontal'
-      className='w-full h-screen flex '
-      defaultValue='item-nav'
+      orientation='vertical'
+      className='w-full h-screen flex flex-col md:flex-row overflow-hidden'
+      defaultValue='item-0'
     >
       <AccordionItem
         value={`item-nav`}
-        className='flex data-[state=open]:w-[50vw] data-[state=closed]:w-[12.5vw] duration-750 transition-all'
+        className='flex max-sm:flex-col md:data-[state=open]:w-[50vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
       >
-        <AccordionHeader className='flex data-[state=closed]:w-[12.5vw] data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
-          <AccordionTrigger className='border border-x-0 border-white h-screen text-white w-full font-medium transition-all cursor-pointer [writing-mode:vertical-rl] [text-orientation:mixed] flex items-center justify-center md:px-20 uppercase text-4xl'>
+        <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
+          <AccordionTrigger className='border border-x-0 border-white md:h-screen text-white w-full font-medium transition-all cursor-pointer md:[writing-mode:vertical-rl] md:[text-orientation:mixed] flex items-center justify-between max-sm:px-10 md:px-20 uppercase text-2xl md:text-4xl'>
             Navigation
           </AccordionTrigger>
         </AccordionHeader>
-        <AccordionContent className='text-white overflow-hidden data-[state=closed]:w-0 data-[state=open]:w-[50vw] transition-all duration-750 ease-in-out relative flex flex-col items-center justify-center gap-10'>
-            <div className='flex gap-6 h-16 items-center mb-12'>
-              <Image
-                src='/logo-white.png'
-                width={200}
-                height={200}
-                alt='Mechanical Festival 2025'
-                className='h-7/10 w-auto'
-              />
-              <Image
-                src='/hmm.png'
-                width={200}
-                height={200}
-                alt='HMM ITB'
-                className='h-full w-auto'
-              />
-            </div>
+        <AccordionContent className='text-white overflow-hidden max-sm:w-full md:data-[state=closed]:w-0 md:data-[state=open]:w-[50vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out relative flex flex-col items-center justify-center gap-10'>
+          <div className='flex gap-4 md:gap-6 h-12 md:h-16 items-center mb-4 md:mb-12'>
+            <Image
+              src='/logo-white.png'
+              width={200}
+              height={200}
+              alt='Mechanical Festival 2025'
+              className='h-7/10 w-auto'
+            />
+            <Image
+              src='/hmm.png'
+              width={200}
+              height={200}
+              alt='HMM ITB'
+              className='h-full w-auto'
+            />
+          </div>
+          <Link
+            href='/'
+            className={`${montserrat.className} text-5xl font-medium uppercase`}
+          >
+            Home
+          </Link>
+          <Link
+            href='/#timeline'
+            className={`${montserrat.className} text-5xl font-medium uppercase`}
+          >
+            Timeline
+          </Link>
+          <Link
+            href='/#events'
+            className={`${montserrat.className} text-5xl font-medium uppercase`}
+          >
+            Events
+          </Link>
+          <div className='flex gap-10 items-center md:mt-12 mt-4'>
             <Link
-              href='/'
-              className={`${montserrat.className} text-6xl font-medium uppercase`}
+              className=''
+              href='https://www.instagram.com/mfestitb/'
             >
-              Home
+              <Instagram size={24} />
             </Link>
             <Link
-              href='/#timeline'
-              className={`${montserrat.className} text-6xl font-medium uppercase`}
+              className=''
+              href='https://www.instagram.com/mfestitb/'
             >
-              Timeline
+              <Twitter size={24} />
             </Link>
             <Link
-              href='/#events'
-              className={`${montserrat.className} text-6xl font-medium uppercase`}
+              className=''
+              href='https://www.instagram.com/mfestitb/'
             >
-              Events
+              <Mail size={24} />
             </Link>
-            <div className='flex gap-10 items-center mt-12'>
-              <Link
-                className=''
-                href='https://www.instagram.com/mfestitb/'
-              >
-                <Instagram size={24} />
-              </Link>
-              <Link
-                className=''
-                href='https://www.instagram.com/mfestitb/'
-              >
-                <Twitter size={24} />
-              </Link>
-              <Link
-                className=''
-                href='https://www.instagram.com/mfestitb/'
-              >
-                <Mail size={24} />
-              </Link>
-            </div>
+          </div>
         </AccordionContent>
       </AccordionItem>
       {competitions.map((competition, i) => (
         <AccordionItem
           key={i}
           value={`item-${i}`}
-          className='flex data-[state=open]:w-[50vw] data-[state=closed]:w-[12.5vw] duration-750 transition-all'
+          className='flex max-sm:flex-col md:data-[state=open]:w-[50vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
         >
-          <AccordionHeader className='flex data-[state=closed]:w-[12.5vw] data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
-            <AccordionTrigger className='border border-x-0 border-white h-screen text-white w-full font-medium transition-all cursor-pointer [writing-mode:vertical-rl] [text-orientation:mixed] flex items-center justify-between md:px-20 uppercase text-4xl'>
+          <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
+            <AccordionTrigger className='border border-x-0 border-white md:h-screen text-white w-full font-medium transition-all cursor-pointer md:[writing-mode:vertical-rl] md:[text-orientation:mixed] flex items-center justify-between max-sm:px-10 md:px-20 uppercase text-2xl md:text-4xl duration-750'>
               <div>{competition.abbreviation}</div>
               <div className='text-base font-normal'>
                 <GradientText className='md:text-base text-base font-normal'>
@@ -145,18 +145,18 @@ export default function CompetitionsPage() {
               </div>
             </AccordionTrigger>
           </AccordionHeader>
-          <AccordionContent className='text-white overflow-hidden data-[state=closed]:w-0 data-[state=open]:w-[50vw] transition-all duration-750 ease-in-out'>
-            <div className='h-3/5 w-[50vw] flex flex-col items-center pt-12 px-12 bg-cover bg-center relative'>
-              <div className='flex flex-col justify-between items-center h-full px-16'>
+          <AccordionContent className='text-white relative overflow-hidden max-sm:w-screen md:data-[state=closed]:w-0 md:data-[state=open]:w-[50vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out'>
+            <div className='h-3/5 md:w-[50vw] w-screen flex flex-col items-center pt-12 px-12 bg-cover bg-center relative'>
+              <div className='flex flex-col justify-between items-center h-full px-16 max-sm:w-screen max-sm:space-y-6'>
                 <Image
                   src={competition.logo}
                   width={200}
                   height={200}
                   alt={competition.abbreviation}
-                  className='h-12 w-auto'
+                  className='md:h-10 h-8 w-auto'
                 />
                 <p
-                  className={`text-center text-6xl uppercase font-semibold ${roboto.className}`}
+                  className={`text-center text-2xl md:text-5xl uppercase font-semibold ${roboto.className}`}
                 >
                   <span>
                     {competition.title.substring(
@@ -164,16 +164,16 @@ export default function CompetitionsPage() {
                       competition.title.lastIndexOf(' ')
                     )}
                   </span>
-                  <span className='italic font-light text-5xl'>
+                  <span className='italic font-light text-2xl md:text-5xl'>
                     {competition.title.substring(
                       competition.title.lastIndexOf(' '),
                       competition.title.length
                     )}
                   </span>
                 </p>
-                <p className='text-center mt-4'>{competition.desc}</p>
+                <p className='text-center mt-4 w-full'>{competition.desc}</p>
               </div>
-              <div className='flex gap-12 my-12 font-medium'>
+              <div className='flex gap-12 my-8 font-medium relative z-20'>
                 <GradientButton variant='outline'>Guide Book</GradientButton>
                 <GradientButton variant='glow'>Register</GradientButton>
               </div>
@@ -184,7 +184,7 @@ export default function CompetitionsPage() {
               alt=''
               width={600}
               height={400}
-              className='h-2/5 w-[50vw] object-center object-cover brightness-75'
+              className='h-2/5 md:w-[50vw] w-full object-center object-cover brightness-50 md:brightness-75 max-sm:absolute max-sm:bottom-0'
             />
           </AccordionContent>
         </AccordionItem>

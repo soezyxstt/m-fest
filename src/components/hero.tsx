@@ -15,10 +15,10 @@ export default function Hero() {
           particleColor='#ad8cea'
         />
       </div>
-      <h1 className='text-4xl md:text-8xl text-center max-w-7/10 md:max-w-2xl [font-family:var(--font-next-montserrat)] font-bold'>
+      <h1 className='text-6xl md:text-8xl text-center max-w-8/10 md:max-w-2xl [font-family:var(--font-next-montserrat)] font-bold'>
         Mechanical Festival 2025
       </h1>
-      <GradientText className='leading-normal md:text-7xl'>
+      <GradientText className='leading-normal md:text-7xl text-4xl'>
         Coming Soon
       </GradientText>
     </section>
