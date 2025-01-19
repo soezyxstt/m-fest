@@ -15,7 +15,7 @@ export default function EventsCard({
 }: {
   title: string;
   description: string;
-  image: string;
+  image: string | string[];
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -33,13 +33,32 @@ export default function EventsCard({
       ref={ref}
       className='h-screen w-full flex flex-col relative pl-12 md:pl-40 pr-10 md:pr-20 overflow-hidden'
     >
-      <Image
-        src={image}
-        alt={'image here'}
-        width={1920}
-        height={1080}
-        className='w-full h-full absolute z-0 left-0 grayscale-80'
-      />
+      {typeof image === 'string' ? (
+        <Image
+          src={image}
+          alt={'image here'}
+          width={1920}
+          height={1080}
+          className='w-full h-screen absolute z-0 left-0 grayscale-80'
+        />
+      ) : (
+        <>
+          <Image
+            src={image[0]}
+            alt={'image here'}
+            width={1920}
+            height={1080}
+            className='w-full h-screen absolute z-0 left-0 grayscale-80 md:hidden'
+          />
+          <Image
+            src={image[1]}
+            alt={'image here'}
+            width={1920}
+            height={1080}
+            className='w-full h-screen absolute z-0 left-0 grayscale-80 hidden md:block'
+          />
+        </>
+      )}
       <div className='absolute w-full h-full bg-black/60 z-1 left-0'></div>
       <motion.div
         style={{ opacity, top: isDesktop ? top : '50%' }}

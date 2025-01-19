@@ -102,16 +102,7 @@ export default function RootTemplate({
             </div>
           </motion.div>
         </motion.div>
-        <motion.div
-          key='main-animation-loader-transition'
-          className=''
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.5 }}
-          exit={{ opacity: 0 }}
-        >
-          {children}
-        </motion.div>
+        <div className='snap-x snap-mandatory *:snap-start'>{children}</div>
       </AnimatePresence>
     </>
   );

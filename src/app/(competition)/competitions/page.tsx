@@ -21,39 +21,54 @@ export default function CompetitionsPage() {
     abbreviation: string;
     cover: string;
     isOpen?: boolean;
+    prize: number;
+    reg1: string;
+    reg2: string;
   }[] = [
     {
       title: 'Business Case Competition',
       logo: '/competition/logo/bcc.png',
-      desc: 'Analyze real-world business cases and present innovative solutions to industry experts. Develop critical thinking and strategic planning skills while competing with top talents.',
+      desc: 'Business Case Competition M-Fest 2025, part of M-Festival 2025, challenges Indonesian undergraduate students to develop problem-solving and innovative thinking skills. The competition involves company collaborations to create case books for participants to analyze and provide strategic business solutions.',
       regLink: 'https://www.google.com',
       abbreviation: 'BCC',
       isOpen: false,
       cover: '/competition/bcc-cover.png',
+      prize: 10000000,
+      reg1: '3 - 12 February 2025',
+      reg2: '13 February - 25 February 2025',
     },
     {
       title: 'Inovative Poster and Paper Competition',
       logo: '/competition/logo/paper.png',
-      desc: 'Showcase your research and analytical skills through academic papers on business and economics. Present your findings to distinguished scholars and industry professionals.',
+      desc: "Innovative Paper and Poster Competition M-Fest 2025, part of M-Festival 2025, is a platform for Indonesian undergraduate students to develop clean energy solutions. The competition aims to generate creative ideas for reducing carbon emissions and accelerating Indonesia's clean energy transition through innovative waste energy utilization.",
       regLink: 'https://www.google.com',
       abbreviation: 'IPPC',
       cover: '/competition/paper-cover.png',
+      reg1: '3 - 12 February 2025',
+      reg2: '13 February - 25 February 2025',
+      prize: 11000000,
     },
     {
-      title: 'Pipeline Competition',
+      title: 'Pipeline Design Competition',
       logo: '/competition/logo/pipeline.png',
-      desc: 'Transform your innovative business ideas into compelling pitches. Learn entrepreneurial skills and get valuable feedback from successful business leaders and venture capitalists.',
+      desc: 'Pipeline Design Competition M-Fest 2025, part of M-Festival 2025, is a platform for Indonesian undergraduate students to develop pipeline design expertise. The competition challenges participants to create economical and reliable pipeline solutions while considering safety and environmental sustainability in energy distribution.',
       regLink: 'https://www.google.com',
       abbreviation: 'Pipeline',
       cover: '/competition/pipeline-cover.png',
+      prize: 12500000,
+      reg1: '3 - 23 February 2025',
+      reg2: '24 February - 30 April 2025',
     },
     {
       title: 'STEM Competition',
       logo: '/competition/logo/stem.png',
-      desc: 'Design and develop cutting-edge projects in science, technology, engineering, or mathematics. Demonstrate your technical expertise to industry professionals and academic experts.',
+      desc: 'STEM Competition M-Fest 2025, part of M-Festival 2025, provides an inspiring platform for Indonesian high school students to enhance their STEM skills. The competition encourages innovation and real contributions to sustainability in Indonesia while accelerating SDGs achievement through STEM-based solutions.',
       regLink: 'https://www.google.com',
       abbreviation: 'STEM',
       cover: '/competition/stem-cover.png',
+      prize: 12000000,
+      reg1: '18 - 24 February 2025',
+      reg2: '25 February - 13 April 2025',
     },
   ];
   return (
@@ -65,14 +80,14 @@ export default function CompetitionsPage() {
     >
       <AccordionItem
         value={`item-nav`}
-        className='flex max-sm:flex-col md:data-[state=open]:w-[50vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
+        className='flex max-sm:flex-col md:data-[state=open]:w-[60vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[10vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
       >
-        <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
+        <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[10vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
           <AccordionTrigger className='border border-x-0 border-white md:h-screen text-white w-full font-medium transition-all cursor-pointer md:[writing-mode:vertical-rl] md:[text-orientation:mixed] flex items-center justify-between max-sm:px-10 md:px-20 uppercase text-2xl md:text-4xl'>
             Navigation
           </AccordionTrigger>
         </AccordionHeader>
-        <AccordionContent className='text-white overflow-hidden max-sm:w-full md:data-[state=closed]:w-0 md:data-[state=open]:w-[50vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out relative flex flex-col items-center justify-center gap-10'>
+        <AccordionContent className='text-white overflow-hidden max-sm:w-full md:data-[state=closed]:w-0 md:data-[state=open]:w-[60vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out relative flex flex-col items-center justify-center gap-10'>
           <div className='flex gap-4 md:gap-6 h-12 md:h-16 items-center mb-4 md:mb-12'>
             <Image
               src='/logo-white.png'
@@ -133,21 +148,24 @@ export default function CompetitionsPage() {
         <AccordionItem
           key={i}
           value={`item-${i}`}
-          className='flex max-sm:flex-col md:data-[state=open]:w-[50vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
+          className='flex max-sm:flex-col md:data-[state=open]:w-[60vw] md:h-full max-sm:data-[state=open]:h-[60vh] md:data-[state=closed]:w-[10vw] max-sm:data-[state=closed]:h-[10vh] max-sm:w-full duration-750 transition-all'
         >
-          <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[12.5vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
+          <AccordionHeader className='flex max-sm:w-full md:h-full md:data-[state=closed]:w-[10vw] max-sm:data-[state=closed]:h-[10vh] max-sm:data-[state=open]:h-[0vh] md:data-[state=open]:w-[0vw] transition-all duration-250 overflow-hidden'>
             <AccordionTrigger className='border border-x-0 border-white md:h-screen text-white w-full font-medium transition-all cursor-pointer md:[writing-mode:vertical-rl] md:[text-orientation:mixed] flex items-center justify-between max-sm:px-10 md:px-20 uppercase text-2xl md:text-4xl duration-750'>
               <div>{competition.abbreviation}</div>
               <div className='text-base font-normal'>
-                <GradientText className='md:text-base text-base font-normal'>
+                <GradientText
+                  style={{ animationDelay: `${0.25 * i}s` }}
+                  className='md:text-base text-base font-normal'
+                >
                   {competition.isOpen ? 'Register Now!' : 'Coming Soon'}
                 </GradientText>
               </div>
             </AccordionTrigger>
           </AccordionHeader>
-          <AccordionContent className='text-white relative overflow-hidden max-sm:w-screen md:data-[state=closed]:w-0 md:data-[state=open]:w-[50vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out'>
-            <div className='h-3/5 md:w-[50vw] w-screen flex flex-col items-center pt-12 px-12 bg-cover bg-center relative'>
-              <div className='flex flex-col justify-between items-center h-full px-16 max-sm:w-screen max-sm:space-y-6'>
+          <AccordionContent className='text-white relative overflow-hidden max-sm:w-screen md:data-[state=closed]:w-0 md:data-[state=open]:w-[60vw] max-sm:data-[state=closed]:h-0 max-sm:data-[state=open]:h-[60vh] transition-all duration-750 ease-in-out'>
+            <div className='h-3/5 md:w-[60vw] w-screen flex flex-col items-center py-12 md:px-12 bg-cover bg-center relative'>
+              <div className='flex flex-col justify-between items-center h-full md:px-16 px-6 max-sm:w-screen max-sm:space-y-6'>
                 <Image
                   src={competition.logo}
                   width={200}
@@ -171,21 +189,51 @@ export default function CompetitionsPage() {
                     )}
                   </span>
                 </p>
-                <p className='text-center mt-4 w-full'>{competition.desc}</p>
+                <div className='flex *:*:w-full justify-between w-full gap-4 text-center max-sm:text-sm'>
+                  <div className=''>
+                    <p className='text-muted text-sm max-sm:text-xs'>
+                      Registration Batch 1:
+                    </p>
+                    <p className=''>{competition.reg1}</p>
+                  </div>
+                  <div className=''>
+                    <p className='text-muted text-sm max-sm:text-xs'>
+                      Registration Batch 2:
+                    </p>
+                    <p className=''>{competition.reg2}</p>
+                  </div>
+                </div>
+                <div className='*:w-full gap-4 text-center'>
+                  <p className='text-muted text-sm'>Total Prize Pool:</p>
+                  <p>
+                    IDR{' '}
+                    {competition.prize.toLocaleString('id-ID', {
+                      minimumFractionDigits: 2,
+                    })}
+                  </p>
+                </div>
               </div>
-              <div className='flex gap-12 my-8 font-medium relative z-20'>
-                <GradientButton variant='outline'>Guide Book</GradientButton>
-                <GradientButton variant='glow'>Register</GradientButton>
-              </div>
-              <div className='absolute bottom-0 w-full translate-y-full pointer-events-none bg-gradient-to-b from-black/90 to-transparent h-1/5 z-10' />
+
+              <div className='absolute bottom-0 w-full translate-y-full pointer-events-none bg-gradient-to-b from-black/90 to-transparent h-1/5 z-10 grid place-items-center'></div>
             </div>
-            <Image
-              src={competition.cover}
-              alt=''
-              width={600}
-              height={400}
-              className='h-2/5 md:w-[50vw] w-full object-center object-cover brightness-50 md:brightness-75 max-sm:absolute max-sm:bottom-0'
-            />
+            <div className='relative h-2/5 w-full md:w-[60vw]'>
+              <Image
+                src={competition.cover}
+                alt=''
+                width={600}
+                height={400}
+                className='w-full object-center object-cover brightness-30 z-0 relative'
+              />
+              <div className='absolute top-0 w-full h-full z-10 flex flex-col items-center gap-6 md:gap-12 py-6 md:py-12'>
+                <div className='flex gap-12 font-medium relative z-20'>
+                  <GradientButton variant='outline'>Guide Book</GradientButton>
+                  <GradientButton variant='glow'>Register</GradientButton>
+                </div>
+                <p className='text-center w-8/10 max-sm:text-xs text-sm'>
+                  {competition.desc}
+                </p>
+              </div>
+            </div>
           </AccordionContent>
         </AccordionItem>
       ))}
