@@ -1,12 +1,6 @@
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
 
-:root {
-  button {
-    cursor: pointer;
-  }
-}
-
 @theme {
   --font-heading: var(--font-roboto);
   --font-montserrat: var(--font-next-montserrat);
@@ -33,6 +27,7 @@
   --shadow-glow-lg: 0px 0px 12.5px 0px;
 
   --animate-shimmer: shimmer 2s linear infinite;
+  --animate-shimmer-compe: shimmer-compe 5s linear infinite;
   --animate-gradient-shift: gradientShift 2s ease-in-out infinite;
   /* Animations */
   --animate-accordion-down: accordion-down 0.25s ease-out;
@@ -87,6 +82,30 @@
   }
 }
 
+@layer base {
+  button {
+    cursor: pointer;
+  }
+}
+
+@keyframes shimmer-compe {
+  0% {
+    background-position: 0px 0px;
+  }
+  10% {
+    background-position: 200% 0px;
+  }
+  20% {
+    background-position: 100% 0px;
+  }
+  40% {
+    background-position: 100% 0px;
+  }
+  100% {
+    background-position: 100% 0px;
+  }
+}
+
 @keyframes gradientShift {
   0% {
     --tw-gradient-from: var(--color-purple-m);
@@ -112,10 +131,26 @@
 
 @keyframes logo {
   0% {
-    clip-path: polygon(0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800, 0 147.800);
+    clip-path: polygon(
+      0 147.8,
+      0 147.8,
+      0 147.8,
+      0 147.8,
+      0 147.8,
+      0 147.8,
+      0 147.8
+    );
   }
   100% {
-    clip-path: polygon(64.486 31.066, 92 5, 117.048 1.00, 153.478 0.000, 89.235 116.729, 36.670 147.800, 0 147.800)
+    clip-path: polygon(
+      64.486 31.066,
+      92 5,
+      117.048 1,
+      153.478 0,
+      89.235 116.729,
+      36.67 147.8,
+      0 147.8
+    );
   }
 }
 

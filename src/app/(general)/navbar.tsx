@@ -24,8 +24,7 @@ export default function Navbar() {
   useOnClickOutside(ref as RefObject<HTMLElement>, () => setval(''));
   const { scrollY } = useScroll();
   const mobileMenuOpen = val === 'root-navbar';
-
-  let timeOut = setTimeout(() => {}, 1000);
+  let timeOut = setTimeout(() => { }, 1000);
 
   scrollY.on('change', (v) => {
     if (v > 300) {
@@ -44,7 +43,7 @@ export default function Navbar() {
         ref={ref}
       >
         <div className='flex items-center px-8 py-6 h-24 w-full justify-between'>
-          <div className='flex gap-4 items-center h-full'>
+          <Link href='/' className='flex gap-4 items-center h-full'>
             <Image
               src='/logo-white.png'
               width={200}
@@ -59,7 +58,7 @@ export default function Navbar() {
               alt='HMM ITB'
               className='h-full w-auto'
             />
-          </div>
+          </Link>
           <button
             className='md:hidden w-8 h-8 flex flex-col justify-center items-center z-[60]'
             onClick={() => setval(val === 'root-navbar' ? '' : 'root-navbar')}
@@ -104,12 +103,12 @@ export default function Navbar() {
                 <Link
                   className='py-4 border-b'
                   onClick={() => setval('')}
-                  href='#timeline'
+                  href='/#timeline'
                 >
                   Timeline
                 </Link>
                 <Link
-                  href='#events'
+                  href='/#events'
                   className='py-4 border-b'
                   onClick={() => setval('')}
                 >
@@ -201,7 +200,7 @@ export default function Navbar() {
             setExpanded(true);
           }}
         >
-          <div className='flex gap-6 h-full items-center'>
+          <Link href='/' className='flex gap-6 h-full items-center'>
             <Image
               src='/logo-white.png'
               width={200}
@@ -216,16 +215,16 @@ export default function Navbar() {
               alt='HMM ITB'
               className='h-full w-auto'
             />
-          </div>
+          </Link>
           <div className='flex items-center gap-6 text-white font-semibold'>
             <Link
               className='px-4 h-full'
-              href='#timeline'
+              href='/#timeline'
             >
               Timeline
             </Link>
             <Link
-              href='#events'
+              href='/#events'
               className='px-4 h-full'
             >
               Events

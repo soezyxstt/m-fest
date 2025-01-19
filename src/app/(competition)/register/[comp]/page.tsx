@@ -23,7 +23,7 @@ export default function RegisterPage() {
     pipeline: {
       logo: '/competition/logo/pipeline.png',
     },
-    paper: {
+    ippc: {
       logo: '/competition/logo/paper.png',
     },
     bcc: {
