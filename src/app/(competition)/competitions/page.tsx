@@ -9,7 +9,6 @@ import {
 import Image from 'next/image';
 import { montserrat, roboto } from '@/style/font';
 import Link from 'next/link';
-import { Instagram, Mail, Twitter } from 'lucide-react';
 import GradientText from '@/components/ui/text/gradient';
 import { competitions } from '@/lib/competition';
 import { socialMedia } from '@/lib/social-media';
