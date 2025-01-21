@@ -54,7 +54,7 @@ function Faqs() {
         <title.h2 className=''>Do You Have Any Further Questions?</title.h2>
         <Link
           target='_blank'
-          href='http://wa.me/628111288114'
+          href='https://mail.google.com/mail/?view=cm&fs=1&to=mfest2025@gmail.com'
           className='flex items-center gap-2 px-8 py-2 rounded-full text-accent-primary font-medium hover:text-white relative group overflow-hidden border h-[calc(100%-1.5rem)] w-fit mt-4 md:mt-8 group transition-all'
         >
           <div className='absolute inset-0 bg-linear-30 from-purple-m to-azure-m w-0 group-hover:w-full transition-all duration-500 ease-in-out' />

@@ -36,7 +36,7 @@ export default function Events() {
       className='grid grid-rows-1 relative w-full'
     >
       <div
-        className={`sticky top-1/2 z-10 ml-6 md:ml-20 transition-all duration-500 ${
+        className={`sticky top-1/2 z-10 ml-4 md:ml-20 transition-all duration-500 ${
           isExpanded ? 'scale-y-100' : 'scale-y-0'
         }`}
       >

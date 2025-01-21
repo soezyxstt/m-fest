@@ -39,7 +39,7 @@ export default function EventsCard({
           alt={'image here'}
           width={1920}
           height={1080}
-          className='w-full h-screen absolute z-0 left-0 grayscale-80'
+          className='w-full h-screen absolute z-0 left-0 grayscale-80 object-cover'
         />
       ) : (
         <>
@@ -48,14 +48,14 @@ export default function EventsCard({
             alt={'image here'}
             width={1920}
             height={1080}
-            className='w-full h-screen absolute z-0 left-0 grayscale-80 md:hidden'
+            className='w-full h-screen absolute z-0 left-0 grayscale-80 object-cover md:hidden'
           />
           <Image
             src={image[1]}
             alt={'image here'}
             width={1920}
             height={1080}
-            className='w-full h-screen absolute z-0 left-0 grayscale-80 hidden md:block'
+            className='w-full h-screen absolute z-0 left-0 grayscale-80 object-cover hidden md:block'
           />
         </>
       )}

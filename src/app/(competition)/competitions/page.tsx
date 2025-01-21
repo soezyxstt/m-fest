@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Instagram, Mail, Twitter } from 'lucide-react';
 import GradientText from '@/components/ui/text/gradient';
 import { competitions } from '@/lib/competition';
+import { socialMedia } from '@/lib/social-media';
 
 export default function CompetitionsPage() {
   return (
@@ -66,24 +67,11 @@ export default function CompetitionsPage() {
             Events
           </Link>
           <div className='flex gap-10 items-center md:mt-12 mt-4'>
-            <Link
-              className=''
-              href='https://www.instagram.com/mfestitb/'
-            >
-              <Instagram size={24} />
-            </Link>
-            <Link
-              className=''
-              href='https://www.instagram.com/mfestitb/'
-            >
-              <Twitter size={24} />
-            </Link>
-            <Link
-              className=''
-              href='https://www.instagram.com/mfestitb/'
-            >
-              <Mail size={24} />
-            </Link>
+            {socialMedia.map((social) => (
+              <Link key={social.name} href={social.url}>
+                <social.icon className='text-lg md:text-2xl' />
+              </Link>
+            ))}
           </div>
         </AccordionContent>
       </AccordionItem>
@@ -138,12 +126,20 @@ export default function CompetitionsPage() {
                       Registration Batch 1:
                     </p>
                     <p className=''>{competition.reg1}</p>
+                    <p className="text-muted text-xs">IDR{' '}
+                      {competition.fee1.toLocaleString('id-ID', {
+                        minimumFractionDigits: 2,
+                      })}</p>
                   </div>
                   <div className=''>
                     <p className='text-muted text-sm max-sm:text-xs'>
                       Registration Batch 2:
                     </p>
                     <p className=''>{competition.reg2}</p>
+                    <p className="text-muted text-xs">IDR{' '}
+                      {competition.fee2.toLocaleString('id-ID', {
+                        minimumFractionDigits: 2,
+                      })}</p>
                   </div>
                 </div>
                 <div className='*:w-full gap-4 text-center'>

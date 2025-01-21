@@ -11,7 +11,7 @@ export default function EventsStep({
   return (
     <motion.div
       style={{ height }}
-      className='rounded-full w-full bg-stone-50'
+      className='rounded-full w-full bg-stone-300'
     ></motion.div>
   );
 }
