@@ -13,6 +13,7 @@ import { UnderlineInput } from '@/components/ui/input/regis-input';
 import GradientButton from '@/components/ui/button/bg-gradient';
 
 export default function RegisterPage() {
+  const dontShow = true;
   const pathName = usePathname();
   const router = useRouter();
   const compe = pathName.substring(pathName.lastIndexOf('/') + 1);
@@ -32,6 +33,8 @@ export default function RegisterPage() {
   };
 
   const [step, setStep] = useState(1);
+  
+  if (dontShow) return null;
 
   if (!competitions[compe.toLocaleLowerCase()]) {
     router.push('/404');
