@@ -21,7 +21,7 @@ export default function RegisterPage() {
     stem: {
       logo: '/competition/logo/stem.png',
     },
-    pipeline: {
+    pdc: {
       logo: '/competition/logo/pipeline.png',
     },
     ippc: {
