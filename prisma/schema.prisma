@@ -1,83 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") // Set this in your .env file
-}
-
-enum CompetitionName {
-  STEM
-  PDC
-  IPPC
-  BCC
+  url      = env("DATABASE_URL")
 }
 
 model Profile {
-  id              String  @id @default(uuid())
-  googleId        String  @unique // ID from Google OAuth
-  email           String  @unique
-  name            String
-  identityCardUrl String
-  semester        String
-  pdDiktiUrl      String
-  followIGUrl     String
-  twibbon         String
-  phoneNumber     String?
-
-  profilePic String? // Optional profile picture from Google
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  team   Team   @relation(fields: [teamId], references: [id])
-  teamId String
-
-  isLeader Leader?
-
-  @@map("profile")
-}
-
-model Competition {
-  id            String          @id @default(uuid())
-  name          CompetitionName
-  description   String?
-  maxMembers    Int             @default(5) // Defaults to 5 members per team
-  minMembers    Int             @default(3) // Defaults to 3 members per team
-  earlyStart    DateTime
-  normalStart   DateTime
-  endDate       DateTime
-  registrations Registration[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-}
-
-model Team {
-  id           String        @id @default(uuid())
-  name         String
-  institution  String
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
-  registration Registration?
-  members      Profile[]
-  leader       Leader        @relation(fields: [leaderId], references: [id])
-  leaderId     String        @unique
-}
-
-model Leader {
-  id        String  @id @default(uuid())
-  profile   Profile @relation(fields: [profileId], references: [id])
-  profileId String  @unique
-  Team      Team?
-}
-
-model Registration {
-  id              String      @id @default(uuid())
-  teamId          String      @unique
-  competitionId   String
-  paymentProofUrl String // Screenshot of payment
-  team            Team        @relation(fields: [teamId], references: [id])
-  competition     Competition @relation(fields: [competitionId], references: [id])
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @updatedAt
+  id          String @id @default(uuid())
+  email       String @unique
+  name        String
+  institution String
+  leader      String
+  phoneNumber String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
