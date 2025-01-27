@@ -164,7 +164,11 @@ export default function CompetitionsPage() {
               />
               <div className='absolute top-0 w-full h-full z-10 flex flex-col items-center gap-6 md:gap-12 py-6 md:py-12'>
                 <div className='flex gap-12 font-medium relative z-20'>
-                  <GradientButton variant='outline'>Guide Book</GradientButton>
+                  <Link href={competition.guideBook} target='_blank'>
+                    <GradientButton variant='outline'>
+                      Guide Book
+                    </GradientButton>
+                  </Link>
                   <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
                 </div>
                 <p className='text-center w-8/10 max-sm:text-xs text-sm'>

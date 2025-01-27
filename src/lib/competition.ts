@@ -11,6 +11,7 @@ export   const competitions: {
   reg2: string;
   fee1: number;
   fee2: number;
+  guideBook: string;
 }[] = [
   {
     title: 'Business Case Competition',
@@ -25,6 +26,8 @@ export   const competitions: {
     reg2: '13 February - 25 February 2025',
     fee1: 175000,
     fee2: 225000,
+    guideBook:
+      'https://drive.google.com/file/d/1kjCYe7Q95CqQ0ZO-syeZsC_XyJrcApno/view?usp=drive_link',
   },
   {
     title: 'Inovative Poster and Paper Competition',
@@ -38,6 +41,8 @@ export   const competitions: {
     prize: 12000000,
     fee1: 90000,
     fee2: 110000,
+    guideBook:
+      'https://drive.google.com/file/d/12hsX_V4bllC3blk3ik0Gt0klKA5crVCK/view?usp=drive_link',
   },
   {
     title: 'Pipeline Design Competition',
@@ -51,6 +56,8 @@ export   const competitions: {
     reg2: '24 February - 30 April 2025',
     fee1: 200000,
     fee2: 250000,
+    guideBook:
+      'https://drive.google.com/file/d/1vQ6Ma1mNfp4tS0FmsVo6trVgbe_XvADw/view?usp=drive_link',
   },
   {
     title: 'STEM Competition',
@@ -64,5 +71,7 @@ export   const competitions: {
     reg2: '25 February - 13 April 2025',
     fee1: 120000,
     fee2: 150000,
+    guideBook:
+      'https://drive.google.com/file/d/1eGfmRZPEVHapgrbBgmbjFBPR5EOneAaI/view?usp=drive_link',
   },
 ];
