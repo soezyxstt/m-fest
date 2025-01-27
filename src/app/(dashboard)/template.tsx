@@ -1,0 +1,85 @@
+"use client";
+
+import { PanelLeft } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { motion } from 'motion/react';
+
+export default function Template({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const pathname = usePathname();
+  const activeTab = pathname.split('/')[1].toLocaleLowerCase();
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <main className='bg-grad md:h-screen'>
+      <div className="w-full md:h-screen bg-stone-400/10 backdrop-blur-sm flex">
+        <aside className={`max-sm:hidden ${expanded ? 'w-64' : 'w-12'} h-full transition-all duration-500`}>
+
+        </aside>
+        <div className="w-full">
+          <nav className="h-16 w-full flex py-4 px-6 items-center justify-between text-white">
+            <div className="grid place-items-center aspect-square h-full hover:bg-stone-400/20 rounded-md transition-all cursor-pointer max-sm:hidden" onClick={() => setExpanded(prev => !prev)}>
+              <PanelLeft className="h-6 w-6" />
+            </div>
+            <button
+              className='md:hidden w-8 h-8 flex flex-col justify-center items-center z-[60]'
+              onClick={() => setExpanded(prev => !prev)}
+            >
+              <motion.span
+                className='w-8 h-0.5 bg-linear-90 from-purple-m to-azure-m block absolute'
+                animate={{
+                  rotate: expanded ? 45 : 0,
+                  y: expanded ? 0 : -8,
+                  width: expanded ? 24 : 24,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className='w-6 h-0.5 bg-linear-90 from-mauve-m to-teal-m block absolute'
+                animate={{
+                  opacity: expanded ? 0 : 1,
+                  x: expanded ? 20 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+              <motion.span
+                className='w-4 h-0.5 bg-linear-90 from-azure-m to-teal-m block absolute'
+                animate={{
+                  rotate: expanded ? -45 : 0,
+                  y: expanded ? 0 : 8,
+                  width: expanded ? 24 : 16,
+                }}
+                transition={{ duration: 0.3 }}
+              />
+            </button>
+            <Link href='/' className='flex gap-4 items-center h-full'>
+              <Image
+                src='/logo-white.png'
+                width={200}
+                height={200}
+                alt='Mechanical Festival 2025'
+                className='h-8/10 w-auto'
+              />
+              <Image
+                src='/hmm.png'
+                width={200}
+                height={200}
+                alt='HMM ITB'
+                className='h-full w-auto'
+              />
+            </Link>
+          </nav>
+          <div className="bg-grad w-[calc(100%-2rem)] h-[calc(100%-5rem)] m-4 mt-0 rounded-xl max-sm:rounded-b-none md:rounded-3xl overflow-y-auto p-6">
+
+            {children}
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
