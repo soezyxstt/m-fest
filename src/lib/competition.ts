@@ -22,8 +22,8 @@ export   const competitions: {
     isOpen: false,
     cover: '/competition/bcc-cover.png',
     prize: 12000000,
-    reg1: '3 - 12 February 2025',
-    reg2: '13 February - 25 February 2025',
+    reg1: '3 - 9 February 2025',
+    reg2: '10 February - 25 February 2025',
     fee1: 175000,
     fee2: 225000,
     guideBook:
@@ -53,7 +53,7 @@ export   const competitions: {
     cover: '/competition/pipeline-cover.png',
     prize: 12500000,
     reg1: '3 - 23 February 2025',
-    reg2: '24 February - 30 April 2025',
+    reg2: '24 February - 30 March 2025',
     fee1: 200000,
     fee2: 250000,
     guideBook:
@@ -67,8 +67,8 @@ export   const competitions: {
     abbreviation: 'STEM',
     cover: '/competition/stem-cover.png',
     prize: 12000000,
-    reg1: '18 - 24 February 2025',
-    reg2: '25 February - 13 April 2025',
+    reg1: '18 - 23 February 2025',
+    reg2: '24 February - 13 March 2025',
     fee1: 120000,
     fee2: 150000,
     guideBook:

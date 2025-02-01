@@ -1,6 +1,6 @@
 "use client";
 
-import { PanelLeft } from 'lucide-react';
+import { Home, PanelLeft, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -16,10 +16,21 @@ export default function Template({
   const activeTab = pathname.split('/')[1].toLocaleLowerCase();
   const [expanded, setExpanded] = useState(true);
   return (
-    <main className='bg-grad md:h-screen'>
-      <div className="w-full md:h-screen bg-stone-400/10 backdrop-blur-sm flex">
-        <aside className={`max-sm:hidden ${expanded ? 'w-64' : 'w-12'} h-full transition-all duration-500`}>
-
+    <main className='bg-grad md:h-screen text-white'>
+      <div className="w-full md:h-screen bg-stone-400/20 backdrop-blur-sm flex">
+        <aside className={`max-sm:hidden ${expanded ? 'w-72' : 'w-16'} h-full transition-all duration-500 overflow-hidden pt-20 p-3`}>
+          <Link href='dashboard' className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "dashboard" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
+            <div className={`p-2 rounded-md transition-all cursor-pointer ${expanded || "hover:bg-stone-400/20"} ${(!expanded && activeTab.toLocaleLowerCase() === "dashboard") && "bg-stone-400/20"}`}>
+              <Home className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
+            </div>
+            Dashboard
+          </Link>
+          <Link href='team' className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "team" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
+            <div className={`p-2 rounded-md transition-all cursor-pointer ${expanded || "hover:bg-stone-400/20"} ${(!expanded && activeTab.toLocaleLowerCase() === "team") && "bg-stone-400/20"}`}>
+              <Users className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
+            </div>
+            Team
+          </Link>
         </aside>
         <div className="w-full">
           <nav className="h-16 w-full flex py-4 px-6 items-center justify-between text-white">
@@ -74,7 +85,7 @@ export default function Template({
               />
             </Link>
           </nav>
-          <div className="bg-grad w-[calc(100%-2rem)] h-[calc(100%-5rem)] m-4 mt-0 rounded-xl max-sm:rounded-b-none md:rounded-3xl overflow-y-auto p-6">
+          <div className="bg-grad w-[calc(100%-2rem)] h-[calc(100%-5rem)] m-4 mt-0 ml-0 rounded-xl max-sm:rounded-b-none md:rounded-3xl overflow-y-auto p-6">
 
             {children}
           </div>

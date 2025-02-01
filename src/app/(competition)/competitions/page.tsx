@@ -13,6 +13,10 @@ import GradientText from '@/components/ui/text/gradient';
 import { competitions } from '@/lib/competition';
 import { socialMedia } from '@/lib/social-media';
 
+export const metadata = {
+  title: "Competitions"
+}
+
 export default function CompetitionsPage() {
   return (
     <Accordion
