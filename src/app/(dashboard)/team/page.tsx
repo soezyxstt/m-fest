@@ -1,5 +1,5 @@
-import {getCachedTeam, getCachedTeams} from "@/app/_action/team";
-import {CreateTeamForm, JoinTeamForm} from "@/app/(dashboard)/team/form";
+import { getCachedTeam, getCachedTeams } from "@/app/_action/team";
+import { CreateTeamForm, JoinTeamForm } from "@/app/(dashboard)/team/form";
 import {
   Table,
   TableBody,
@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import {auth} from "@/auth";
+import { auth } from "@/auth";
 import GradientText from "@/components/ui/text/gradient";
 import Link from "next/link";
 
@@ -25,8 +25,8 @@ export default async function TeamPage() {
       {!team ? (
         <>
           <div className="flex max-sm:flex-col justify-between w-full h-min">
-            <CreateTeamForm/>
-            <JoinTeamForm/>
+            <CreateTeamForm />
+            <JoinTeamForm />
           </div>
           <div className="flex-1">
             <GradientText className='text-left text-lg mb-2 md:mb-4 md:text-2xl'>Team List</GradientText>
@@ -62,7 +62,7 @@ export default async function TeamPage() {
             ) : (
               <div className="text-muted flex gap-2 items-center">
                 No Competition
-                <Link href='/competition' className="text-azure-m underline">
+                <Link href='/competitions' className="text-azure-m underline">
                   Register Now
                 </Link>
               </div>

@@ -1,11 +1,11 @@
 "use client";
 
 import GradientButton from "@/components/ui/button/bg-gradient";
-import {Input} from "@/components/ui/input";
-import React, {BaseSyntheticEvent, useState} from "react";
-import {createTeam, joinTeam} from "@/app/_action/team";
-import {toast} from "sonner";
-import {useAction} from "next-safe-action/hooks";
+import { Input } from "@/components/ui/input";
+import React, { BaseSyntheticEvent, useState } from "react";
+import { createTeam, joinTeam } from "@/app/_action/team";
+import { toast } from "sonner";
+import { useAction } from "next-safe-action/hooks";
 import {
   Dialog,
   DialogContent,
@@ -31,11 +31,11 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form"
-import {createTeamSchema} from "@/lib/schema";
+import { createTeamSchema } from "@/lib/schema";
 
 export function JoinTeamForm() {
   const [code, setCode] = useState("");
-  const {execute, isExecuting} = useAction(joinTeam, {
+  const { execute, isExecuting } = useAction(joinTeam, {
     onSuccess: () => {
       toast.success('Join team successfully');
     },
@@ -46,9 +46,9 @@ export function JoinTeamForm() {
 
   return (
     <form onSubmit={() => {
-      execute({secretCode: code});
+      execute({ secretCode: code });
     }} className="flex gap-2 text-sm md:text-base items-center">
-      <Input placeholder="enter code" value={code} onChange={(v) => setCode(v.target.value)} type="text"/>
+      <Input placeholder="enter code" value={code} onChange={(v) => setCode(v.target.value)} type="text" />
       <GradientButton disabled={isExecuting} type='submit' variant="glow" className="min-w-32">
         Join Team
       </GradientButton>
@@ -57,7 +57,7 @@ export function JoinTeamForm() {
 }
 
 export function CreateTeamForm() {
-  const {execute, isExecuting} = useAction(createTeam, {
+  const { execute, isExecuting } = useAction(createTeam, {
     onSuccess: () => {
       toast.success('Join team successfully');
     },
@@ -100,7 +100,7 @@ export function CreateTeamForm() {
             <FormField
               control={form.control}
               name="name"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Team Name</FormLabel>
                   <FormControl>
@@ -110,7 +110,7 @@ export function CreateTeamForm() {
                       type="text"
                       {...field} />
                   </FormControl>
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -118,7 +118,7 @@ export function CreateTeamForm() {
             <FormField
               control={form.control}
               name="institution"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Institution</FormLabel>
                   <FormControl>
@@ -128,8 +128,7 @@ export function CreateTeamForm() {
                       type="text"
                       {...field} />
                   </FormControl>
-
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -137,7 +136,7 @@ export function CreateTeamForm() {
             <FormField
               control={form.control}
               name="phoneNumber"
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Phone Number</FormLabel>
                   <FormControl>
@@ -147,8 +146,7 @@ export function CreateTeamForm() {
                       type="text"
                       {...field} />
                   </FormControl>
-
-                  <FormMessage/>
+                  <FormMessage />
                 </FormItem>
               )}
             />

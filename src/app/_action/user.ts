@@ -63,7 +63,7 @@ export const updateOrCreateProfile = actionClient
           data: parsedInput
         });
       }
-    } catch {
+    } catch(e) {
       if (e instanceof Error) {
         throw e;
       }

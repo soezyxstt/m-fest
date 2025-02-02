@@ -7,9 +7,9 @@ import CldImage from "@/components/ui/CldImage";
 
 export default async function Dashboard() {
   const session = await auth();
-  const profile = await getCachedProfile(session?.user?.email);
+  const profile = await getCachedProfile(session?.user?.email ?? "");
   // const profile = await getProfile();
-  const {pKTM, pIG, pTwibbon, pPDDikti} = {pKTM: "ktm", pIG: "followIG", pPDDikti: "pdDikti", pTwibbon: "twibbon"}
+  const {pKTM, pIG, pTwibbon, pPDDikti} = {pKTM: "ktm", pIG: "followIG", pPDDikti: "pdDikti", pTwibbon: "twibbon"} as const
 
   if (!session) {
     redirect('/sign-in');
@@ -83,25 +83,25 @@ export default async function Dashboard() {
         className="@md:h-[calc(100%-var(--spacing)*72)] @md:overflow-hidden relative w-full rounded-lg md:rounded-2xl bg-stone-400/10 backdrop-blur-sm flex max-sm:flex-col gap-2 @md:gap-4 @lg:gap-6 p-4 md:p-6">
         <div className="md:col-span-2 grid grid-rows-2 gap-2 w-1/2">
           <div className="h-full w-full relative">
-            <CldImage src={profile.ktm} alt={'upload ktm'} width="500" height="200"
+            <CldImage src={profile?.ktm ?? ""} alt={'upload ktm'} width="500" height="200"
                    className="w-full h-full object-cover object-center rounded-md relative z-0"/>
-            <ImageUpload prefix={pKTM} onTop={!!profile.ktm} desc='Upload your KTM/Student Card'/>
+            <ImageUpload prefix={pKTM} onTop={!!profile?.ktm} desc='Upload your KTM/Student Card'/>
           </div>
           <div className="w-full h-full relative">
-            <CldImage src={profile.pdDikti} alt={'upload ss pddikti'} width={500} height={200}
+            <CldImage src={profile?.pdDikti ?? ""} alt={'upload ss pddikti'} width={500} height={200}
                    className="w-full h-full object-cover object-center rounded-md"/>
-            <ImageUpload prefix={pPDDikti} onTop={!!profile.pdDikti} desc='Upload PDDikti Statement'/>
+            <ImageUpload prefix={pPDDikti} onTop={!!profile?.pdDikti} desc='Upload PDDikti Statement'/>
           </div>
         </div>
         <div className="w-1/4 relative">
-          <CldImage src={profile.twibbon} alt={'post your twibbon'} width={300} height={500}
+          <CldImage src={profile?.twibbon ?? ""} alt={'post your twibbon'} width={300} height={500}
                  className="w-full h-full object-cover object-center rounded-md"/>
-          <ImageUpload prefix={pTwibbon} onTop={!!profile.twibbon} desc='Upload your Twibbon Screenshot'/>
+          <ImageUpload prefix={pTwibbon} onTop={!!profile?.twibbon} desc='Upload your Twibbon Screenshot'/>
         </div>
         <div className="w-1/4 relative">
-          <CldImage src={profile.followIG} alt={'follow first'} width={300} height={500}
+          <CldImage src={profile?.followIG ?? ""} alt={'follow first'} width={300} height={500}
                  className="w-full object-cover object-center h-full rounded-md"/>
-          <ImageUpload onTop={!!profile.followIG} prefix={pIG} desc="Upload M-Fest's Ig following proof"/>
+          <ImageUpload onTop={!!profile?.followIG} prefix={pIG} desc="Upload M-Fest's Ig following proof"/>
         </div>
       </div>
     </div>

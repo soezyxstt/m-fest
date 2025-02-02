@@ -89,7 +89,7 @@ export const createTeam = authActionClient
       }
       revalidatePath("/team")
       return team;
-    } catch {
+    } catch (e) {
       if (e instanceof Error) {
         throw e;
       }
@@ -110,7 +110,7 @@ export const joinTeam = authActionClient
           }
         }
       });
-    } catch {
+    } catch(e) {
       if (e instanceof Error) {
         throw e;
       }
@@ -133,7 +133,7 @@ export const leaveTeam = authActionClient
           }
         }
       });
-    } catch {
+    } catch(e) {
       if (e instanceof Error) {
         throw e;
       }

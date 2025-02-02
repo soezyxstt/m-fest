@@ -1,14 +1,14 @@
 "use client";
 
-import {Home, PanelLeft, Users} from 'lucide-react';
+import { Home, PanelLeft, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {usePathname, useSearchParams} from 'next/navigation';
-import {motion} from 'motion/react';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { motion } from 'motion/react';
 
 export default function Template({
-                                   children,
-                                 }: {
+  children,
+}: {
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
@@ -23,18 +23,18 @@ export default function Template({
         <aside
           className={`max-sm:hidden ${expanded ? 'w-72' : 'w-16'} h-full space-y-2 transition-all duration-500 overflow-hidden pt-20 p-3`}>
           <Link href='dashboard'
-                className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "dashboard" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
+            className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "dashboard" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
             <div
               className={`p-2 rounded-md transition-all cursor-pointer ${expanded || "hover:bg-stone-400/20"} ${(!expanded && activeTab.toLocaleLowerCase() === "dashboard") && "bg-stone-400/20"}`}>
-              <Home className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`}/>
+              <Home className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
             </div>
             Dashboard
           </Link>
           <Link href='team'
-                className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "team" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
+            className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "team" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
             <div
               className={`p-2 rounded-md transition-all cursor-pointer ${expanded || "hover:bg-stone-400/20"} ${(!expanded && activeTab.toLocaleLowerCase() === "team") && "bg-stone-400/20"}`}>
-              <Users className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`}/>
+              <Users className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
             </div>
             Team
           </Link>
@@ -44,7 +44,7 @@ export default function Template({
             <Link
               href={!expanded ? '?' : '?collapsed=true'}
               className="grid place-items-center aspect-square h-full hover:bg-stone-400/20 rounded-md transition-all cursor-pointer max-sm:hidden">
-              <PanelLeft className="h-6 w-6"/>
+              <PanelLeft className="h-6 w-6" />
             </Link>
             <Link
               href={!expanded ? '?' : '?collapsed=true'}
@@ -57,7 +57,7 @@ export default function Template({
                   y: expanded ? 0 : -8,
                   width: expanded ? 24 : 24,
                 }}
-                transition={{duration: 0.3}}
+                transition={{ duration: 0.3 }}
               />
               <motion.span
                 className='w-6 h-0.5 bg-linear-90 from-mauve-m to-teal-m block absolute'
@@ -65,7 +65,7 @@ export default function Template({
                   opacity: expanded ? 0 : 1,
                   x: expanded ? 20 : 0,
                 }}
-                transition={{duration: 0.3}}
+                transition={{ duration: 0.3 }}
               />
               <motion.span
                 className='w-4 h-0.5 bg-linear-90 from-azure-m to-teal-m block absolute'
@@ -74,7 +74,7 @@ export default function Template({
                   y: expanded ? 0 : 8,
                   width: expanded ? 24 : 16,
                 }}
-                transition={{duration: 0.3}}
+                transition={{ duration: 0.3 }}
               />
             </Link>
             <Link href='/' className='flex gap-4 items-center h-full'>

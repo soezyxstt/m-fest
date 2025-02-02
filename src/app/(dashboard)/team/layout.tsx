@@ -7,7 +7,7 @@ export default async function DashboardLayout({
   params: Promise<{ comp: string }>;
 }>) {
   const session = await auth();
-  
+
   return (
     <>
       <title>{`Dashboard - ${session?.user?.name?.split(' ')[0]}`}</title>

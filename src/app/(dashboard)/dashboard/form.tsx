@@ -49,14 +49,14 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
       toast.success('Profile updated successfully');
     },
     onError: (err) => {
-      toast.error(err.error);
+      toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
     }
   });
 
   const onSubmit: SubmitHandler<z.infer<typeof updateOrCreateProfileSchema>> = (values, e) => {
     e?.preventDefault();
     execute({
-      semester: parseInt(values.semester),
+      semester: parseInt(values.semester.toString()),
       name: values.name,
       email: values.email,
     });
@@ -129,7 +129,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
 
 interface ImageUploadProps {
   desc?: string;
-  prefix: string;
+  prefix: 'ktm' | 'pdDikti' | 'followIG' | 'twibbon';
   onTop?: boolean;
 }
 
@@ -137,7 +137,7 @@ export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
   const {execute} = useAction(uploadImage, {
     onError: (err) => {
-      toast.error(err.error);
+      toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
     },
     onSuccess: () => {
       setTimeout(() => {
@@ -173,7 +173,9 @@ export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
                   value={files}
                   onValueChange={(files) => {
                     setFiles(files);
-                    execute({file: files[0], prefix});
+                    if (files && files.length > 0) {
+                      execute({file: files[0], prefix});
+                    }
                   }}
                   dropzoneOptions={dropZoneConfig}
                   className={`relative bg-transparent rounded-lg p-1 h-full ${onTop && "absolute w-full z-10 bg-stone-900 opacity-50 top-0 left-0"}`}
