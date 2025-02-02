@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { montserrat, onest, roboto } from '@/style/font';
 import 'lenis/dist/lenis.css';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
-  title: 'Mechanical Festival 2025',
-  description: '',
+  title: { default: 'Mechanical Festival 2025', template: '%s | M-Fest 2025' },
+  description: 'Innovate Ideas. Create Impact',
 };
 
 export default function RootLayout({
@@ -15,10 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
+      <head className="">
+        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
+      </head>
       <body
         className={`${montserrat.variable} ${roboto.variable} ${onest.className} antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );

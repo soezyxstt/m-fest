@@ -1,9 +1,11 @@
+import { CompetitionName } from '@prisma/client';
+
 export   const competitions: {
   title: string;
   logo: string;
   desc: string;
   regLink: string;
-  abbreviation: string;
+  abbreviation: CompetitionName;
   cover: string;
   isOpen?: boolean;
   prize: number;
@@ -11,6 +13,7 @@ export   const competitions: {
   reg2: string;
   fee1: number;
   fee2: number;
+  guideBook: string;
 }[] = [
   {
     title: 'Business Case Competition',
@@ -21,10 +24,12 @@ export   const competitions: {
     isOpen: false,
     cover: '/competition/bcc-cover.png',
     prize: 12000000,
-    reg1: '3 - 12 February 2025',
-    reg2: '13 February - 25 February 2025',
+    reg1: '3 - 9 February 2025',
+    reg2: '10 February - 25 February 2025',
     fee1: 175000,
     fee2: 225000,
+    guideBook:
+      'https://drive.google.com/file/d/1kjCYe7Q95CqQ0ZO-syeZsC_XyJrcApno/view?usp=drive_link',
   },
   {
     title: 'Inovative Poster and Paper Competition',
@@ -35,22 +40,26 @@ export   const competitions: {
     cover: '/competition/paper-cover.png',
     reg1: '3 - 12 February 2025',
     reg2: '13 February - 25 February 2025',
-    prize: 11000000,
+    prize: 12000000,
     fee1: 90000,
     fee2: 110000,
+    guideBook:
+      'https://drive.google.com/file/d/12hsX_V4bllC3blk3ik0Gt0klKA5crVCK/view?usp=drive_link',
   },
   {
     title: 'Pipeline Design Competition',
     logo: '/competition/logo/pipeline.png',
     desc: 'Pipeline Design Competition M-Fest 2025 is a platform for Indonesian undergraduate students to develop pipeline design expertise. The competition challenges participants to create economical and reliable pipeline solutions while considering safety and environmental sustainability in energy distribution.',
     regLink: 'https://www.google.com',
-    abbreviation: 'Pipeline',
+    abbreviation: 'PDC',
     cover: '/competition/pipeline-cover.png',
     prize: 12500000,
     reg1: '3 - 23 February 2025',
-    reg2: '24 February - 30 April 2025',
+    reg2: '24 February - 30 March 2025',
     fee1: 200000,
     fee2: 250000,
+    guideBook:
+      'https://drive.google.com/file/d/1vQ6Ma1mNfp4tS0FmsVo6trVgbe_XvADw/view?usp=drive_link',
   },
   {
     title: 'STEM Competition',
@@ -60,9 +69,11 @@ export   const competitions: {
     abbreviation: 'STEM',
     cover: '/competition/stem-cover.png',
     prize: 12000000,
-    reg1: '18 - 24 February 2025',
-    reg2: '25 February - 13 April 2025',
+    reg1: '18 - 23 February 2025',
+    reg2: '24 February - 13 March 2025',
     fee1: 120000,
     fee2: 150000,
+    guideBook:
+      'https://drive.google.com/file/d/1eGfmRZPEVHapgrbBgmbjFBPR5EOneAaI/view?usp=drive_link',
   },
 ];

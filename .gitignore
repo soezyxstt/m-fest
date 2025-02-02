@@ -45,3 +45,6 @@ next-env.d.ts
 /prisma/seed.js
 /prisma/data.json
 /prisma/data.ts
+
+.idea
+.vscode

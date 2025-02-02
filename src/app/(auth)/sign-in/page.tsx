@@ -70,6 +70,6 @@ export default async function SignIn() {
 }
 
 export const metadata: Metadata = {
-  title: 'Sign In | M-Fest',
+  title: 'Sign In',
   description: '',
 };
