@@ -1,10 +1,10 @@
-import { auth } from '@/auth';
-import { prisma } from '@/server/prisma';
+import {auth} from '@/auth';
+import {prisma} from '@/server/prisma';
 import {
   createSafeActionClient,
   DEFAULT_SERVER_ERROR_MESSAGE,
 } from 'next-safe-action';
-import { z } from 'zod';
+import {z} from 'zod';
 
 export const actionClient = createSafeActionClient({
   handleServerError(e) {
@@ -19,7 +19,7 @@ export const actionClient = createSafeActionClient({
   },
   defaultValidationErrorsShape: 'flattened',
   // Define logging middleware.
-}).use(async ({ next, clientInput, metadata }) => {
+}).use(async ({next, clientInput, metadata}) => {
   console.log('LOGGING MIDDLEWARE');
 
   const startTime = performance.now();
@@ -40,7 +40,7 @@ export const actionClient = createSafeActionClient({
 
 export const authActionClient = actionClient
   // Define authorization middleware.
-  .use(async ({ next }) => {
+  .use(async ({next}) => {
     const session = await auth();
 
     if (!session) {
@@ -48,7 +48,7 @@ export const authActionClient = actionClient
     }
 
     const profile = await prisma.profile.findUnique({
-      where: { email: session?.user?.email ?? "" },
+      where: {email: session?.user?.email ?? ""},
     });
 
     if (!profile) {
@@ -56,5 +56,5 @@ export const authActionClient = actionClient
     }
 
     // Return the next middleware with `userId` value in the context
-    return next({ ctx: { id: profile.id } });
+    return next({ctx: {id: profile.id}});
   });

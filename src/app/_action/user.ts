@@ -4,6 +4,7 @@ import {auth} from '@/auth';
 import {actionClient, authActionClient} from '@/lib/safe-action';
 import {updateOrCreateProfileSchema, updateProfileSchema} from '@/lib/schema';
 import {prisma} from '@/server/prisma';
+import {unstable_cache, revalidateTag as rT, revalidatePath as rP} from 'next/cache';
 
 export async function getProfile() {
   const email = (await auth())?.user?.email ?? "";
@@ -13,12 +14,24 @@ export async function getProfile() {
   });
 }
 
+const date = (new Date()).toLocaleString().replace(/[\/\s:]/g, '-');
+
+export const getCachedProfile = unstable_cache(async (email: string) => {
+  return prisma.profile.findUnique({
+    where: {email},
+    include: {team: true}
+  });
+}, ["get_profile-" + date], {tags: ["get_profile"]});
+
 export async function getProfileByEmail({email}: { email: string }) {
   return prisma.profile.findUnique({
     where: {email},
     include: {team: true}
   });
 }
+
+export const revalidatePath = rP
+export const revalidateTag = rT;
 
 export const updateProfile = authActionClient
   .metadata({actionName: "updateProfile"})

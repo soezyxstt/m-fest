@@ -15,14 +15,14 @@ enum CompetitionName {
 }
 
 model Profile {
-  id              String  @id @default(uuid())
-  email           String  @unique
-  name            String
-  identityCardUrl String?
-  semester        Int
-  pdDiktiUrl      String?
-  followIGUrl     String?
-  twibbon         String?
+  id       String  @id @default(uuid())
+  email    String  @unique
+  name     String
+  ktm      String?
+  semester Int
+  pdDikti  String?
+  followIG String?
+  twibbon  String?
 
   profilePic String? // Optional profile picture from Google
   createdAt  DateTime @default(now())
@@ -62,6 +62,7 @@ model Team {
   members      Profile[]
   leader       Leader        @relation(fields: [leaderId], references: [id])
   leaderId     String        @unique
+  secretCode   String        @unique
   phoneNumber  String
 }
 

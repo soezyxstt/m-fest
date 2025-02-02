@@ -32,7 +32,7 @@ import {UnderlineInput} from '@/components/ui/input/regis-input'
 import {updateOrCreateProfileSchema} from '@/lib/schema'
 import {uploadImage} from "@/app/_action/upload-image";
 import {useAction} from "next-safe-action/hooks";
-import {updateOrCreateProfile} from "@/app/_action/user";
+import {revalidateTag, updateOrCreateProfile} from "@/app/_action/user";
 
 const formSchema = z.object({
   image: z.string()
@@ -129,16 +129,31 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
 
 interface ImageUploadProps {
   desc?: string;
-  prefix: string
+  prefix: string;
+  onTop?: boolean;
 }
 
-export function ImageUpload({desc, prefix}: ImageUploadProps) {
+export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
-  const {execute} = useAction(uploadImage);
+  const {execute} = useAction(uploadImage, {
+    onError: (err) => {
+      toast.error(err.error);
+    },
+    onSuccess: () => {
+      setTimeout(() => {
+          toast.success('Image uploaded successfully');
+          // location.reload();
+        revalidateTag("get_profile");
+        }
+        , 1500);
+    }, onSettled: () => {
+      setFiles(null);
+    }
+  });
 
   const dropZoneConfig = {
-    maxFiles: 1,
-    maxSize: 1024 * 1024 * 4,
+    maxFiles: 2,
+    maxSize: 1024 * 1024 * 5,
     multiple: true,
   };
   const form = useForm<z.infer<typeof formSchema>>({
@@ -161,7 +176,7 @@ export function ImageUpload({desc, prefix}: ImageUploadProps) {
                     execute({file: files[0], prefix});
                   }}
                   dropzoneOptions={dropZoneConfig}
-                  className="relative bg-transparent rounded-lg p-1 h-full"
+                  className={`relative bg-transparent rounded-lg p-1 h-full ${onTop && "absolute w-full z-10 bg-stone-900 opacity-50 top-0 left-0"}`}
                 >
                   <FileInput
                     id="fileInput"
@@ -171,7 +186,7 @@ export function ImageUpload({desc, prefix}: ImageUploadProps) {
                       <CloudUpload className='text-gray-500 w-6 h-6'/>
                       <p className="mb-1 text-sm text-gray-500 dark:text-gray-400 text-center">
                         <span className="font-semibold">{desc ?? "Upload KTM/Student Id"}</span>
-                        &nbsp; or drag and drop
+                        &nbsp; or drag and drop (max 5 Mb)
                       </p>
                       <p className="text-xs text-gray-500 dark:text-gray-400">
                         PNG, JPG, or JPEG

@@ -129,38 +129,13 @@
   }
 }
 
-@keyframes logo {
-  0% {
-    clip-path: polygon(
-      0 147.8,
-      0 147.8,
-      0 147.8,
-      0 147.8,
-      0 147.8,
-      0 147.8,
-      0 147.8
-    );
-  }
-  100% {
-    clip-path: polygon(
-      64.486 31.066,
-      92 5,
-      117.048 1,
-      153.478 0,
-      89.235 116.729,
-      36.67 147.8,
-      0 147.8
-    );
-  }
-}
-
-html {
+html, .no-scrollbar {
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-html::-webkit-scrollbar {
+html::-webkit-scrollbar, .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
