@@ -1,3 +1,4 @@
+import { CompetitionName } from '@prisma/client';
 import { z } from 'zod';
 
 export const updateProfileSchema = z.object({
@@ -32,4 +33,15 @@ export const joinTeamSchema = z.object({
 export const uploadImageSchema = z.object({
   file: z.instanceof(File),
   prefix: z.enum(['ktm', 'pdDikti', 'twibbon', 'followIG']),
+});
+
+export const registerSchema = z.object({
+  teamId: z.string(),
+  competitionName: z.enum([
+    CompetitionName.BCC,
+    CompetitionName.IPPC,
+    CompetitionName.PDC,
+    CompetitionName.STEM,
+  ]),
+  paymentProof: z.instanceof(File),
 });

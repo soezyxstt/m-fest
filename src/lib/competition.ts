@@ -1,9 +1,11 @@
+import { CompetitionName } from '@prisma/client';
+
 export   const competitions: {
   title: string;
   logo: string;
   desc: string;
   regLink: string;
-  abbreviation: string;
+  abbreviation: CompetitionName;
   cover: string;
   isOpen?: boolean;
   prize: number;

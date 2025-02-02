@@ -82,4 +82,5 @@ model Registration {
   competition     Competition @relation(fields: [competitionId], references: [id])
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+  isVerified      Boolean     @default(false)
 }

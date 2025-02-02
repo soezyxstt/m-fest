@@ -55,7 +55,7 @@ export default async function TeamPage() {
       ) : (
         <>
           <div className="flex max-sm:flex-col items-center gap-2 justify-between">
-            {team.registration ? (
+            {team.registration?.isVerified ? (
               <div className="">
                 {team.registration.competition.name} Competition
               </div>
