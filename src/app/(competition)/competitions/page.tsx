@@ -173,7 +173,9 @@ export default function CompetitionsPage() {
                       Guide Book
                     </GradientButton>
                   </Link>
-                  <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
+                  <Link href={`/register/${competition.abbreviation.toLowerCase()}`}>
+                    <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
+                  </Link>
                 </div>
                 <p className='text-center w-8/10 max-sm:text-xs text-sm'>
                   {competition.desc}
