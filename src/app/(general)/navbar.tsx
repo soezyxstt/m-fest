@@ -22,8 +22,8 @@ export default function Navbar() {
   const [val, setval] = useState('');
   const ref = useRef<HTMLElement>(null);
   useOnClickOutside(ref as RefObject<HTMLElement>, () => setval(''));
-  const { scrollY } = useScroll();
   const mobileMenuOpen = val === 'root-navbar';
+  const { scrollY } = useScroll();
   let timeOut = setTimeout(() => { }, 1000);
 
   scrollY.on('change', (v) => {

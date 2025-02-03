@@ -1,6 +1,5 @@
-import { auth, signIn } from '@/auth';
+import { signIn } from '@/auth';
 import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
 import { title } from '@/components/ui/text/title';
 import SignInForm from './form';
 import GradientButton from '@/components/ui/button/bg-gradient';
@@ -8,10 +7,7 @@ import Link from 'next/link';
 import GradientText from '@/components/ui/text/gradient';
 
 export default async function SignIn() {
-  const session = await auth();
-  if (session) {
-    redirect('/dashboard');
-  }
+
   return (
     <main className='h-screen flex flex-col justify-center items-center gap-6 md:gap-10'>
       <title.h1 className='uppercase'>Sign In</title.h1>

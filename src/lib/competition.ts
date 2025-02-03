@@ -21,7 +21,7 @@ export   const competitions: {
     desc: 'Business Case Competition M-Fest 2025 challenges Indonesian undergraduate students to develop problem-solving and innovative thinking skills. The competition involves company collaborations to create case books for participants to analyze and provide strategic business solutions.',
     regLink: 'https://www.google.com',
     abbreviation: 'BCC',
-    isOpen: false,
+    isOpen: true,
     cover: '/competition/bcc-cover.png',
     prize: 12000000,
     reg1: '3 - 9 February 2025',
@@ -32,7 +32,7 @@ export   const competitions: {
       'https://drive.google.com/file/d/1kjCYe7Q95CqQ0ZO-syeZsC_XyJrcApno/view?usp=drive_link',
   },
   {
-    title: 'Inovative Poster and Paper Competition',
+    title: 'Innovative Poster and Paper Competition',
     logo: '/competition/logo/paper.png',
     desc: "Innovative Paper and Poster Competition M-Fest 2025 is a platform for Indonesian undergraduate students to develop clean energy solutions. The competition aims to generate creative ideas for reducing carbon emissions and accelerating Indonesia's clean energy transition through innovative waste energy utilization.",
     regLink: 'https://www.google.com',
@@ -45,6 +45,7 @@ export   const competitions: {
     fee2: 110000,
     guideBook:
       'https://drive.google.com/file/d/12hsX_V4bllC3blk3ik0Gt0klKA5crVCK/view?usp=drive_link',
+    isOpen: true,
   },
   {
     title: 'Pipeline Design Competition',
@@ -60,6 +61,7 @@ export   const competitions: {
     fee2: 250000,
     guideBook:
       'https://drive.google.com/file/d/1vQ6Ma1mNfp4tS0FmsVo6trVgbe_XvADw/view?usp=drive_link',
+    isOpen: true,
   },
   {
     title: 'STEM Competition',
