@@ -1,12 +1,18 @@
-import { signIn } from '@/auth';
+import { auth, signIn } from '@/auth';
 import { Metadata } from 'next';
 import { title } from '@/components/ui/text/title';
 import SignInForm from './form';
 import GradientButton from '@/components/ui/button/bg-gradient';
 import Link from 'next/link';
 import GradientText from '@/components/ui/text/gradient';
+import { redirect } from 'next/navigation';
 
 export default async function SignIn() {
+  const session = await auth();
+
+  if (session) {
+    redirect('/dashboard');
+  }
 
   return (
     <main className='h-screen flex flex-col justify-center items-center gap-6 md:gap-10'>
@@ -36,7 +42,7 @@ export default async function SignIn() {
             Continue with Google
           </GradientButton>
         </form>
-        <div className='grid grid-cols-2 gap-x-10 text-xs text-white font-light my-4'>
+        <div className='hidden grid-cols-2 gap-x-10 text-xs text-white font-light my-4'>
           <div className='text-right flex gap-2 justify-end'>
             Don&apos;t have an account yet?
             <Link
