@@ -28,23 +28,23 @@ import {
   FileUploader,
 } from "@/components/ui/file-upload"
 import GradientButton from '@/components/ui/button/bg-gradient'
-import {UnderlineInput} from '@/components/ui/input/regis-input'
-import {updateOrCreateProfileSchema} from '@/lib/schema'
-import {uploadImage} from "@/app/_action/upload-image";
-import {useAction} from "next-safe-action/hooks";
-import {revalidateTag, updateOrCreateProfile} from "@/app/_action/user";
+import { UnderlineInput } from '@/components/ui/input/regis-input'
+import { updateOrCreateProfileSchema } from '@/lib/schema'
+import { uploadImage } from "@/app/_action/upload-image";
+import { useAction } from "next-safe-action/hooks";
+import { revalidateTag, updateOrCreateProfile } from "@/app/_action/user";
 
 const formSchema = z.object({
   image: z.string()
 });
 
-export function BasicForm({defaultValues}: { defaultValues: { name: string; email: string; semester: number } }) {
+export function BasicForm({ defaultValues }: { defaultValues: { name: string; email: string; semester: number } }) {
   const form = useForm<z.infer<typeof updateOrCreateProfileSchema>>({
     resolver: zodResolver(updateOrCreateProfileSchema),
     defaultValues
   })
 
-  const {execute, isExecuting} = useAction(updateOrCreateProfile, {
+  const { execute, isExecuting } = useAction(updateOrCreateProfile, {
     onSuccess: () => {
       toast.success('Profile updated successfully');
     },
@@ -55,11 +55,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
 
   const onSubmit: SubmitHandler<z.infer<typeof updateOrCreateProfileSchema>> = (values, e) => {
     e?.preventDefault();
-    execute({
-      semester: parseInt(values.semester.toString()),
-      name: values.name,
-      email: values.email,
-    });
+    execute(values);
   }
 
   return (
@@ -69,7 +65,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
           <FormField
             control={form.control}
             name="email"
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <UnderlineInput
@@ -80,7 +76,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
                     type="email"
                     {...field} />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -88,7 +84,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
           <FormField
             control={form.control}
             name="name"
-            render={({field}) => (
+            render={({ field }) => (
               <FormItem>
                 <FormControl>
                   <UnderlineInput
@@ -97,7 +93,7 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
                     type="text"
                     {...field} />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -105,23 +101,26 @@ export function BasicForm({defaultValues}: { defaultValues: { name: string; emai
           <FormField
             control={form.control}
             name="semester"
-            render={({field}) => (
+            render={({ field: { onChange, ...field } }) => (
               <FormItem>
                 <FormControl>
                   <UnderlineInput
                     className='text-sm'
                     placeholder="semester"
                     type="number"
+                    onChange={(e) => {
+                      onChange(e.target.valueAsNumber);
+                    }}
 
                     {...field} />
                 </FormControl>
-                <FormMessage/>
+                <FormMessage />
               </FormItem>
             )}
           />
         </div>
         <GradientButton disabled={isExecuting} containerClassName='mt-4' size='sm' className='min-w-28' variant='glow'
-                        type="submit">Submit</GradientButton>
+          type="submit">Submit</GradientButton>
       </form>
     </Form>
   )
@@ -133,19 +132,19 @@ interface ImageUploadProps {
   onTop?: boolean;
 }
 
-export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
+export function ImageUpload({ desc, prefix, onTop = false }: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
-  const {execute} = useAction(uploadImage, {
+  const { execute } = useAction(uploadImage, {
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
     },
     onSuccess: () => {
       setTimeout(() => {
-          toast.success('Image uploaded successfully');
-          // location.reload();
+        toast.success('Image uploaded successfully');
+        // location.reload();
         revalidateTag("get_profile");
-        }
-        , 1500);
+      }
+        , 500);
     }, onSettled: () => {
       setFiles(null);
     }
@@ -174,7 +173,7 @@ export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
                   onValueChange={(files) => {
                     setFiles(files);
                     if (files && files.length > 0) {
-                      execute({file: files[0], prefix});
+                      execute({ file: files[0], prefix });
                     }
                   }}
                   dropzoneOptions={dropZoneConfig}
@@ -185,7 +184,7 @@ export function ImageUpload({desc, prefix, onTop = false}: ImageUploadProps) {
                     className="outline-dashed outline-1 outline-slate-500 h-full"
                   >
                     <div className="flex items-center justify-center flex-col p-6 w-full h-full">
-                      <CloudUpload className='text-gray-500 w-6 h-6'/>
+                      <CloudUpload className='text-gray-500 w-6 h-6' />
                       <p className="mb-1 text-sm text-gray-500 dark:text-gray-400 text-center">
                         <span className="font-semibold">{desc ?? "Upload KTM/Student Id"}</span>
                         &nbsp; or drag and drop (max 5 Mb)

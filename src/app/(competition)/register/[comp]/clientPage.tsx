@@ -29,6 +29,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { SparklesCore } from '@/components/ui/sparkle';
 
 export default function RegisterPage({ team, competitions: cs }:
   {
@@ -41,7 +42,7 @@ export default function RegisterPage({ team, competitions: cs }:
       }
     }>[] | undefined | null
   }) {
-  const dontShow = false;
+
   const pathName = usePathname();
   const router = useRouter();
   const compe = pathName.substring(pathName.lastIndexOf('/') + 1);
@@ -69,14 +70,12 @@ export default function RegisterPage({ team, competitions: cs }:
 
       setTimeout(() => {
         router.push('/dashboard');
-      }, 5000);
+      }, 7500);
     },
     onError: () => {
       toast.error('Failed to register');
     }
   })
-
-  if (dontShow) return null;
 
   const competition = cs?.find((c) => c.name.toLocaleLowerCase() === compe.toLowerCase());
 
@@ -91,15 +90,40 @@ export default function RegisterPage({ team, competitions: cs }:
     router.push('/team');
   }
 
+  if (competition.earlyStart > new Date()) {
+    return (
+      <section
+        id='hero'
+        className='h-screen flex justify-center items-center flex-col gap-6 relative text-white'
+      >
+        <div className='w-full absolute h-screen pointer-events-none'>
+          <SparklesCore
+            id='tsparticlesfullpage'
+            background='transparent'
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={60}
+            className='w-full h-full z-0'
+            particleColor='#ad8cea'
+          />
+        </div>
+        <h1 className='text-5xl md:text-7xl text-center max-w-8/10 md:max-w-2xl [font-family:var(--font-next-montserrat)] font-bold uppercase'>
+          {compe}
+        </h1>
+        <GradientText className='leading-normal max-w-8/10'>Comeback at {competition.earlyStart.toDateString()}</GradientText>
+      </section>
+    )
+  }
+
   return (
     <div className='h-screen bg-grad'>
-      <div className='flex justify-between h-24 md:px-12 items-center py-6 fixed top-0 left-0 w-full z-10'>
+      <div className='flex justify-between h-24 px-6 md:px-12 items-center py-6 fixed top-0 left-0 w-full z-10'>
         <Link
           href='/competitions'
           className='flex gap-4 items-center text-white'
         >
           <MoveLeft size={24} />
-          <title.h5 className={`font-medium ${montserrat.className} uppercase`}>
+          <title.h5 className={`font-medium ${montserrat.className} uppercase max-sm:hidden`}>
             Back
           </title.h5>
         </Link>
@@ -109,7 +133,7 @@ export default function RegisterPage({ team, competitions: cs }:
             width={200}
             height={100}
             alt=''
-            className='h-full w-auto'
+            className='md:h-full h-8 w-auto'
           />
           <GradientText
             className={`${montserrat.className} text-3xl md:text-5xl font-bold uppercase from-purple-500 via-blue-500 to-white`}
@@ -119,8 +143,8 @@ export default function RegisterPage({ team, competitions: cs }:
         </div>
       </div>
       <div className='grid place-items-center text-white h-full w-full'>
-        <div className='flex w-[70vw] items-center'>
-          <div className='w-3/10 grid grid-cols-[1fr_20px]'>
+        <div className='flex md:w-[70vw] items-center'>
+          <div className='w-3/10 grid grid-cols-[1fr_20px] max-sm:hidden'>
 
             <div className='grid grid-cols-subgrid col-span-2'>
               <div className='flex gap-2 md:gap-4 items-center py-4'>
@@ -173,9 +197,9 @@ export default function RegisterPage({ team, competitions: cs }:
 
           {/* main screen */}
           <Carousel>
-            <CarouselContent>
+            <CarouselContent className='max-w-[90vw]'>
               <CarouselItem>
-                <div className='pl-4 md:pl-20 space-y-6'>
+                <div className='md:pl-20 space-y-6'>
                   <div className='text-muted text-sm'>Step {step}</div>
                   <title.h2 className='text-3xl font-medium mb-12'>
                     Please confirm that you are registering for <strong className='text-azure-m'>{competition?.name}</strong> and <span className="text-mauve-m">{competition?.name === 'STEM' ? 'still in school' : 'already in college'}
@@ -186,22 +210,22 @@ export default function RegisterPage({ team, competitions: cs }:
               </CarouselItem>
 
               <CarouselItem>
-                <div className='pl-4 md:pl-20 space-y-6'>
+                <div className='md:pl-20 space-y-6'>
                   <div className='text-muted text-sm'>Step {step}</div>
                   <title.h3 className='text-2xl font-medium mb-12'>
                     Wait wait... you need to do something first. Please attach your <span className="text-mauve-m">payment receipt below</span>.
                   </title.h3>
-                  <p className="">Please make sure that it is indeed IDR <span className='text-azure-m'>{fee?.toLocaleString('id-ID', {
+                  <p className="">Please make sure that it is indeed IDR <span className='text-cyan-500'>{fee?.toLocaleString('id-ID', {
                     minimumFractionDigits: 2,
-                  })}</span> a.n Adi Haditya N</p>
+                  })}</span> to <span className='text-teal-m'>Mandiri: 1320029544567</span> (Raudhah Yahya Kuddah)</p>
                   <Input accept='image/*' onChange={(e) => e.target.files && setFile(e.target.files[0])} type="file" />
                 </div>
               </CarouselItem>
               <CarouselItem>
-                <div className='pl-4 md:pl-20 space-y-12'>
+                <div className='md:pl-20 space-y-12'>
                   <div className='text-muted text-sm'>Step {step}</div>
                   <title.h3 className='text-2xl font-medium mb-12'>
-                    Lets make things clear <strong>{team?.name}</strong>
+                    Lets make things clear <strong>{team?.name}</strong> team
                   </title.h3>
                   <p className="">You guys want to register for <span className="text-mauve-m">{compe.toUpperCase()}</span> and already paid <span className="text-teal-m">{fee?.toLocaleString('id-ID', {
                     minimumFractionDigits: 2,
@@ -209,14 +233,14 @@ export default function RegisterPage({ team, competitions: cs }:
                 </div>
               </CarouselItem>
             </CarouselContent>
-            <div className="pl-4 flex w-full justify-between mt-4 md:mt-16 md:pl-20">
+            <div className="flex w-full justify-between mt-4 md:mt-16 md:pl-20">
               <PrevButton onClick={() => {
                 setStep(step - 1);
               }} />
               {step < 3 ? (<NextButton onClick={() => {
                 setStep(step + 1);
               }} />) : (
-                <GradientButton className='min-w-32' onClick={() => {
+                <GradientButton className='min-w-28' onClick={() => {
                   if (!team || !file) {
                     toast.error('Please fill all the fields');
                     return;

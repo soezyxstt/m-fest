@@ -57,6 +57,7 @@ export default function SignInForm() {
                   placeholder='email'
                   type='email'
                   autoComplete='email-mfest-signin'
+                  disabled
                   {...field}
                 />
               </FormControl>
@@ -75,6 +76,7 @@ export default function SignInForm() {
               <FormControl>
                 <PasswordInput
                   placeholder='input at least 8 characters'
+                  disabled
                   {...field}
                 />
               </FormControl>
@@ -89,6 +91,7 @@ export default function SignInForm() {
           containerClassName='mt-10'
           variant='outline'
           isFullWIdth
+          disabled
         >
           <Mail className='w-4 h-4' />
           Sign-in using email

@@ -55,11 +55,15 @@ export default async function TeamPage() {
       ) : (
         <>
           <div className="flex max-sm:flex-col items-center gap-2 justify-between">
-            {team.registration?.isVerified ? (
+            {team.registration ? (team.registration.isVerified ? (
+              <p className="">
+                Verification Process
+              </p>
+            ) : (
               <div className="">
                 {team.registration.competition.name} Competition
               </div>
-            ) : (
+            )) : (
               <div className="text-muted flex gap-2 items-center">
                 No Competition
                 <Link href='/competitions' className="text-azure-m underline">
