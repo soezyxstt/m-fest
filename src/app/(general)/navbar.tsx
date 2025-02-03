@@ -137,42 +137,44 @@ export default function Navbar() {
                             className=''
                             heading='Competitions'
                           >
-                            <CommandItem>
-                              <span className='text-muted'>BCC</span>
+                            <CommandItem asChild>
+                              <Link href='/register/bcc' className='text-muted'>
+                                BCC
+                              </Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>IPPC</span>
+                            <CommandItem asChild>
+                              <Link href='/register/ippc' className='text-muted'>IPPC</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>Pipeline</span>
+                            <CommandItem asChild>
+                              <Link href='/register/pdc' className='text-muted'>PDC</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>STEM</span>
+                            <CommandItem asChild>
+                              <Link href='/register/stem' className='text-muted'>STEM</Link>
                             </CommandItem>
                           </CommandGroup>
                           <CommandGroup heading='Events'>
-                            <CommandItem>
-                              <span className='text-muted'>M-Care</span>
+                            <CommandItem asChild>
+                              <Link href='/register/m-care' className='text-muted'>M-Care</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>M-Run</span>
+                            <CommandItem asChild>
+                              <Link href='/register/m-run' className='text-muted'>M-Run</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>Engine Tune Up</span>
+                            <CommandItem asChild>
+                              <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>M-Expo</span>
+                            <CommandItem asChild>
+                              <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>
+                            <CommandItem asChild>
+                              <Link href='/register/solidarity-forever-summit' className='text-muted'>
                                 Solidarity Forever Summit
-                              </span>
+                              </Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>M-Talks</span>
+                            <CommandItem asChild>
+                              <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
                             </CommandItem>
-                            <CommandItem>
-                              <span className='text-muted'>Ceremony</span>
+                            <CommandItem asChild>
+                              <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
                             </CommandItem>
                           </CommandGroup>
                         </CommandList>
@@ -247,41 +249,43 @@ export default function Navbar() {
               <DropdownMenuContent className='text-white backdrop-blur-md'>
                 <DropdownMenuLabel className='text-white'>Competitions</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <span className='text-muted'>BCC</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/bcc' className='text-muted'>
+                    BCC
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>IPPC</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/ippc' className='text-muted'>IPPC</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>Pipeline</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/pdc' className='text-muted'>Pipeline</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>STEM</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/stem' className='text-muted'>STEM</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuLabel className='text-white'>Events</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <span className='text-muted'>M-Care</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/m-care' className='text-muted'>M-Care</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>M-Run</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/m-run' className='text-muted'>M-Run</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>Engine Tune Up</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>M-Expo</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>Solidarity Forever Summit</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/solidarity-forever-summit' className='text-muted'>Solidarity Forever Summit</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>M-Talks</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span className='text-muted'>Ceremony</span>
+                <DropdownMenuItem className='cursor-pointer' asChild>
+                  <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

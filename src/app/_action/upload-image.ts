@@ -14,6 +14,11 @@ export const uploadImage = authActionClient
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
       const date = (new Date()).toLocaleString().replace(/[\/\s:]/g, '-');
+
+      if (!id) {
+        throw new Error('Please submit the semester first!');
+      }
+
       let data: object | null = null;
 
       await new Promise(async (resolve, reject) => {

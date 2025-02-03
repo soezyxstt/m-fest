@@ -10,7 +10,7 @@ export const actionClient = createSafeActionClient({
   handleServerError(e) {
     console.error('Action Error ->', e.message);
 
-    return DEFAULT_SERVER_ERROR_MESSAGE;
+    return e.message ?? DEFAULT_SERVER_ERROR_MESSAGE;
   },
   defineMetadataSchema() {
     return z.object({
@@ -52,7 +52,7 @@ export const authActionClient = actionClient
     });
 
     if (!profile) {
-      throw new Error('Session is not valid!');
+      throw new Error('Please submit your semester first!');
     }
 
     // Return the next middleware with `userId` value in the context
