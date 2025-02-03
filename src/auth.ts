@@ -13,8 +13,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   pages: {
-    signIn: '/signin',
-    signOut: '/signout',
+    signIn: '/sign-in',
+    signOut: '/sign-out',
     error: '/error',
   },
   callbacks: {
