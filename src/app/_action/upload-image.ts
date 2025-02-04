@@ -31,15 +31,10 @@ export const uploadImage = authActionClient
             async (err, callResult) => {
               if (err || !callResult) {
                 reject(err);
-                return;
+                throw new Error('Failed to upload image');
               }
 
               const { secure_url } = callResult;
-
-              if (!secure_url) {
-                reject(new Error('Failed to upload image'));
-                throw new Error('Failed to upload image');
-              }
 
               data = await prisma.profile.update({
                 where: { id },
