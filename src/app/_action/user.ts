@@ -33,6 +33,12 @@ export async function getProfileByEmail({email}: { email: string }) {
 export const revalidatePath = rP
 export const revalidateTag = rT;
 
+export const getProfileByEmailAction = actionClient
+  .metadata({actionName: "getProfileByEmail"})
+  .action(async () => {
+    return (await getProfile());
+  })
+
 export const updateProfile = authActionClient
   .metadata({actionName: "updateProfile"})
   .schema(updateProfileSchema)

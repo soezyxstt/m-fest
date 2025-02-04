@@ -1,4 +1,4 @@
-import { getCachedTeam, getCachedTeams } from "@/app/_action/team";
+import { getCachedTeams, getTeam } from "@/app/_action/team";
 import { CreateTeamForm, JoinTeamForm } from "@/app/(dashboard)/team/form";
 import {
   Table,
@@ -16,7 +16,7 @@ export default async function TeamPage() {
   const email = (await auth())?.user?.email ?? "";
 
   // const team = await getTeam();
-  const team = await getCachedTeam(email);
+  const team = await getTeam(email);
   const teams = await getCachedTeams();
 
   const wagLinks = {

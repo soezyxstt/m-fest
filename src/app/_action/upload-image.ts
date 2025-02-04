@@ -45,6 +45,8 @@ export const uploadImage = authActionClient
           .end(buffer);
         resolve(data);
       });
+      
+
       return data;
     } catch (e) {
       if (e instanceof Error) {

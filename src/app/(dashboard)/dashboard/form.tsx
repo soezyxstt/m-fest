@@ -38,7 +38,7 @@ const formSchema = z.object({
   image: z.string()
 });
 
-export function BasicForm({ defaultValues, revalidate }: { defaultValues: { name: string; email: string; semester: number }, revalidate: () => void }) {
+export function BasicForm({ defaultValues }: { defaultValues: { name: string; email: string; semester: number }, revalidate?: () => void }) {
   const form = useForm<z.infer<typeof updateOrCreateProfileSchema>>({
     resolver: zodResolver(updateOrCreateProfileSchema),
     defaultValues
@@ -46,11 +46,10 @@ export function BasicForm({ defaultValues, revalidate }: { defaultValues: { name
 
   const { execute, isExecuting } = useAction(updateOrCreateProfile, {
     onSuccess: () => {
+      toast.success('Profile updated succesfully!');
       setTimeout(() => {
-        toast.success('Image uploaded successfully');
-        // location.reload();
-        revalidate();
-      })
+        location.reload();
+      }, 1000);
     },
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
@@ -134,22 +133,21 @@ interface ImageUploadProps {
   desc?: string;
   prefix: 'ktm' | 'pdDikti' | 'followIG' | 'twibbon';
   onTop?: boolean;
-  revalidate: () => void;
+  revalidate?: () => void;
 }
 
-export function ImageUpload({ desc, prefix, onTop = false, revalidate }: ImageUploadProps) {
+export function ImageUpload({ desc, prefix, onTop = false }: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
   const { execute } = useAction(uploadImage, {
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
     },
     onSuccess: () => {
+      toast.success('Image uploaded successfully');
       setTimeout(() => {
-        toast.success('Image uploaded successfully');
-        // location.reload();
-        revalidate();
+        location.reload();
       }
-        , 500);
+        , 1000);
     }, onSettled: () => {
       setFiles(null);
     }
