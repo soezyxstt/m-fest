@@ -1,6 +1,6 @@
 "use client";
 
-import { Home, PanelLeft, Users } from 'lucide-react';
+import { PanelLeft, User, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,7 +27,7 @@ export default function Template({
         <aside className={`max-sm:hidden ${expanded ? 'w-72' : 'w-16'} h-full transition-all duration-500 overflow-hidden pt-20 p-3 space-y-2 `}>
           <Link href='dashboard' className={`flex w-52 items-center h-12 gap-3 ${expanded && "hover:bg-stone-400/20"} ${expanded && activeTab.toLocaleLowerCase() === "dashboard" && "bg-stone-400/20"} rounded-md transition-all cursor-pointer`}>
             <div className={`p-2 rounded-md transition-all cursor-pointer ${expanded || "hover:bg-stone-400/20"} ${(!expanded && activeTab.toLocaleLowerCase() === "dashboard") && "bg-stone-400/20"}`}>
-              <Home className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
+              <User className={`${expanded ? "h-5 w-5" : "h-6 w-6"} transition-all duration-500`} />
             </div>
             Dashboard
           </Link>

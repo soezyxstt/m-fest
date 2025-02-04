@@ -103,6 +103,11 @@ export default function Navbar() {
                 <Link
                   className='py-4 border-b'
                   onClick={() => setval('')}
+                  href='/sign-in'
+                >Sign In</Link>
+                <Link
+                  className='py-4 border-b'
+                  onClick={() => setval('')}
                   href='/#timeline'
                 >
                   Timeline
@@ -237,58 +242,69 @@ export default function Navbar() {
             >
               Competitions
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+            <div className="flex gap-4 items-center">
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <GradientButton
+                    variant='outline'
+                    className='px-4 h-full min-w-28'
+                  >
+                    Register
+                  </GradientButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className='text-white backdrop-blur-md'>
+                  <DropdownMenuLabel className='text-white'>Competitions</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/bcc' className='text-muted'>
+                      BCC
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/ippc' className='text-muted'>IPPC</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/pdc' className='text-muted'>Pipeline</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/stem' className='text-muted'>STEM</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuLabel className='text-white'>Events</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/m-care' className='text-muted'>M-Care</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/m-run' className='text-muted'>M-Run</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/solidarity-forever-summit' className='text-muted'>Solidarity Forever Summit</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className='cursor-pointer' asChild>
+                    <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <Link href='/sign-in'>
                 <GradientButton
-                  variant='outline'
-                  className='px-4 h-full'
+                  variant='glow'
+                  className='px-4 h-full min-w-24'
                 >
-                  Register
+                  Sign In
                 </GradientButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className='text-white backdrop-blur-md'>
-                <DropdownMenuLabel className='text-white'>Competitions</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/bcc' className='text-muted'>
-                    BCC
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/ippc' className='text-muted'>IPPC</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/pdc' className='text-muted'>Pipeline</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/stem' className='text-muted'>STEM</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel className='text-white'>Events</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/m-care' className='text-muted'>M-Care</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/m-run' className='text-muted'>M-Run</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/solidarity-forever-summit' className='text-muted'>Solidarity Forever Summit</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className='cursor-pointer' asChild>
-                  <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              </Link>
+            </div>
           </div>
         </nav>
         <div

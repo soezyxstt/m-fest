@@ -32,13 +32,13 @@ import { UnderlineInput } from '@/components/ui/input/regis-input'
 import { updateOrCreateProfileSchema } from '@/lib/schema'
 import { uploadImage } from "@/app/_action/upload-image";
 import { useAction } from "next-safe-action/hooks";
-import { revalidateTag, updateOrCreateProfile } from "@/app/_action/user";
+import { updateOrCreateProfile } from "@/app/_action/user";
 
 const formSchema = z.object({
   image: z.string()
 });
 
-export function BasicForm({ defaultValues }: { defaultValues: { name: string; email: string; semester: number } }) {
+export function BasicForm({ defaultValues, revalidate }: { defaultValues: { name: string; email: string; semester: number }, revalidate: () => void }) {
   const form = useForm<z.infer<typeof updateOrCreateProfileSchema>>({
     resolver: zodResolver(updateOrCreateProfileSchema),
     defaultValues
@@ -46,7 +46,11 @@ export function BasicForm({ defaultValues }: { defaultValues: { name: string; em
 
   const { execute, isExecuting } = useAction(updateOrCreateProfile, {
     onSuccess: () => {
-      toast.success('Profile updated successfully');
+      setTimeout(() => {
+        toast.success('Image uploaded successfully');
+        // location.reload();
+        revalidate();
+      })
     },
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
@@ -130,9 +134,10 @@ interface ImageUploadProps {
   desc?: string;
   prefix: 'ktm' | 'pdDikti' | 'followIG' | 'twibbon';
   onTop?: boolean;
+  revalidate: () => void;
 }
 
-export function ImageUpload({ desc, prefix, onTop = false }: ImageUploadProps) {
+export function ImageUpload({ desc, prefix, onTop = false, revalidate }: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
   const { execute } = useAction(uploadImage, {
     onError: (err) => {
@@ -142,7 +147,7 @@ export function ImageUpload({ desc, prefix, onTop = false }: ImageUploadProps) {
       setTimeout(() => {
         toast.success('Image uploaded successfully');
         // location.reload();
-        revalidateTag("get_profile");
+        revalidate();
       }
         , 500);
     }, onSettled: () => {

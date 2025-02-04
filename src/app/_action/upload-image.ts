@@ -5,6 +5,7 @@ import { uploadImageSchema } from '@/lib/schema';
 import { prisma } from '@/server/prisma';
 import { cloudinary } from '@/lib/cloudinary';
 import { revalidatePath } from 'next/cache';
+import { z } from 'zod';
 
 export const uploadImage = authActionClient
   .metadata({ actionName: 'uploadImage' })
@@ -45,8 +46,9 @@ export const uploadImage = authActionClient
             }
           )
           .end(buffer);
-        revalidatePath('/dashboard');
         resolve(data);
+        revalidatePath('/dashboard');
+        console.log('dsa');
       });
       return data;
     } catch (e) {
@@ -55,4 +57,16 @@ export const uploadImage = authActionClient
       }
       throw new Error('Failed to upload image');
     }
+  });
+
+export const dummy = authActionClient
+  .metadata({ actionName: 'dummy' })
+  .schema(
+    z.object({
+      path: z.string(),
+    })
+  )
+  .action(async ({ parsedInput: { path } }) => {
+    revalidatePath(path);
+    return {};
   });
