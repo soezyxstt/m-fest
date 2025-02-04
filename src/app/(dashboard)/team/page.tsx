@@ -19,12 +19,19 @@ export default async function TeamPage() {
   const team = await getCachedTeam(email);
   const teams = await getCachedTeams();
 
+  const wagLinks = {
+    BCC: "https://chat.whatsapp.com/GF8DRvwKDmfCUz1hlePySi",
+    PDC: "https://chat.whatsapp.com/EhCa1P216bFGQoOagocyOX",
+    IPPC: "https://chat.whatsapp.com/GBf3XtAQh086XaFP0vSdkq",
+    STEM: "#"
+  }
+
   return (
     <div
       className="@container flex flex-col gap-6 md:gap-10 h-full w-full bg-stone-400/10 rounded-lg md:rounded-2xl p-4">
       {!team ? (
         <>
-          <div className="flex max-sm:flex-col justify-between w-full h-min">
+          <div className="flex max-sm:flex-col justify-between w-full h-min gap-4">
             <CreateTeamForm />
             <JoinTeamForm />
           </div>
@@ -80,6 +87,9 @@ export default async function TeamPage() {
               </div>
             </div>
           </div>
+          {team.registration?.competition.name && (
+            <Link className='my-4' href={wagLinks[team.registration.competition.name]}>Please join WAG for verification process and further infos.</Link>
+          )}
           <div className="">
             <GradientText className='text-left text-lg mb-2 md:mb-4 md:text-2xl'>Team Information</GradientText>
             <Table>
