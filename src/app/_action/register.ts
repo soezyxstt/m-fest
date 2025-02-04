@@ -25,14 +25,13 @@ export const register = authActionClient
 
         const arrayBuffer = await paymentProof.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-        const date = new Date().toLocaleString().replace(/[\/\s:]/g, '-');
         let data: object | null = null;
 
         await new Promise(async (resolve, reject) => {
           cloudinary.uploader
             .upload_stream(
               {
-                public_id: 'payment-proof-' + id + '-' + date,
+                public_id: 'payment-proof-' + id,
                 resource_type: 'image',
               },
               async (err, callResult) => {

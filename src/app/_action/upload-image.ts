@@ -4,8 +4,6 @@ import { authActionClient } from '@/lib/safe-action';
 import { uploadImageSchema } from '@/lib/schema';
 import { prisma } from '@/server/prisma';
 import { cloudinary } from '@/lib/cloudinary';
-import { revalidatePath } from 'next/cache';
-import { z } from 'zod';
 
 export const uploadImage = authActionClient
   .metadata({ actionName: 'uploadImage' })
@@ -14,7 +12,6 @@ export const uploadImage = authActionClient
     try {
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
-      const date = new Date().toLocaleString().replace(/[\/\s:]/g, '-');
 
       if (!id) {
         throw new Error('Please submit the semester first!');
@@ -26,7 +23,7 @@ export const uploadImage = authActionClient
         cloudinary.uploader
           .upload_stream(
             {
-              public_id: prefix + '-' + id + '-' + date,
+              public_id: prefix + '-' + id,
               resource_type: 'image',
             },
             async (err, callResult) => {
@@ -47,8 +44,6 @@ export const uploadImage = authActionClient
           )
           .end(buffer);
         resolve(data);
-        revalidatePath('/dashboard');
-        console.log('dsa');
       });
       return data;
     } catch (e) {
@@ -57,16 +52,4 @@ export const uploadImage = authActionClient
       }
       throw new Error('Failed to upload image');
     }
-  });
-
-export const dummy = authActionClient
-  .metadata({ actionName: 'dummy' })
-  .schema(
-    z.object({
-      path: z.string(),
-    })
-  )
-  .action(async ({ parsedInput: { path } }) => {
-    revalidatePath(path);
-    return {};
   });
