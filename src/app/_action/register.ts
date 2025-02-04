@@ -2,7 +2,6 @@
 
 import { authActionClient } from '@/lib/safe-action';
 import { prisma } from '@/server/prisma';
-import { revalidatePath, revalidateTag } from 'next/cache';
 import { registerSchema } from '@/lib/schema';
 import { cloudinary } from '@/lib/cloudinary';
 
@@ -55,9 +54,6 @@ export const register = authActionClient
               }
             )
             .end(buffer);
-          revalidatePath('/team');
-          revalidateTag('get_teams');
-          revalidatePath('get_team');
           resolve(data);
         });
         return data;
