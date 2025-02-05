@@ -45,8 +45,10 @@ export const uploadImage = authActionClient
           .end(buffer);
         resolve(data);
       });
-      
 
+      if (!data) {
+        throw new Error('Failed to upload image');
+      }
       return data;
     } catch (e) {
       if (e instanceof Error) {

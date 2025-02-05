@@ -47,9 +47,6 @@ export function BasicForm({ defaultValues }: { defaultValues: { name: string; em
   const { execute, isExecuting } = useAction(updateOrCreateProfile, {
     onSuccess: () => {
       toast.success('Profile updated succesfully!');
-      setTimeout(() => {
-        location.reload();
-      }, 1000);
     },
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
@@ -136,18 +133,21 @@ interface ImageUploadProps {
   revalidate?: () => void;
 }
 
-export function ImageUpload({ desc, prefix, onTop = false }: ImageUploadProps) {
+export function ImageUpload({ desc, prefix, onTop = false, revalidate }: ImageUploadProps) {
   const [files, setFiles] = useState<File[] | null>(null);
   const { execute } = useAction(uploadImage, {
     onError: (err) => {
       toast.error(err.error.serverError || err.error.bindArgsValidationErrors || "Validation error, check your input!");
     },
     onSuccess: () => {
-      toast.success('Image uploaded successfully');
+      toast.success('Image uploaded successfully! Refresh to see the changes');
       setTimeout(() => {
-        location.reload();
+        revalidate?.();
+        if (revalidate) {
+          revalidate();
+        }
       }
-        , 1000);
+        , 1500);
     }, onSettled: () => {
       setFiles(null);
     }

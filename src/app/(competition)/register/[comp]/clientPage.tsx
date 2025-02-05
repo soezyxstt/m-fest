@@ -259,7 +259,7 @@ export default function RegisterPage({ team, competitions: cs }:
         </div>
       </div>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className='bg-white/20 backdrop-blur-sm'>
+        <DialogContent className='bg-stone-400/50 backdrop-blur-sm'>
           <DialogHeader>
             <DialogTitle className='text-white font-medium'>Thanks for filling up the form!</DialogTitle>
           </DialogHeader>

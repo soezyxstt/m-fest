@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'motion/react';
+import HelpButton from './help-button';
 
 export default function RootTemplate({
   children,
@@ -102,6 +103,7 @@ export default function RootTemplate({
             </div>
           </motion.div>
         </motion.div>
+        <HelpButton />
         {children}
       </AnimatePresence>
     </>

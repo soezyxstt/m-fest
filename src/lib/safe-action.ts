@@ -44,7 +44,7 @@ export const authActionClient = actionClient
     const session = await auth();
 
     if (!session) {
-      throw new Error('Session not found!');
+      throw new Error('Session not found! Please relogin.');
     }
 
     const profile = await prisma.profile.findUnique({
