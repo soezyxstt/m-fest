@@ -40,15 +40,19 @@ export const uploadImage = authActionClient
                   [prefix]: secure_url,
                 },
               });
+
+              if (!data) {
+                reject(new Error('Failed to upload image'));
+              }
             }
           )
           .end(buffer);
         resolve(data);
       });
 
-      if (!data) {
-        throw new Error('Failed to upload image');
-      }
+      // if (!data) {
+      //   throw new Error('Failed to upload image');
+      // }
       return data;
     } catch (e) {
       if (e instanceof Error) {
