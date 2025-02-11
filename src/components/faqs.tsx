@@ -40,6 +40,11 @@ function Faqs() {
       content:
         'One person is only allowed to participate in 1 competition category in M-Fest 2025.',
     },
+    {
+      id: "06",
+      title: "Competition related questions?",
+      content: "If you have any further questions regarding our competitions, please kindly follow our Instagram and click 'FAQ Competitions' highlight. Thank you!"
+    }
   ];
 
   return (
