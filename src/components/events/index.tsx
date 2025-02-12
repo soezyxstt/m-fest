@@ -36,9 +36,8 @@ export default function Events() {
       className='grid grid-rows-1 relative w-full'
     >
       <div
-        className={`sticky top-1/2 z-10 ml-4 md:ml-20 transition-all duration-500 ${
-          isExpanded ? 'scale-y-100' : 'scale-y-0'
-        }`}
+        className={`sticky top-1/2 z-10 ml-4 md:ml-20 transition-all duration-500 ${isExpanded ? 'scale-y-100' : 'scale-y-0'
+          }`}
       >
         <div className='absolute space-y-4 -translate-y-1/2 '>
           {events.map((_, i) => (
@@ -55,7 +54,7 @@ export default function Events() {
         </div>
       </div>
       <motion.div
-        style={{left, top, rotate}}
+        style={{ left, top, rotate }}
         className='sticky w-0 h-0 z-[11] pointer-events-none max-sm:hidden'
       >
         <div className='bg-radial w-96 h-96 from-cyan-200 via-azure-m to-80% to-transparent rounded-full absolute opacity-7.5  translate-12'></div>
@@ -67,6 +66,7 @@ export default function Events() {
           title={event.title}
           description={event.desc}
           image={event.img}
+          url={event.url}
         />
       ))}
     </section>

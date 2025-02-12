@@ -3,6 +3,7 @@ export   const events = [
     title: 'M-Care',
     desc: 'We want to show that we care, Save Blood Save Lives! Register yourself, donate your blood, and get a free medical check up!',
     img: '/event/mcare.jpg',
+    url: 'https://bit.ly/RegistrasiMCare',
   },
   {
     title: 'M-Run',

@@ -12,10 +12,12 @@ export default function EventsCard({
   title: t,
   description,
   image,
+  url
 }: {
   title: string;
   description: string;
-  image: string | string[];
+    image: string | string[];
+  url?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -64,7 +66,7 @@ export default function EventsCard({
         style={{ opacity, top: isDesktop ? top : '50%' }}
         className='z-10 sticky transform -translate-y-1/2 w-fit'
       >
-        <HoverCard url={`/events/${t.toLowerCase().replace(' ', '-').replace(' ', '-')}`}>
+        <HoverCard url={url ?? `/events/${t.toLowerCase().replace(' ', '-').replace(' ', '-')}`}>
           <title.h1
             className={`flex gap-6 md:gap-12 ${
               is3Words ? 'md:text-7xl text-5xl' : 'md:text-8xl text-6xl '
