@@ -355,7 +355,7 @@ export default function RegisterPage({ team, competitions: cs }:
                     });
                   }
                 }}
-                  disabled={step < pageLength || !team || !file || (isStem && !teacher?.NUPTK || !teacher?.name || !teacher?.email || !teacher?.phoneNumber) || !gender}
+                    disabled={(!team || !file || (isStem && (!teacher?.NUPTK || !teacher?.name || !teacher?.email || !teacher?.phoneNumber || !gender)))}
                 >
                   Register
                 </GradientButton>
