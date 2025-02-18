@@ -106,7 +106,7 @@ export function BasicForm({ defaultValues }: { defaultValues: { name: string; em
                 <FormControl>
                   <UnderlineInput
                     className='text-sm'
-                    placeholder="semester"
+                    placeholder="semester or class for student"
                     type="number"
                     onChange={(e) => {
                       onChange(e.target.valueAsNumber);
