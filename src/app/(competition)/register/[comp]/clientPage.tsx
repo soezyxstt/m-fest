@@ -7,7 +7,7 @@ import Image from 'next/image';
 import GradientText from '@/components/ui/text/gradient';
 import { montserrat } from '@/style/font';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -92,17 +92,23 @@ export default function RegisterPage({ team, competitions: cs }:
 
   const competition = cs?.find((c) => c.name.toLocaleLowerCase() === compe.toLowerCase());
 
+  useEffect(() => {
+    if (!competition) {
+      router.push('/404');
+      return
+    }
+
+    if (!team) {
+      router.push('/team');
+    }
+  }, [competition, team, router])
+
   if (!competition) {
-    router.push('/404');
     return
   }
 
   const localCompe = localCs.find((c) => c.abbreviation === compe.toUpperCase());
   const fee = competition?.normalStart < new Date() ? localCompe?.fee1 : localCompe?.fee2;
-
-  if (!team) {
-    router.push('/team');
-  }
 
   if (competition.earlyStart > new Date()) {
     return (
