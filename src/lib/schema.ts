@@ -45,3 +45,11 @@ export const registerSchema = z.object({
   ]),
   paymentProof: z.instanceof(File),
 });
+
+export const addTeacherSchema = z.object({
+  name: z.string(),
+  email: z.string().email(),
+  phoneNumber: z.string(),
+  NUPTK: z.string(),
+  gender: z.enum(['L', 'P']),
+});

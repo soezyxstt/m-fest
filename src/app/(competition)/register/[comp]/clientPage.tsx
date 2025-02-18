@@ -1,6 +1,6 @@
 'use client';
 
-import { BrainCircuit, CircleDollarSign, MoveLeft, PackageCheck } from 'lucide-react';
+import { BrainCircuit, CircleDollarSign, MoveLeft, PackageCheck, Speech } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { title } from '@/components/ui/text/title';
 import Image from 'next/image';
@@ -15,12 +15,12 @@ import {
   NextButton,
   PrevButton,
 } from "@/components/ui/carousel"
-import { Prisma } from '@prisma/client';
+import { Gender, Prisma } from '@prisma/client';
 import GradientButton from '@/components/ui/button/bg-gradient';
 import { Input } from '@/components/ui/shadcnInput';
 import { competitions as localCs } from '@/lib/competition';
 import { useAction } from 'next-safe-action/hooks';
-import { register } from '@/app/_action/register';
+import { addTeacher, register } from '@/app/_action/register';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -30,6 +30,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { SparklesCore } from '@/components/ui/sparkle';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function RegisterPage({ team, competitions: cs }:
   {
@@ -60,9 +61,13 @@ export default function RegisterPage({ team, competitions: cs }:
       logo: '/competition/logo/bcc.png',
     },
   };
+  const isStem = compe === 'stem';
+  const pageLength = isStem ? 4 : 3;
 
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(1);
+  const [teacher, setTeacher] = useState<{ name: string, phoneNumber: string, email: string, NUPTK: string } | null>(null);
+  const [gender, setgender] = useState<Gender | undefined>(undefined);
   const [file, setFile] = useState<File | null>(null);
   const { execute } = useAction(register, {
     onSuccess: () => {
@@ -76,6 +81,14 @@ export default function RegisterPage({ team, competitions: cs }:
       toast.error('Failed to register');
     }
   })
+  const { execute: addTeacherAction } = useAction(addTeacher, {
+    onSuccess: () => {
+      toast.success('Teacher added successfully');
+    },
+    onError: () => {
+      toast.error('Failed to add teacher');
+    }
+  })
 
   const competition = cs?.find((c) => c.name.toLocaleLowerCase() === compe.toLowerCase());
 
@@ -83,6 +96,7 @@ export default function RegisterPage({ team, competitions: cs }:
     router.push('/404');
     return
   }
+
   const localCompe = localCs.find((c) => c.abbreviation === compe.toUpperCase());
   const fee = competition?.normalStart < new Date() ? localCompe?.fee1 : localCompe?.fee2;
 
@@ -143,7 +157,7 @@ export default function RegisterPage({ team, competitions: cs }:
         </div>
       </div>
       <div className='grid place-items-center text-white h-full w-full'>
-        <div className='flex md:w-[70vw] items-center'>
+        <div className='flex md:w-[80vw] items-center'>
           <div className='w-3/10 grid grid-cols-[1fr_20px] max-sm:hidden'>
 
             <div className='grid grid-cols-subgrid col-span-2'>
@@ -178,11 +192,29 @@ export default function RegisterPage({ team, competitions: cs }:
               </div>
             </div>
 
+            {isStem && (
+              <div className='grid grid-cols-subgrid col-span-2'>
+                <div className='flex gap-2 md:gap-4 items-center py-4'>
+                  <Speech className='text-2xl' />
+                  <div className='mr-6 w-max'>
+                    <p className='text-sm text-muted'>Step 3</p>
+                    <p className='text-lg font-medium'>Add Some More</p>
+                  </div>
+                </div>
+                <div className='grid place-items-center w-full h-full relative'>
+                  <div className='w-0.5 h-full left-1/2 bg-white absolute -translate-x-1/2'></div>
+                  <div className='rounded-full border h-5 grid place-items-center backdrop-blur-sm w-5'>
+                    &#x1F5F8;
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div className='grid grid-cols-subgrid col-span-2'>
               <div className='flex gap-2 md:gap-4 items-center py-4'>
                 <PackageCheck className='text-2xl' />
                 <div className='mr-6 w-max'>
-                  <p className='text-sm text-muted'>Step 3</p>
+                  <p className='text-sm text-muted'>Step {pageLength}</p>
                   <p className='text-lg font-medium'>Confirm First</p>
                 </div>
               </div>
@@ -193,11 +225,12 @@ export default function RegisterPage({ team, competitions: cs }:
                 </div>
               </div>
             </div>
+
           </div>
 
           {/* main screen */}
           <Carousel>
-            <CarouselContent className='max-w-[90vw]'>
+            <CarouselContent className='max-w-[60vw]'>
               <CarouselItem>
                 <div className='md:pl-20 space-y-6'>
                   <div className='text-muted text-sm'>Step {step}</div>
@@ -221,6 +254,64 @@ export default function RegisterPage({ team, competitions: cs }:
                   <Input accept='image/*' onChange={(e) => e.target.files && setFile(e.target.files[0])} type="file" />
                 </div>
               </CarouselItem>
+              {isStem && (
+                <CarouselItem>
+                  <div className='md:pl-20 space-y-6'>
+                    <div className='text-muted text-sm'>Step {step}</div>
+                    <title.h3 className='text-2xl font-medium mb-12'>
+                      Additional Information
+                    </title.h3>
+                    <p className="">Please fill all the information about your Academic Advisor (<span className='italic'>Guru Pembimbing</span>) below</p>
+                    <div className='grid grid-cols-1 gap-4'>
+                      <Input value={teacher?.name} onChange={(e) => {
+                        setTeacher(prev => ({
+                          name: e.target.value,
+                          email: prev?.email ?? "",
+                          phoneNumber: prev?.phoneNumber ?? "",
+                          NUPTK: prev?.NUPTK ?? "",
+                        }))
+                      }} placeholder='Name' />
+                      <Input value={teacher?.email} onChange={(e) => {
+                        setTeacher(prev => ({
+                          name: prev?.name ?? "",
+                          email: e.target.value,
+                          phoneNumber: prev?.phoneNumber ?? "",
+                          NUPTK: prev?.NUPTK ?? "",
+                        }))
+                      }} placeholder='Email' />
+                      <Input value={teacher?.phoneNumber} onChange={(e) => {
+                        setTeacher(prev => ({
+                          name: prev?.name ?? "",
+                          email: prev?.email ?? "",
+                          phoneNumber: e.target.value,
+                          NUPTK: prev?.NUPTK ?? "",
+                        }))
+                      }} placeholder='Phone Number' />
+                      <Input
+                        value={teacher?.NUPTK}
+                        onChange={(e) => {
+                          setTeacher(prev => ({
+                            name: prev?.name ?? "",
+                            email: prev?.email ?? "",
+                            phoneNumber: prev?.phoneNumber ?? "",
+                            NUPTK: e.target.value,
+                          }))
+                        }}
+                        placeholder='NUPTK' />
+                      <Select value={gender} onValueChange={(v) => setgender(v as Gender)}>
+                        <SelectTrigger>
+                          <SelectValue className='text-muted' placeholder="Gender" />
+                        </SelectTrigger>
+                        <SelectContent className='text-white bg-slate-400/20 backdrop-blur-sm'>
+                          {Object.values(Gender).map((g) => (
+                            <SelectItem key={g} value={g}>{g}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </CarouselItem>
+              )}
               <CarouselItem>
                 <div className='md:pl-20 space-y-12'>
                   <div className='text-muted text-sm'>Step {step}</div>
@@ -237,7 +328,7 @@ export default function RegisterPage({ team, competitions: cs }:
               <PrevButton onClick={() => {
                 setStep(step - 1);
               }} />
-              {step < 3 ? (<NextButton onClick={() => {
+              {step < pageLength ? (<NextButton onClick={() => {
                 setStep(step + 1);
               }} />) : (
                 <GradientButton className='min-w-28' onClick={() => {
@@ -245,12 +336,27 @@ export default function RegisterPage({ team, competitions: cs }:
                     toast.error('Please fill all the fields');
                     return;
                   }
+
+                  console.log(teacher, isStem)
+
                   execute({
                     teamId: team?.id ?? "",
                     competitionName: competition.name,
                     paymentProof: file,
                   })
-                }}>
+
+                  if (isStem && teacher) {
+                    addTeacherAction({
+                      name: teacher.name,
+                      email: teacher.email,
+                      phoneNumber: teacher.phoneNumber,
+                      NUPTK: teacher.NUPTK,
+                      gender: gender ?? "L"
+                    });
+                  }
+                }}
+                  disabled={step < pageLength || !team || !file || (isStem && !teacher?.NUPTK || !teacher?.name || !teacher?.email || !teacher?.phoneNumber) || !gender}
+                >
                   Register
                 </GradientButton>
               )}

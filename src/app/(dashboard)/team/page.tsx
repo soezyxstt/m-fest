@@ -88,7 +88,8 @@ export default async function TeamPage() {
             </div>
           </div>
           {team.registration?.competition.name && (
-            <Link className='my-4' href={wagLinks[team.registration.competition.name]}>Please join WAG for verification process and further infos.</Link>
+            <p className="">Please join <Link className='my-4 text-blue-400 hover:underline' href={wagLinks[team.registration.competition.name]}>WAG</Link> for more informations
+            </p>
           )}
           <div className="">
             <GradientText className='text-left text-lg mb-2 md:mb-4 md:text-2xl'>Team Information</GradientText>

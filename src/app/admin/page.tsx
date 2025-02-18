@@ -4,6 +4,7 @@ import { prisma } from '@/server/prisma';
 import WrapperImage from './image';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+import { CheckForm } from './form';
 export default async function Admin() {
   const email = (await auth())?.user?.email ?? "";
   const user = await prisma.profile.findUnique({
@@ -39,15 +40,17 @@ export default async function Admin() {
                 <TableHead>Team</TableHead>
                 <TableHead>Competition</TableHead>
                 <TableHead>Payment</TableHead>
+                <TableHead>IsVerified</TableHead>
                 <TableHead>Created At</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {reg.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.id} className=''>
                   <TableCell>{row.team?.name}</TableCell>
                   <TableCell>{row.competition?.name}</TableCell>
                   <TableCell><WrapperImage src={row.paymentProofUrl} /></TableCell>
+                  <TableCell><CheckForm checked={row.isVerified} id={row.id} /></TableCell>
                   <TableCell>{row.createdAt.toDateString()}</TableCell>
                 </TableRow>
               ))}

@@ -2,8 +2,9 @@
 
 import { authActionClient } from '@/lib/safe-action';
 import { prisma } from '@/server/prisma';
-import { registerSchema } from '@/lib/schema';
+import { addTeacherSchema, registerSchema } from '@/lib/schema';
 import { cloudinary } from '@/lib/cloudinary';
+import { z } from 'zod';
 
 export const register = authActionClient
   .metadata({ actionName: 'register' })
@@ -65,3 +66,79 @@ export const register = authActionClient
       }
     }
   );
+
+export const addTeacher = authActionClient
+  .metadata({ actionName: 'addTeacher' })
+  .schema(addTeacherSchema)
+  .action(
+    async ({
+      ctx: { id },
+      parsedInput: { name, email, phoneNumber, NUPTK, gender },
+    }) => {
+      try {
+        const team = await prisma.team.findFirst({
+          where: { members: { some: { id } } },
+        });
+
+        const teacher = await prisma.teacher.findFirst({
+          where: { email },
+        });
+
+        if (teacher) {
+          throw new Error('Teacher already exists');
+        }
+
+        const r = await prisma.teacher.create({
+          data: {
+            name,
+            email,
+            phoneNumber,
+            gender,
+            NUPTK,
+            team: {
+              connect: { id: team?.id },
+            },
+          },
+        });
+
+        if (!r) {
+          throw new Error('Failed to add teacher');
+        }
+
+        return r;
+      } catch (e) {
+        if (e instanceof Error) {
+          throw e;
+        }
+        throw new Error('Failed to add teacher');
+      }
+    }
+  );
+
+export const updateVerified = authActionClient
+  .metadata({ actionName: 'updateVerified' })
+  .schema(
+    z.object({
+      id: z.string(),
+      isVerified: z.boolean(),
+    })
+  )
+  .action(async ({ parsedInput: { id, isVerified } }) => {
+    try {
+      const result = await prisma.registration.update({
+        where: { id },
+        data: { isVerified },
+      });
+
+      if (!result) {
+        throw new Error('Failed to update verification status');
+      }
+
+      return result;
+    } catch (e) {
+      if (e instanceof Error) {
+        throw e;
+      }
+      throw new Error('Failed to update verification status');
+    }
+  });
