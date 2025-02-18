@@ -50,7 +50,7 @@ export default async function Dashboard() {
               <div className="grid h-full place-items-center">
                 <Checkbox aria-readonly disabled checked={!!profile?.pdDikti} />
               </div>
-              PDDikti
+              PDDikti/Pasphoto
             </div>
             <div className="flex gap-2 items-center">
               <div className="grid h-full place-items-center">
@@ -96,7 +96,7 @@ export default async function Dashboard() {
           <div className="w-full h-full relative">
             {!!profile?.pdDikti && <CldImage src={profile?.pdDikti ?? ""} alt={'upload ss pddikti'} width={500} height={200}
               className="w-full h-full object-cover object-center rounded-md" />}
-            <ImageUpload revalidate={revalidate} prefix={pPDDikti} onTop={!!profile?.pdDikti} desc='Upload PDDikti Statement' />
+            <ImageUpload revalidate={revalidate} prefix={pPDDikti} onTop={!!profile?.pdDikti} desc='Upload PDDikti Statement/Pasphoto for STEM' />
           </div>
         </div>
         <div className="md:w-1/4 relative">
