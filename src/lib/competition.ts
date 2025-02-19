@@ -77,5 +77,6 @@ export   const competitions: {
     fee2: 150000,
     guideBook:
       'https://drive.google.com/file/d/1eGfmRZPEVHapgrbBgmbjFBPR5EOneAaI/view?usp=drive_link',
+    isOpen: true,
   },
 ];
