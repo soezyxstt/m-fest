@@ -103,3 +103,20 @@ model Teacher {
   team        Team     @relation(fields: [teamId], references: [id])
   teamId      String   @unique
 }
+
+model MRunReggistration {
+  id               String   @id @default(uuid())
+  name             String
+  gender           Gender
+  birthDate        DateTime
+  phoneNumber      String
+  email            String
+  adress           String
+  bloodType        String
+  identityNumber   String
+  identityType     String
+  emergencyContact String
+  payment          String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}

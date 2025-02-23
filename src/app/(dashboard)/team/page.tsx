@@ -88,8 +88,13 @@ export default async function TeamPage() {
             </div>
           </div>
           {team.registration?.competition.name && (
-            <p className="">Please join <Link className='my-4 text-blue-400 hover:underline' href={wagLinks[team.registration.competition.name]}>WAG</Link> for more informations
-            </p>
+            <div className='md:flex w-full justify-between '>
+              <p className="">Please join <Link className='my-4 text-blue-400 hover:underline' href={wagLinks[team.registration.competition.name]}>WAG</Link> for more informations
+              </p>
+              {team.registration.competition.name === 'IPPC' && (
+                <Link target='_blank' href="https://bit.ly/ExtendedAbstractIPPC2025" className='text-blue-500 hover:underline'>Submit Paper</Link>
+              )}
+            </div>
           )}
           <div className="">
             <GradientText className='text-left text-lg mb-2 md:mb-4 md:text-2xl'>Team Information</GradientText>
