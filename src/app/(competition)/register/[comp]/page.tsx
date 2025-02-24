@@ -6,7 +6,11 @@ import { prisma } from '@/server/prisma';
 export default async function Wrapper() {
   const email = (await auth())?.user?.email ?? "";
   const team = await getTeam(email);
-  const competitions = await prisma.competition.findMany();
+  const competitions = await prisma.competition.findMany({
+    include: {
+      registrations: true
+    }
+  });
   return (
     <RegisterPage team={team} competitions={competitions} />
   )

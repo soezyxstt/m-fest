@@ -12,12 +12,19 @@ import Link from 'next/link';
 import GradientText from '@/components/ui/text/gradient';
 import { competitions } from '@/lib/competition';
 import { socialMedia } from '@/lib/social-media';
+import { prisma } from '@/server/prisma';
 
 export const metadata = {
   title: "Competitions"
 }
 
-export default function CompetitionsPage() {
+export default async function CompetitionsPage() {
+  const competitionsDB = await prisma.competition.findMany({
+    include: {
+      registrations: true
+    }
+  });
+
   return (
     <Accordion
       type='single'
@@ -173,9 +180,14 @@ export default function CompetitionsPage() {
                       Guide Book
                     </GradientButton>
                   </Link>
-                  <Link href={`/register/${competition.abbreviation.toLowerCase()}`}>
-                    <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
-                  </Link>
+                  <div className="flex flex-col justify-center">
+                    <Link href={`/register/${competition.abbreviation.toLowerCase()}`}>
+                      <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
+                    </Link>
+                    {competition.abbreviation === 'PDC' && (
+                      <p className="mx-auto text-xs text-muted mt-1">Slots left: {(35 - (competitionsDB.find((c) => c.name === 'PDC')?.registrations.length ?? 0))}</p>
+                    )}
+                  </div>
                 </div>
                 <p className='text-center w-8/10 max-sm:text-xs text-sm'>
                   {competition.desc}

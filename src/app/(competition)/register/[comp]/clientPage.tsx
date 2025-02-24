@@ -40,6 +40,9 @@ export default function RegisterPage({ team, competitions: cs }:
         name: true;
         earlyStart: true;
         normalStart: true;
+      },
+      include: {
+        registrations: true
       }
     }>[] | undefined | null
   }) {
@@ -131,6 +134,34 @@ export default function RegisterPage({ team, competitions: cs }:
           {compe}
         </h1>
         <GradientText className='leading-normal max-w-8/10'>Comeback at {competition.earlyStart.toDateString()}</GradientText>
+      </section>
+    )
+  }
+
+  const isPDC = compe === 'pdc';
+  const slotsPDCLeft = 35 - (cs?.find((c) => c.name === 'PDC')?.registrations.length ?? 0);
+
+  if (isPDC && slotsPDCLeft <= 0) {
+    return (
+      <section
+        id='hero'
+        className='h-screen flex justify-center items-center flex-col gap-6 relative text-white'
+      >
+        <div className='w-full absolute h-screen pointer-events-none'>
+          <SparklesCore
+            id='tsparticlesfullpage'
+            background='transparent'
+            minSize={0.6}
+            maxSize={1.4}
+            particleDensity={60}
+            className='w-full h-full z-0'
+            particleColor='#ad8cea'
+          />
+        </div>
+        <h1 className='text-5xl md:text-7xl text-center max-w-8/10 md:max-w-2xl [font-family:var(--font-next-montserrat)] font-bold uppercase'>
+          {compe}
+        </h1>
+        <GradientText className='leading-normal max-w-8/10'>Sorry participant slots are full.</GradientText>
       </section>
     )
   }
@@ -361,7 +392,7 @@ export default function RegisterPage({ team, competitions: cs }:
                     });
                   }
                 }}
-                    disabled={(!team || !file || (isStem && (!teacher?.NUPTK || !teacher?.name || !teacher?.email || !teacher?.phoneNumber || !gender)))}
+                  disabled={(!team || !file || (isStem && (!teacher?.NUPTK || !teacher?.name || !teacher?.email || !teacher?.phoneNumber || !gender)))}
                 >
                   Register
                 </GradientButton>
