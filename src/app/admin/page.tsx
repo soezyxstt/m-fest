@@ -4,7 +4,8 @@ import { prisma } from '@/server/prisma';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { DataTable } from '@/components/data-table';
-import { registrationColumn } from './columns';
+import { accountColumn, registrationColumn, teamColumn } from './columns';
+
 export default async function Admin() {
   const email = (await auth())?.user?.email ?? "";
   const user = await prisma.profile.findUnique({
@@ -17,75 +18,156 @@ export default async function Admin() {
     redirect('/');
   }
 
-  const reg = (await prisma.registration.findMany({
+  const reg = await prisma.registration.findMany({
     include: {
       team: true,
       competition: true,
     },
-  })).map((team) => ({
-    team: team.team?.name,
-    competition: team.competition.name,
-    payment: team.paymentProofUrl,
-    isVerified: team.isVerified,
-    createdAt: team.createdAt.toDateString(),
+    orderBy: {
+      competition: {
+        name: 'asc'
+      }
+    }
+  });
+
+  const competitionStats = await prisma.competition.findMany({
+    select: {
+      name: true,
+      _count: {
+        select: {
+          registrations: true
+        }
+      }
+    }
+  });
+
+  const stats = {
+    totalTeams: await prisma.team.count(),
+    totalRegistrations: await prisma.registration.count(),
+    verifiedRegistrations: await prisma.registration.count({
+      where: { isVerified: true }
+    }),
+    totalAccounts: await prisma.profile.count()
+  };
+
+  const regTableData = reg.map((row) => ({
+    team: row.team?.name,
+    competition: row.competition?.name,
+    payment: row.paymentProofUrl,
+    isVerified: row.isVerified,
+    createdAt: row.createdAt.toLocaleDateString(),
+    id: row.id,
   }));
 
-  const teams = (await prisma.team.findMany())
-  const accounts = await prisma.profile.findMany();
+  const teams = await prisma.team.findMany({
+    include: {
+      registration: {
+        include: {
+          competition: true
+        }
+      },
+      leader: {
+        include: {
+          profile: true
+        }
+      },
+      members: true
+    },
+    orderBy: {
+      name: 'asc'
+    }
+  });
+  const accounts = await prisma.profile.findMany({
+    include: {
+      team: true
+    },
+    orderBy: {
+      email: 'asc'
+    }
+  });
+
+  const teamTableData = teams.map((row) => ({
+    name: row.name,
+    institution: row.institution,
+    competition: row.registration?.competition?.name,
+    leader: row.leader.profile.name,
+    members: row.members.length,
+  }));
+
+  const accountTableData = accounts.map((row) => ({
+    email: row.email,
+    name: row.name,
+    semester: row.semester,
+    team: row.team?.name,
+    ktm: row.ktm,
+    pddikti: row.pdDikti,
+    twibbon: row.twibbon,
+  }));
+  
   return (
     <div className="px-8 overflow-x-hidden">
       <Tabs className='min-h-screen w-full text-white' defaultValue='registration'>
-        <TabsList className='grid grid-cols-3 w-full'>
+        <TabsList className='grid grid-cols-4 w-full'>
           <TabsTrigger value='registration'>Regis</TabsTrigger>
           <TabsTrigger value='team'>Team</TabsTrigger>
           <TabsTrigger value='Account'>Account</TabsTrigger>
+          <TabsTrigger value='recap'>Recap</TabsTrigger>
         </TabsList>
         <TabsContent value='registration'>
-          <DataTable columns={registrationColumn} data={reg} />
+          <DataTable data={regTableData} columns={registrationColumn} />
         </TabsContent>
         <TabsContent value='team'>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {Object.keys(teams[0]).map((key, i) => (
-                  <TableHead key={key + i + "team"}>{key}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {teams.map((row) => (
-                <TableRow key={row.id + "dadad"}>
-                  {Object.values(row).map((value, i) => {
-                    const val = typeof value === 'object' ? value.toDateString() : value.toString();
-                    return <TableCell key={val + i + row.id}>{val}</TableCell>
-                  }
-                  )}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <DataTable data={teamTableData} columns={teamColumn} />
         </TabsContent>
         <TabsContent value='Account'>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                {Object.keys(accounts[0]).map((key, i) => (
-                  <TableHead key={key + i + "acccc"}>{key}</TableHead>
-                ))}
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {accounts.map((row) => (
-                <TableRow key={row.id}>
-                  {Object.values(row).map((value, i) => {
-                    const val = typeof value === 'object' ? value?.toDateString() : value.toString();
-                    return <TableCell key={val! + i + 5 + row.id}>{val}</TableCell>
-                  }
-                  )}
+          <DataTable data={accountTableData} columns={accountColumn} />
+        </TabsContent>
+        <TabsContent value='recap'>
+          <div className="space-y-8">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Metric</TableHead>
+                  <TableHead>Count</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Total Teams</TableCell>
+                  <TableCell>{stats.totalTeams}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Total Registrations</TableCell>
+                  <TableCell>{stats.totalRegistrations}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Verified Registrations</TableCell>
+                  <TableCell>{stats.verifiedRegistrations}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Total Accounts</TableCell>
+                  <TableCell>{stats.totalAccounts}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Competition</TableHead>
+                  <TableHead>Registrations</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {competitionStats.map((comp) => (
+                  <TableRow key={comp.name}>
+                    <TableCell>{comp.name}</TableCell>
+                    <TableCell>{comp._count.registrations}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </TabsContent>
       </Tabs>
     </div>

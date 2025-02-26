@@ -12,6 +12,7 @@ export type Registration = {
   payment: string;
   isVerified: boolean;
   createdAt: string;
+  id: string;
 };
 export const registrationColumn: ColumnDef<Registration>[] = [
   {
@@ -24,8 +25,10 @@ export const registrationColumn: ColumnDef<Registration>[] = [
   },
   {
     accessorKey: 'isVerified', header: "IsVerified",
-    cell: ({ row }) => <CheckForm
-      checked={row.getValue("isVerified")} id={row.id} />
+    cell: ({ row }) => {
+      const ori = row.original;
+      return <CheckForm checked={ori.isVerified} id={ori.id} />
+    }
   },
   {
     accessorKey: 'createdAt', header: "CreatedAt"
@@ -34,16 +37,16 @@ export const registrationColumn: ColumnDef<Registration>[] = [
 
 export type team = {
   name: string;
-  competition: CompetitionName;
+  competition: CompetitionName | undefined;
   institution: string;
   leader: string;
   members: number;
 }
 
-export const teamColumn: ColumnDef<Registration>[] = [
+export const teamColumn: ColumnDef<team>[] = [
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'institution', header: 'Institution' },
-  { accessorKey: 'isRegistered', header: 'IsRegistered' },
+  { accessorKey: 'competition', header: 'Competition' },
   { accessorKey: 'leader', header: 'Leader' },
   { accessorKey: 'members', header: 'Members' },
 ]
@@ -51,13 +54,30 @@ export const teamColumn: ColumnDef<Registration>[] = [
 export type Account = {
   email: string;
   name: string;
-  semester: string;
-  team: string;
+  semester: number;
+  team: string | undefined;
+  ktm: string | null;
+  pddikti: string | null;
+  twibbon: string | null;
 }
 
-export const accountColumn: ColumnDef<Registration>[] = [
+export const accountColumn: ColumnDef<Account>[] = [
   { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'semester', header: 'Semester' },
   { accessorKey: 'team', header: 'Team' },
+  {
+    accessorKey: 'ktm', header: 'KTM', cell: ({ row }) => <WrapperImage
+      src={row.getValue("ktm")}
+    />
+  },
+  {
+    accessorKey: 'pddikti', header: 'Profile', cell: ({ row }) => <WrapperImage
+      src={row.getValue("profile")}
+    />
+  },
+  {
+    accessorKey: 'twibbon', header: 'Twibbon', cell: ({ row }) => <WrapperImage
+      src={row.getValue("twibbon")} />
+  }
 ]

@@ -11,7 +11,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { Input } from "@/components/ui/input"
+// import { Input } from "@/components/ui/input"
 
 import {
   Table,
@@ -51,7 +51,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="">
-      <div className="flex items-center py-4 w-fit">
+      {/* <div className="flex items-center py-4 w-fit">
         <Input
           placeholder="Filter competition..."
           value={(table.getColumn("competition")?.getFilterValue() as string) ?? ""}
@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-      </div>
+      </div> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
