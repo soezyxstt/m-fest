@@ -45,6 +45,7 @@ export   const competitions: {
     fee2: 110000,
     guideBook:
       'https://drive.google.com/file/d/12hsX_V4bllC3blk3ik0Gt0klKA5crVCK/view?usp=drive_link',
+    isOpen: true,
   },
   {
     title: 'Pipeline Design Competition',
