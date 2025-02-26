@@ -19,7 +19,11 @@ export const metadata = {
 }
 
 export default async function CompetitionsPage() {
-  const competitionsDB = await prisma.competition.findMany({
+
+  const pdc = await prisma.competition.findFirst({
+    where: {
+      name: 'PDC'
+    },
     include: {
       registrations: true
     }
@@ -185,7 +189,7 @@ export default async function CompetitionsPage() {
                       <GradientButton disabled={!competition.isOpen} variant='glow'>Register</GradientButton>
                     </Link>
                     {competition.abbreviation === 'PDC' && (
-                      <p className="mx-auto text-xs text-muted mt-1">Slots left: {(35 - (competitionsDB.find((c) => c.name === 'PDC')?.registrations.length ?? 0))}</p>
+                      <p className="mx-auto text-xs text-muted mt-1">Slots left: {(35 - (pdc?.registrations.length ?? 0))}</p>
                     )}
                   </div>
                 </div>
