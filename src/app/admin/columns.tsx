@@ -55,29 +55,34 @@ export type Account = {
   email: string;
   name: string;
   semester: number;
-  team: string | undefined;
+  // team: string | undefined;
   ktm: string | null;
-  pddikti: string | null;
+  pdDikti: string | null;
   twibbon: string | null;
+  id: string;
 }
 
 export const accountColumn: ColumnDef<Account>[] = [
   { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'semester', header: 'Semester' },
-  { accessorKey: 'team', header: 'Team' },
+  // { accessorKey: 'team', header: 'Team' },
   {
     accessorKey: 'ktm', header: 'KTM', cell: ({ row }) => <WrapperImage
       src={row.getValue("ktm")}
+      key={row.original.id + "ktm"}
     />
   },
   {
-    accessorKey: 'pddikti', header: 'Profile', cell: ({ row }) => <WrapperImage
+    accessorKey: 'pdDikti', header: 'Profile', cell: ({ row }) => <WrapperImage
       src={row.getValue("profile")}
+      key={row.original.id + "profile"}
     />
   },
   {
     accessorKey: 'twibbon', header: 'Twibbon', cell: ({ row }) => <WrapperImage
-      src={row.getValue("twibbon")} />
+      src={row.getValue("twibbon")}
+      key={row.original.id + "twibbon"}
+    />
   }
 ]

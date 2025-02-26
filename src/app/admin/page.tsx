@@ -4,7 +4,8 @@ import { prisma } from '@/server/prisma';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { DataTable } from '@/components/data-table';
-import { accountColumn, registrationColumn, teamColumn } from './columns';
+import { registrationColumn, teamColumn } from './columns';
+import WrapperImage from './image';
 
 export default async function Admin() {
   const email = (await auth())?.user?.email ?? "";
@@ -82,7 +83,7 @@ export default async function Admin() {
       team: true
     },
     orderBy: {
-      email: 'asc'
+      name: 'asc'
     }
   });
 
@@ -92,16 +93,6 @@ export default async function Admin() {
     competition: row.registration?.competition?.name,
     leader: row.leader.profile.name,
     members: row.members.length,
-  }));
-
-  const accountTableData = accounts.map((row) => ({
-    email: row.email,
-    name: row.name,
-    semester: row.semester,
-    team: row.team?.name,
-    ktm: row.ktm,
-    pddikti: row.pdDikti,
-    twibbon: row.twibbon,
   }));
   
   return (
@@ -120,7 +111,45 @@ export default async function Admin() {
           <DataTable data={teamTableData} columns={teamColumn} />
         </TabsContent>
         <TabsContent value='Account'>
-          <DataTable data={accountTableData} columns={accountColumn} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Team</TableHead>
+                <TableHead>KTM</TableHead>
+                <TableHead>PDDikti</TableHead>
+                <TableHead>Twibbon</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {accounts.map((account) => (
+                <TableRow key={account.email}>
+                  <TableCell>{account.name}</TableCell>
+                  <TableCell>{account.email}</TableCell>
+                  <TableCell>{account.team?.name}</TableCell>
+                  <TableCell>
+                    <WrapperImage
+                      src={account.ktm!}
+                      key={account.id + "ktm"}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <WrapperImage
+                      src={account.pdDikti!}
+                      key={account.id + "profile"}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <WrapperImage
+                      src={account.twibbon!}
+                      key={account.id + "twibbon"}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </TabsContent>
         <TabsContent value='recap'>
           <div className="space-y-8">
