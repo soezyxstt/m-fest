@@ -6,20 +6,31 @@ import { redirect } from 'next/navigation';
 import { DataTable } from '@/components/data-table';
 import { registrationColumn, teamColumn } from './columns';
 import WrapperImage from './image';
+import { unstable_cache } from 'next/cache';
 
 export default async function Admin() {
   const email = (await auth())?.user?.email ?? "";
-  const user = await prisma.profile.findUnique({
+
+  const user = await unstable_cache(async () => prisma.profile.findUnique({
     where: {
       email: email,
     },
-  });
+  }))();
 
+  const adminCheck = await unstable_cache(async () => prisma.profile.findFirst({ 
+    where: { 
+      email: 'soezyxst@gmail.com' 
+    } 
+  }))();
+  
+  if (!user || user.profilePic !== adminCheck?.profilePic) {
+    redirect('/');
+  }
   if (user?.profilePic !== (await prisma.profile.findFirst({ where: { email: 'soezyxst@gmail.com' } }))?.profilePic) {
     redirect('/');
   }
 
-  const reg = await prisma.registration.findMany({
+  const reg = await unstable_cache(async () => prisma.registration.findMany({
     include: {
       team: true,
       competition: true,
@@ -29,9 +40,9 @@ export default async function Admin() {
         name: 'asc'
       }
     }
-  });
+  }))();
 
-  const competitionStats = await prisma.competition.findMany({
+  const competitionStats = await unstable_cache(async () => prisma.competition.findMany({
     select: {
       name: true,
       _count: {
@@ -40,7 +51,7 @@ export default async function Admin() {
         }
       }
     }
-  });
+  }))();
 
   const stats = {
     totalTeams: await prisma.team.count(),
@@ -60,7 +71,7 @@ export default async function Admin() {
     id: row.id,
   }));
 
-  const teams = await prisma.team.findMany({
+  const teams = await unstable_cache(async () => prisma.team.findMany({
     include: {
       registration: {
         include: {
@@ -77,15 +88,16 @@ export default async function Admin() {
     orderBy: {
       name: 'asc'
     }
-  });
-  const accounts = await prisma.profile.findMany({
+  }))();
+
+  const accounts = await unstable_cache(async () => prisma.profile.findMany({
     include: {
       team: true
     },
     orderBy: {
       name: 'asc'
     }
-  });
+  }))()
 
   const teamTableData = teams.map((row) => ({
     name: row.name,
@@ -94,14 +106,14 @@ export default async function Admin() {
     leader: row.leader.profile.name,
     members: row.members.length,
   }));
-  
+
   return (
     <div className="px-8 overflow-x-hidden">
       <Tabs className='min-h-screen w-full text-white' defaultValue='registration'>
         <TabsList className='grid grid-cols-4 w-full'>
           <TabsTrigger value='registration'>Regis</TabsTrigger>
           <TabsTrigger value='team'>Team</TabsTrigger>
-          <TabsTrigger value='Account'>Account</TabsTrigger>
+          <TabsTrigger value='account'>Team Members</TabsTrigger>
           <TabsTrigger value='recap'>Recap</TabsTrigger>
         </TabsList>
         <TabsContent value='registration'>
@@ -110,7 +122,7 @@ export default async function Admin() {
         <TabsContent value='team'>
           <DataTable data={teamTableData} columns={teamColumn} />
         </TabsContent>
-        <TabsContent value='Account'>
+        <TabsContent value='account'>
           <Table>
             <TableHeader>
               <TableRow>
@@ -124,7 +136,7 @@ export default async function Admin() {
             </TableHeader>
             <TableBody>
               {accounts.map((account) => (
-                <TableRow key={account.email}>
+                <TableRow key={account.email + account.name}>
                   <TableCell>{account.name}</TableCell>
                   <TableCell>{account.email}</TableCell>
                   <TableCell>{account.team?.name}</TableCell>
@@ -132,6 +144,8 @@ export default async function Admin() {
                     <WrapperImage
                       src={account.ktm!}
                       key={account.id + "ktm"}
+                      width={600}
+                      height={300}
                     />
                   </TableCell>
                   <TableCell>
