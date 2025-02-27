@@ -11,7 +11,6 @@ export type Registration = {
   competition: CompetitionName;
   payment: string;
   isVerified: boolean;
-  createdAt: string;
   id: string;
 };
 export const registrationColumn: ColumnDef<Registration>[] = [
@@ -29,9 +28,6 @@ export const registrationColumn: ColumnDef<Registration>[] = [
       const ori = row.original;
       return <CheckForm checked={ori.isVerified} id={ori.id} />
     }
-  },
-  {
-    accessorKey: 'createdAt', header: "CreatedAt"
   },
 ]
 

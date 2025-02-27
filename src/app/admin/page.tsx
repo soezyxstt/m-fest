@@ -67,7 +67,6 @@ export default async function Admin() {
     competition: row.competition?.name,
     payment: row.paymentProofUrl,
     isVerified: row.isVerified,
-    createdAt: row.createdAt.toLocaleDateString(),
     id: row.id,
   }));
 
