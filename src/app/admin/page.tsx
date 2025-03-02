@@ -11,26 +11,23 @@ import { unstable_cache } from 'next/cache';
 export default async function Admin() {
   const email = (await auth())?.user?.email ?? "";
 
-  const user = await unstable_cache(async () => prisma.profile.findUnique({
+  const user = await prisma.profile.findUnique({
     where: {
       email: email,
     },
-  }))();
+  })
 
-  const adminCheck = await unstable_cache(async () => prisma.profile.findFirst({ 
-    where: { 
-      email: 'soezyxst@gmail.com' 
-    } 
-  }))();
-  
+  const adminCheck = await prisma.profile.findFirst({
+    where: {
+      email: 'soezyxst@gmail.com'
+    }
+  })
+
   if (!user || user.profilePic !== adminCheck?.profilePic) {
     redirect('/');
   }
-  if (user?.profilePic !== (await prisma.profile.findFirst({ where: { email: 'soezyxst@gmail.com' } }))?.profilePic) {
-    redirect('/');
-  }
 
-  const reg = await unstable_cache(async () => prisma.registration.findMany({
+  const reg = await prisma.registration.findMany({
     include: {
       team: true,
       competition: true,
@@ -40,7 +37,7 @@ export default async function Admin() {
         name: 'asc'
       }
     }
-  }))();
+  })
 
   const competitionStats = await unstable_cache(async () => prisma.competition.findMany({
     select: {
