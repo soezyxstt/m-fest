@@ -65,6 +65,7 @@ export default async function Admin() {
     payment: row.paymentProofUrl,
     isVerified: row.isVerified,
     id: row.id,
+    phoneNumber: row.team.phoneNumber
   }));
 
   const teams = await unstable_cache(async () => prisma.team.findMany({
@@ -158,6 +159,7 @@ export default async function Admin() {
                 <TableHead>KTM</TableHead>
                 <TableHead>PDDikti</TableHead>
                 <TableHead>Twibbon</TableHead>
+                <TableHead>Follow IG</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -185,6 +187,12 @@ export default async function Admin() {
                       src={account.twibbon!}
                       key={account.id + "twibbon"}
                     />
+                  </TableCell>
+                  <TableCell>
+                    <WrapperImage
+                      src={account.followIG!}
+                      key={account.id + "igFollow"}
+                    ></WrapperImage>
                   </TableCell>
                 </TableRow>
               ))}
@@ -234,7 +242,7 @@ export default async function Admin() {
                     <TableCell>{comp._count.registrations}</TableCell>
                   </TableRow>
                 ))}
-              </TableBody>
+              </TableBody>  
             </Table>
 
             <Table>

@@ -12,6 +12,7 @@ export type Registration = {
   payment: string;
   isVerified: boolean;
   id: string;
+  phoneNumber: string;
 };
 export const registrationColumn: ColumnDef<Registration>[] = [
   {
@@ -29,6 +30,9 @@ export const registrationColumn: ColumnDef<Registration>[] = [
       return <CheckForm checked={ori.isVerified} id={ori.id} />
     }
   },
+  {
+    accessorKey: 'phoneNumber', header: "Phone Number"
+  }
 ]
 
 export type team = {
