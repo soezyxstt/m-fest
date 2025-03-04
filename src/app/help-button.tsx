@@ -24,7 +24,7 @@ export default function HelpButton() {
           height: expanded ? 'auto' : 0,
           overflow: 'hidden',
         }}
-          className='*:text-left'
+          className='*:text-left text-blue-300'
         >
           <Link href='https://drive.google.com/file/d/17P8g6J6d5RVIAFnr_j8Kr1br6UguUHJr/view?usp=sharing' target='_blank'>
             Registration Guideline
