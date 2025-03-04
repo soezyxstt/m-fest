@@ -103,6 +103,36 @@ export default async function Admin() {
     members: row.members.length,
   }));
 
+  const totalIncome = reg.reduce((acc, row) => {
+    let payment = 0;
+    if (row.competition.name === 'BCC') {
+      if (row.createdAt <= row.competition.earlyStart) {
+        payment = 175000;
+      } else {
+        payment = 225000;
+      }
+    } else if (row.competition.name === 'IPPC') {
+      if (row.createdAt <= row.competition.earlyStart) {
+        payment = 90000;
+      } else {
+        payment = 110000;
+      }
+    } else if (row.competition.name === 'PDC') {
+      if (row.createdAt <= row.competition.earlyStart) {
+        payment = 200000;
+      } else {
+        payment = 250000;
+      }
+    } else {
+      if (row.createdAt <= row.competition.earlyStart) {
+        payment = 120000;
+      } else {
+        payment = 150000;
+      }
+    }
+    return acc + payment;
+  }, 0);
+
   return (
     <div className="px-8 overflow-x-hidden">
       <Tabs className='min-h-screen w-full text-white' defaultValue='registration'>
@@ -205,6 +235,13 @@ export default async function Admin() {
                   </TableRow>
                 ))}
               </TableBody>
+            </Table>
+
+            <Table>
+              <TableRow>
+                <TableCell>Expected Income</TableCell>
+                <TableCell>{new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(totalIncome)}</TableCell>
+              </TableRow>
             </Table>
           </div>
         </TabsContent>
