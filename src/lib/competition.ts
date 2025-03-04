@@ -73,7 +73,7 @@ export   const competitions: {
     reg1: '18 - 23 February 2025',
     reg2: '24 February - 13 March 2025',
     fee1: 120000,
-    fee2: 150000,
+    fee2: 180000,
     guideBook:
       'https://drive.google.com/file/d/1eGfmRZPEVHapgrbBgmbjFBPR5EOneAaI/view?usp=drive_link',
     isOpen: true,
