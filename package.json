@@ -33,6 +33,7 @@
     "@tsparticles/engine": "^3.7.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.7.1",
+    "@vercel/speed-insights": "^1.2.0",
     "cloudinary": "^2.5.1",
     "cmdk": "^1.0.4",
     "embla-carousel-react": "^8.5.2",

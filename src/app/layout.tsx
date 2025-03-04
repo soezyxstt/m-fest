@@ -3,6 +3,7 @@ import './globals.css';
 import { montserrat, onest, roboto } from '@/style/font';
 import 'lenis/dist/lenis.css';
 import { Toaster } from '@/components/ui/sonner';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: { default: 'Mechanical Festival 2025', template: '%s | M-Fest 2025' },
@@ -24,6 +25,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
+        <SpeedInsights/>
       </body>
     </html>
   );
