@@ -20,6 +20,10 @@ export const updateOrCreateProfileSchema = z.object({
   twibbon: z.string().url().optional(),
   semester: z.number().int().positive(),
   isLocked: z.boolean().optional(),
+  gender: z.enum(['L', 'P']).optional(),
+  origin: z.string().optional(),
+  major: z.string().optional(),
+  phoneNumber: z.string().optional(),
 });
 export const createTeamSchema = z.object({
   name: z.string(),

@@ -5,11 +5,12 @@ import CldImage from "@/components/ui/CldImage";
 import { auth } from '@/auth';
 import { getProfile } from '@/app/_action/user';
 import { revalidatePath } from 'next/cache';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export default async function Dashboard() {
   const session = await auth()
   const profile = await getProfile()
-
+  const isSTEM = profile?.team?.registration?.competition?.name === "STEM"
   const { pKTM, pIG, pTwibbon, pPDDikti } = { pKTM: "ktm", pIG: "followIG", pPDDikti: "pdDikti", pTwibbon: "twibbon" } as const
 
   if (!session) {
@@ -33,9 +34,9 @@ export default async function Dashboard() {
   return (
     <div className="@container flex flex-col h-full space-y-4 @md:space-y-6 @lg:space-y-8">
       <div className="grid grid-cols-1 @md:grid-cols-2 @lg:grid-cols-3 gap-4 @md:gap-6 @lg:gap-8 w-full">
-        <div className="rounded-lg md:rounded-2xl bg-stone-400/10 backdrop-blur-sm p-4 md:p-6 h-64 max-sm:order-2">
-          <BasicForm revalidate={revalidate} defaultValues={defaultValues} />
-        </div>
+        <ScrollArea className="rounded-lg md:rounded-2xl bg-stone-400/10 backdrop-blur-sm p-4 md:p-6 h-64 max-sm:order-2">
+          <BasicForm isSTEM={isSTEM} revalidate={revalidate} defaultValues={defaultValues} />
+        </ScrollArea>
         <div
           className="rounded-lg md:rounded-2xl flex flex-col bg-stone-400/10 backdrop-blur-sm p-4 md:p-6 lg:col-span-2 text-sm max-sm:order-1">
           <p className="mb-2 md:mb-4">Update Status</p>

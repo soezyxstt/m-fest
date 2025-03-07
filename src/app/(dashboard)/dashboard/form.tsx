@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import {
+  ChevronDown,
   CloudUpload,
 } from "lucide-react"
 import {
@@ -38,7 +39,7 @@ const formSchema = z.object({
   image: z.string()
 });
 
-export function BasicForm({ defaultValues }: { defaultValues: { name: string; email: string; semester: number }, revalidate?: () => void }) {
+export function BasicForm({ defaultValues, isSTEM = false }: { defaultValues: { name: string; email: string; semester: number }, isSTEM?: boolean, revalidate?: () => void }) {
   const form = useForm<z.infer<typeof updateOrCreateProfileSchema>>({
     resolver: zodResolver(updateOrCreateProfileSchema),
     defaultValues
@@ -61,6 +62,9 @@ export function BasicForm({ defaultValues }: { defaultValues: { name: string; em
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-between h-full">
+        {isSTEM && (
+          <div className="absolute bottom-px left-1/2 -translate-x-1/2 animate-bounce"><ChevronDown className='opacity-80' /></div>
+        )}
         <div className="">
           <FormField
             control={form.control}
@@ -118,8 +122,86 @@ export function BasicForm({ defaultValues }: { defaultValues: { name: string; em
               </FormItem>
             )}
           />
+
+          {isSTEM && (
+            <>
+              <FormField
+                control={form.control}
+                name="phoneNumber"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <UnderlineInput
+                        className='text-sm'
+                        placeholder="phone number"
+                        type="text"
+
+                        {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="origin"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <UnderlineInput
+                        className='text-sm'
+                        placeholder="school adress (city, province)"
+                        type="text"
+
+                        {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex gap-3">
+                <FormField
+                  control={form.control}
+                  name="major"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <UnderlineInput
+                          className='text-sm'
+                          placeholder="major, eg. science"
+                          type="text"
+
+                          {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="gender"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <UnderlineInput
+                          className='text-sm'
+                          placeholder="gender (L/P)"
+                          type="text"
+
+                          {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </>
+          )}
         </div>
-        <GradientButton disabled={isExecuting} containerClassName='mt-4' size='sm' className='min-w-28' variant='glow'
+        <GradientButton disabled={isExecuting} containerClassName='mt-4 ml-2' size='sm' className='min-w-28' variant='glow'
           type="submit">Submit</GradientButton>
       </form>
     </Form>

@@ -65,7 +65,8 @@ export default async function Admin() {
     payment: row.paymentProofUrl,
     isVerified: row.isVerified,
     id: row.id,
-    phoneNumber: row.team.phoneNumber
+    phoneNumber: row.team.phoneNumber,
+    createdAt: row.createdAt.toLocaleString(),
   }));
 
   const teams = await unstable_cache(async () => prisma.team.findMany({
@@ -156,6 +157,7 @@ export default async function Admin() {
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Team</TableHead>
+                <TableHead>Semester/Kelas</TableHead>
                 <TableHead>KTM</TableHead>
                 <TableHead>PDDikti</TableHead>
                 <TableHead>Twibbon</TableHead>
@@ -168,6 +170,7 @@ export default async function Admin() {
                   <TableCell>{account.name}</TableCell>
                   <TableCell>{account.email}</TableCell>
                   <TableCell>{account.team?.name}</TableCell>
+                  <TableCell>{account.semester}</TableCell>
                   <TableCell>
                     <WrapperImage
                       src={account.ktm!}

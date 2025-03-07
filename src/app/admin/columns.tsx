@@ -13,6 +13,7 @@ export type Registration = {
   isVerified: boolean;
   id: string;
   phoneNumber: string;
+  createdAt: string;
 };
 export const registrationColumn: ColumnDef<Registration>[] = [
   {
@@ -32,6 +33,9 @@ export const registrationColumn: ColumnDef<Registration>[] = [
   },
   {
     accessorKey: 'phoneNumber', header: "Phone Number"
+  },
+  {
+    accessorKey: 'createdAt', header: "Created At"
   }
 ]
 

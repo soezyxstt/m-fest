@@ -29,6 +29,11 @@ model Profile {
   followIG String?
   twibbon  String?
 
+  gender      Gender?
+  origin      String?
+  major       String?
+  phoneNumber String?
+
   profilePic String? // Optional profile picture from Google
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
