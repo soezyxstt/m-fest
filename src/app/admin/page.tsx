@@ -4,7 +4,7 @@ import { prisma } from '@/server/prisma';
 import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 import { DataTable } from '@/components/data-table';
-import { registrationColumn, teamColumn } from './columns';
+import { registrationColumn, teacherColumn, teamColumn } from './columns';
 import WrapperImage from './image';
 import { unstable_cache } from 'next/cache';
 
@@ -135,13 +135,25 @@ export default async function Admin() {
     return acc + payment;
   }, 0);
 
+  const teachers = await prisma.teacher.findMany({
+    include: {
+      team: true
+    }
+  });
+
+  const teacherTableData = teachers.map(({team, ...row}) => ({
+    team: team?.name,
+    ...row
+  }));
+
   return (
     <div className="px-8 overflow-x-hidden">
       <Tabs className='min-h-screen w-full text-white' defaultValue='registration'>
-        <TabsList className='grid grid-cols-4 w-full'>
+        <TabsList className='grid grid-cols-5 w-full'>
           <TabsTrigger value='registration'>Regis</TabsTrigger>
           <TabsTrigger value='team'>Team</TabsTrigger>
           <TabsTrigger value='account'>Team Members</TabsTrigger>
+          <TabsTrigger value='teacher'>Teacher</TabsTrigger>
           <TabsTrigger value='recap'>Recap</TabsTrigger>
         </TabsList>
         <TabsContent value='registration'>
@@ -157,11 +169,15 @@ export default async function Admin() {
                 <TableHead>Name</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Team</TableHead>
-                <TableHead>Semester/Kelas</TableHead>
+                <TableHead>Semester/Class</TableHead>
                 <TableHead>KTM</TableHead>
                 <TableHead>PDDikti</TableHead>
                 <TableHead>Twibbon</TableHead>
                 <TableHead>Follow IG</TableHead>
+                <TableHead>Gender</TableHead>
+                <TableHead>School Adress</TableHead>
+                <TableHead>Phone Number</TableHead>
+                <TableHead>Major</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -197,10 +213,17 @@ export default async function Admin() {
                       key={account.id + "igFollow"}
                     ></WrapperImage>
                   </TableCell>
+                  <TableCell>{account.gender}</TableCell>
+                  <TableCell>{account.origin}</TableCell>
+                  <TableCell>{account.phoneNumber}</TableCell>
+                  <TableCell>{account.major}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
+        </TabsContent>
+        <TabsContent value='teacher'>
+          <DataTable data={teacherTableData} columns={teacherColumn} />
         </TabsContent>
         <TabsContent value='recap'>
           <div className="space-y-8">
@@ -245,7 +268,7 @@ export default async function Admin() {
                     <TableCell>{comp._count.registrations}</TableCell>
                   </TableRow>
                 ))}
-              </TableBody>  
+              </TableBody>
             </Table>
 
             <Table>

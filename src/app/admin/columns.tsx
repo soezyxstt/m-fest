@@ -55,6 +55,24 @@ export const teamColumn: ColumnDef<team>[] = [
   { accessorKey: 'members', header: 'Members' },
 ]
 
+export type teacher = {
+  name: string;
+  email: string;
+  gender: string;
+  phoneNumber: string;
+  NUPTK: string;
+  team: string;
+}
+
+export const teacherColumn: ColumnDef<teacher>[] = [
+  { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'email', header: 'Email' },
+  { accessorKey: 'gender', header: 'Gender' },
+  { accessorKey: 'phoneNumber', header: 'Phone Number' },
+  { accessorKey: 'NUPTK', header: 'NUPTK' },
+  { accessorKey: 'team', header: 'Team' },
+]
+
 export type Account = {
   email: string;
   name: string;
