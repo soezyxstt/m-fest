@@ -39,7 +39,7 @@ export default async function Admin() {
     }
   })
 
-  const competitionStats = await unstable_cache(async () => prisma.competition.findMany({
+  const competitionStats = await prisma.competition.findMany({
     select: {
       name: true,
       _count: {
@@ -48,7 +48,7 @@ export default async function Admin() {
         }
       }
     }
-  }))();
+  })
 
   const stats = {
     totalTeams: await prisma.team.count(),
