@@ -9,6 +9,7 @@ export   const events = [
     title: 'M-Run',
     desc: 'Improve your health and build connection in the process, with us and M-Run.',
     img: ['/event/mrun1.jpg', '/event/mrun2.jpeg'],
+    url: 'https://bit.ly/RegistrasiMRUN2025',
   },
   {
     title: 'Engine Tune Up',

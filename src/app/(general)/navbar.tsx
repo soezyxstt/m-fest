@@ -162,7 +162,7 @@ export default function Navbar() {
                               <Link href='/register/m-care' className='text-muted'>M-Care</Link>
                             </CommandItem>
                             <CommandItem asChild>
-                              <Link href='/register/m-run' className='text-muted'>M-Run</Link>
+                              <Link href='https://bit.ly/RegistrasiMRUN2025' target='_blank' className='text-muted'>M-Run</Link>
                             </CommandItem>
                             <CommandItem asChild>
                               <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
@@ -277,7 +277,7 @@ export default function Navbar() {
                     <Link href='/register/m-care' className='text-muted'>M-Care</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/m-run' className='text-muted'>M-Run</Link>
+                    <Link href='https://bit.ly/RegistrasiMRUN2025' target='_blank' className='text-muted'>M-Run</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
                     <Link href='/register/engine-tune-up' className='text-muted'>Engine Tune Up</Link>
