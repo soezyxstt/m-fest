@@ -15,6 +15,7 @@ export   const events = [
     title: 'Engine Tune Up',
     desc: 'Make sure your vehicle always at its prime, come visit us for free engine tune up service!',
     img: ['/event/etu1.jpg', '/event/etu2.jpg'],
+    url: 'https://bit.ly/RegistrasiETU',
   },
   {
     title: 'M-Expo',
