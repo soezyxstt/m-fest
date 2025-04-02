@@ -26,7 +26,7 @@ export default async function Sponsor() {
 
       <div className="flex flex-col gap-8 items-center mt-12">
         <title.h2>Silver Sponsors</title.h2>
-        <div className="flex flex-wrap items-center gap-6">
+        <div className="flex flex-wrap justify-center w-full items-center gap-6">
           {silverSponsors.map((sponsor, index) => (
             <SponsorItem key={index} title={sponsor} src={getImageFilename(sponsor, 'silver')} size="sm" />
           ))}
