@@ -171,7 +171,7 @@ export default function Navbar() {
                               <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
                             </CommandItem>
                             <CommandItem asChild>
-                              <Link href='/register/solidarity-forever-summit' className='text-muted'>
+                              <Link href='https://docs.google.com/forms/d/e/1FAIpQLSeinpkZItMdCGmDloI6HQm8TUJWV3foEx_Yadx3TckAsJ8WAQ/viewform?usp=sharing' className='text-muted'>
                                 Solidarity Forever Summit
                               </Link>
                             </CommandItem>
@@ -286,7 +286,7 @@ export default function Navbar() {
                     <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/solidarity-forever-summit' className='text-muted'>Solidarity Forever Summit</Link>
+                    <Link href='https://docs.google.com/forms/d/e/1FAIpQLSeinpkZItMdCGmDloI6HQm8TUJWV3foEx_Yadx3TckAsJ8WAQ/viewform?usp=sharing' className='text-muted'>Solidarity Forever Summit</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
                     <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>

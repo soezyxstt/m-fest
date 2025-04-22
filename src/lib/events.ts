@@ -26,6 +26,7 @@ export   const events = [
     title: 'Solidarity Forever Summit',
     desc: 'Address important issues, mechanical engineering related, and discuss how we might approach and even solve this problems.',
     img: '/event/solvermit.jpg',
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSeinpkZItMdCGmDloI6HQm8TUJWV3foEx_Yadx3TckAsJ8WAQ/viewform?usp=sharing',
   },
   {
     title: 'M-Talks',
