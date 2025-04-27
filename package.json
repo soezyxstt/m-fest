@@ -54,14 +54,14 @@
     "usehooks-ts": "^3.1.0",
     "vaul": "^1.1.2",
     "zod": "^3.24.1",
-    "prisma": "^6.0.1"
+    "prisma": "^6.0.1",
+    "babel-plugin-react-compiler": "^19.0.0-beta-37ed2a7-20241206"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "babel-plugin-react-compiler": "^19.0.0-beta-37ed2a7-20241206",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "^9",
