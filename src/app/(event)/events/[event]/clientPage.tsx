@@ -136,7 +136,6 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
 
           {/* The Actual Form */}
           {isDone ||
-
             <Carousel>
               <CarouselContent className='max-w-[60vw]'>
                 <CarouselItem>
@@ -342,6 +341,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                     handleSubmit(onSubmit)();
                   }}
                     disabled={!isValid || !isDirty || isSubmitting} type='submit'
+                    variant='glow'
                   >
                     Register
                   </GradientButton>
@@ -352,12 +352,12 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
 
           {isDone &&
             <div className="flex flex-col items-center justify-center text-center space-y-8 md:pl-20 max-w-[60vw]">
-                <title.h3 className="font-medium">
+              <title.h3 className="font-medium">
                 Hi, <span className="text-azure-m">{getValues('name').split(" ")[0]}</span>.
                 Thanks for registering <span className="text-mauve-m">{event}</span>.
                 <br />
                 May you enjoy your day at <span className="text-amber-500">Mechanical Festival 2025</span> 🎉🎉🎉!
-                </title.h3>
+              </title.h3>
               <Link href="/">
                 <GradientButton className="min-w-28" variant='outline'>
                   Back to Home
