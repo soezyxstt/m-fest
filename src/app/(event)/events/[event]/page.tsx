@@ -4,11 +4,17 @@ import { cache } from 'react';
 import GradientText from '@/components/ui/text/gradient';
 import { unstable_cache } from 'next/cache';
 import { prisma } from '@/server/prisma';
+import { redirect } from 'next/navigation';
+import { EventName } from '@prisma/client';
 
 const getRegistrations = unstable_cache(
-  async () => await prisma.eventRegistration.findMany(),
+  async (eventName: EventName) => await prisma.eventRegistration.findMany({
+    where: {
+      eventName: eventName,
+    }
+  }),
   ['getRegistrations'],
-  {revalidate: 60*30} // Set revalidate to 0 for immediate cache invalidation
+  { revalidate: 60 * 30 } // Set revalidate to 0 for immediate cache invalidation
 )
 
 export default async function EventPage({
@@ -31,7 +37,11 @@ export default async function EventPage({
 
   const eventDate = new Date('2026-10-14T08:00:00Z'); // Example date
   const isEventOpen = now < eventDate;
-  const registrations = await getRegistrations();
+  const registrations = await getRegistrations(event.replace(/-/g, '_').toUpperCase() as EventName);
+
+  if (!['m-talks', 'm-expo'].includes(event.toLowerCase())) {
+    redirect('/404')
+  }
 
   if (!isEventOpen) {
     return (

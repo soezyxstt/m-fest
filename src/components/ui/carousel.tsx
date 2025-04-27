@@ -269,7 +269,7 @@ const NextButton = React.forwardRef<
         scrollNext()
       }}
       {...props}
-      className={cn('flex gap-2 justify-center items-center group min-w-28', className)}
+      className={cn('flex gap-2 justify-center items-center group min-w-20 md:min-w-28', className)}
     >
       <span className="">Next</span>
       <ArrowRight
@@ -297,7 +297,7 @@ const PrevButton = React.forwardRef<
         scrollPrev()
       }}
       {...props}
-      className={cn('flex gap-2 justify-center items-center group min-w-28', className)}
+      className={cn('flex gap-2 justify-center items-center group min-w-20 md:min-w-28', className)}
     >
       <ArrowLeft
         size={16}

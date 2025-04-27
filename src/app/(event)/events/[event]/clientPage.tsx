@@ -17,9 +17,9 @@ import { EventName, EventRegInstitution } from "@prisma/client"
 import { useAction } from 'next-safe-action/hooks';
 import { registerEvent } from '@/app/_action/register';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 export default function ClientPage({ event, regs }: { event: string, regs: { name: string, nim: string | null, phoneNumber: string }[] }) {
+  const [isDone, setIsDone] = useState(false);
   const { register, handleSubmit, watch, setValue, getValues, formState: { errors, isDirty, isValid, isSubmitting } } = useForm<z.infer<typeof eventRegistrationSchema>>({
     mode: 'onChange',
     defaultValues: {
@@ -33,15 +33,13 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
     },
   });
 
-  const router = useRouter();
-
   const { execute } = useAction(registerEvent, {
     onSuccess: () => {
       toast.success(`Congrats, ${getValues('name').split(" ")[0]}. The registration successful!`);
 
       setTimeout(() => {
-        router.push('/');
-      }, 5000);
+        setIsDone(true);
+      }, 2000);
     },
     onError: () => {
       toast.error('Failed to register');
@@ -137,205 +135,236 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
           </div>
 
           {/* The Actual Form */}
-          <Carousel>
-            <CarouselContent className='max-w-[60vw]'>
-              <CarouselItem>
-                <div className='md:pl-20 space-y-6'>
-                  <div className='text-muted text-sm'>Step {step}</div>
-                  <title.h2 className='text-3xl font-medium mb-12'>
-                    Please confirm that you are registering for <strong className='text-azure-m'>{event}</strong> and <span className="text-mauve-m">you&apos;re not gay nor a bot
-                    </span>.
-                  </title.h2>
-                  <p className="">Click next button to continue</p>
-                </div>
-              </CarouselItem>
-              <CarouselItem>
-                <div className='md:pl-20 space-y-6'>
-                  <div className='text-muted text-sm'>Step {step}</div>
-                  <title.h3 className='text-3xl font-medium mb-12'>Please <span className="text-azure-m">fill</span> all the <span className="text-mauve-m">empty blanks</span> below.</title.h3>
-                  <div className='grid grid-cols-1 gap-4'>
-                    <div className="space-y-1">
-                      <Input
-                        {...register("name", {
-                          required: "Name is required",
-                          minLength: {
-                            value: 3,
-                            message: "Name must be at least 3 characters"
-                          },
-                          validate: {
-                            hasFullName: value => {
-                              const words = value.trim().split(/\s+/);
-                              return words.length >= 2 || 'Please enter your full name (first and last name)';
-                            },
-                            notRegistered: value => {
-                              const nameExists = regs.some(reg => reg.name === value);
-                              return !nameExists || 'This name is already registered for this event';
-                            }
-                          }
-                        })}
-                        placeholder='name'
-                      />
-                      {errors.name && (
-                        <p className="text-xs text-red-500 ml-1">
-                          {errors.name.message || 'Name must be at least 3 characters with first and last name'}
-                        </p>
-                      )}
-                    </div>
-                    <Select {...register('institutionType', { minLength: 3, required: "Please select the corresponding institution type." })} onValueChange={(v) => setValue('institutionType', v as EventRegInstitution)}>
-                      <SelectTrigger>
-                        <SelectValue className='text-muted placeholder:text-muted' placeholder='Institution' />
-                      </SelectTrigger>
-                      <SelectContent className='backdrop-blur-sm bg-white/10'>
-                        {Object.keys(EventRegInstitution).map((institution) => (
-                          <SelectItem key={institution} value={institution} className=' text-white'>{institution}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    {watch('institutionType') === 'ITB' && (
+          {isDone ||
+
+            <Carousel>
+              <CarouselContent className='max-w-[60vw]'>
+                <CarouselItem>
+                  <div className='md:pl-20 space-y-6'>
+                    <div className='text-muted text-sm'>Step {step}</div>
+                    <title.h2 className='text-3xl font-medium mb-12'>
+                      Please confirm that you are registering for <strong className='text-azure-m'>{event}</strong> and <span className="text-mauve-m">you&apos;re not gay nor a bot
+                      </span>.
+                    </title.h2>
+                    <p className="">Click next button to continue</p>
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className='md:pl-20 space-y-6'>
+                    <div className='text-muted text-sm'>Step {step}</div>
+                    <title.h3 className='text-3xl font-medium mb-12'>Please <span className="text-azure-m">fill</span> all the <span className="text-mauve-m">empty blanks</span> below.</title.h3>
+                    <div className='grid grid-cols-1 gap-4'>
                       <div className="space-y-1">
                         <Input
-                          placeholder='NIM'
-                          {...register('nim', {
+                          {...register("name", {
+                            required: "Name is required",
                             minLength: {
-                              value: 8,
-                              message: 'NIM must be exactly 8 characters'
+                              value: 3,
+                              message: "Name must be at least 3 characters"
                             },
-                            maxLength: {
-                              value: 8,
-                              message: 'NIM must be exactly 8 characters'
-                            },
-                            validate: value => {
-                              // Check if the NIM exists in regs array
-                              const nimExists = regs.some(reg => reg.nim === value);
-                              if (nimExists) return 'This NIM is already registered';
-                              
-                              // Check if the first 3 digits are valid
-                              const firstThreeDigits = value?.substring(0, 3);
-                              const isValidNIM = nims.includes(firstThreeDigits!);
-                              if (!isValidNIM) return 'Please enter a valid ITB NIM';
-                              
-                              return true;
+                            validate: {
+                              hasFullName: value => {
+                                const words = value.trim().split(/\s+/);
+                                return words.length >= 2 || 'Please enter your full name (first and last name)';
+                              },
+                              notRegistered: value => {
+                                const nameExists = regs.some(reg => reg.name === value);
+                                return !nameExists || 'This name is already registered for this event';
+                              }
                             }
                           })}
+                          placeholder='name'
                         />
-                        {errors.nim && (
+                        {errors.name && (
                           <p className="text-xs text-red-500 ml-1">
-                            {errors.nim.message || 'NIM must be exactly 8 characters'}
+                            {errors.name.message || 'Name must be at least 3 characters with first and last name'}
                           </p>
                         )}
                       </div>
-                    )}
-                    {watch('institutionType') === 'NON_ITB' && (
+                      <Select {...register('institutionType', { minLength: 3, required: "Please select the corresponding institution type." })} onValueChange={(v) => setValue('institutionType', v as EventRegInstitution)}>
+                        <SelectTrigger>
+                          <SelectValue className='text-muted placeholder:text-muted' placeholder='Institution' />
+                        </SelectTrigger>
+                        <SelectContent className='backdrop-blur-sm bg-white/10'>
+                          {Object.keys(EventRegInstitution).map((institution) => (
+                            <SelectItem key={institution} value={institution} className=' text-white'>{institution}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      {watch('institutionType') === 'ITB' && (
+                        <div className="space-y-1">
+                          <Input
+                            placeholder='NIM'
+                            {...register('nim', {
+                              minLength: {
+                                value: 8,
+                                message: 'NIM must be exactly 8 characters'
+                              },
+                              maxLength: {
+                                value: 8,
+                                message: 'NIM must be exactly 8 characters'
+                              },
+                              validate: value => {
+                                // Check if the NIM exists in regs array
+                                const nimExists = regs.some(reg => reg.nim === value);
+                                if (nimExists) return 'This NIM is already registered';
+
+                                // Check if the first 3 digits are valid
+                                const firstThreeDigits = value?.substring(0, 3);
+                                const isValidNIM = nims.includes(firstThreeDigits!);
+                                if (!isValidNIM) return 'Please enter a valid ITB NIM';
+
+                                return true;
+                              }
+                            })}
+                          />
+                          {errors.nim && (
+                            <p className="text-xs text-red-500 ml-1">
+                              {errors.nim.message || 'NIM must be exactly 8 characters'}
+                            </p>
+                          )}
+                        </div>
+                      )}
+                      {watch('institutionType') === 'NON_ITB' && (
+                        <div className="space-y-1">
+                          <Input
+                            placeholder='institution name e.g Institut Teknologi Bandung'
+                            {...register('institutionName', {
+                              minLength: 3,
+                              validate: value => {
+                                if (!value) return 'Institution name is required';
+                                return universities.some(uni =>
+                                  uni.toLowerCase() === value.toLowerCase() ||
+                                  uni.toLowerCase().includes(value.toLowerCase())
+                                ) || 'Please enter a valid institution name';
+                              }
+                            })}
+                          />
+                          {errors.institutionName && (
+                            <p className="text-xs text-red-500 ml-1">
+                              {errors.institutionName.message || 'Institution name must be at least 3 characters'}
+                            </p>
+                          )}
+                        </div>
+                      )}
                       <div className="space-y-1">
                         <Input
-                          placeholder='institution name e.g Institut Teknologi Bandung'
-                          {...register('institutionName', {
-                            minLength: 3,
+                          placeholder='phone number'
+                          type='number'
+                          {...register('phoneNumber', {
+                            minLength: 8,
+                            maxLength: 15,
                             validate: value => {
-                              if (!value) return 'Institution name is required';
-                              return universities.some(uni =>
-                                uni.toLowerCase() === value.toLowerCase() ||
-                                uni.toLowerCase().includes(value.toLowerCase())
-                              ) || 'Please enter a valid institution name';
+                              // Check if the phone number exists in regs array
+                              const phoneExists = regs.some(reg => reg.phoneNumber === value);
+                              return !phoneExists || 'This phone number is already registered';
                             }
                           })}
                         />
-                        {errors.institutionName && (
+                        {errors.phoneNumber && (
                           <p className="text-xs text-red-500 ml-1">
-                            {errors.institutionName.message || 'Institution name must be at least 3 characters'}
+                            {errors.phoneNumber.message || 'Phone number must be between 8-15 digits'}
                           </p>
                         )}
                       </div>
-                    )}
-                    <div className="space-y-1">
-                      <Input
-                        placeholder='phone number'
-                        type='number'
-                        {...register('phoneNumber', {
-                          minLength: 8,
-                          maxLength: 15,
-                          validate: value => {
-                            // Check if the phone number exists in regs array
-                            const phoneExists = regs.some(reg => reg.phoneNumber === value);
-                            return !phoneExists || 'This phone number is already registered';
-                          }
-                        })}
-                      />
-                      {errors.phoneNumber && (
-                        <p className="text-xs text-red-500 ml-1">
-                          {errors.phoneNumber.message || 'Phone number must be between 8-15 digits'}
-                        </p>
-                      )}
+                      <Input {...register('followIG')} type='file' accept='image/*' className='hidden' id='follow_ig' />
+                      <label role='button' htmlFor="follow_ig" className='flex h-9 items-center w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-stone-400 placeholder:text-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-muted cursor-pointer'>{!!watch('followIG')[0] ? getValues('followIG')[0].name : "screenshot of following mfestitb"}</label>
                     </div>
-                    <Input {...register('followIG')} type='file' accept='image/*' className='hidden' id='follow_ig' />
-                    <label role='button' htmlFor="follow_ig" className='flex h-9 items-center w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-stone-400 placeholder:text-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-muted cursor-pointer'>{!!watch('followIG')[0] ? getValues('followIG')[0].name : "screenshot of following mfestitb"}</label>
                   </div>
-                </div>
-              </CarouselItem>
-              <CarouselItem>
-                <div className='md:pl-20 space-y-6'>
-                  <div className='text-muted text-sm'>Step {step}</div>
-                  <title.h3 className='text-3xl font-medium mb-12'>Let&apos;s <span className='text-mauve-m'>rewiew</span> your answers in the step 2.</title.h3>
-                  <div className="space-y-2">
-                    <div className="md:grid-cols-2 grid grid-cols-1 gap-2 w-full">
-                      <div className="flex justify-between items-center">
-                        <p className={getValues('name') && !errors.name ? "line-through text-muted" : "text-red-500"}>Name</p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <p className={getValues('institutionType') && !errors.institutionType ? "line-through text-muted" : "text-red-500"}>Institution</p>
-                      </div>
-
-                      {getValues('institutionType') === 'ITB' && (
+                </CarouselItem>
+                <CarouselItem>
+                  <div className='md:pl-20 space-y-6'>
+                    <div className='text-muted text-sm'>Step {step}</div>
+                    <title.h3 className='text-3xl font-medium mb-12'>Let&apos;s <span className='text-mauve-m'>rewiew</span> your answers in the step 2.</title.h3>
+                    <div className="space-y-2">
+                      <div className="md:grid-cols-2 grid grid-cols-1 gap-2 w-full">
                         <div className="flex justify-between items-center">
-                          <p className={getValues('nim') && !errors.nim ? "line-through text-muted" : "text-red-500"}>NIM</p>
+                          <p className={getValues('name') && !errors.name ? "line-through text-muted" : "text-white"}>
+                            Name {getValues('name') && !errors.name ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                          <p className={getValues('institutionType') && !errors.institutionType ? "line-through text-muted" : "text-white"}>
+                            Institution {getValues('institutionType') && !errors.institutionType ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+
+                        {getValues('institutionType') === 'ITB' && (
+                          <div className="flex justify-between items-center">
+                            <p className={getValues('nim') && !errors.nim ? "line-through text-muted" : "text-white"}>
+                              NIM {getValues('nim') && !errors.nim ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                            </p>
+                          </div>
+                        )}
+
+                        {getValues('institutionType') === 'NON_ITB' && (
+                          <div className="flex justify-between items-center">
+                            <p className={getValues('institutionName') && !errors.institutionName ? "line-through text-muted" : "text-white"}>
+                              Institution Name {getValues('institutionName') && !errors.institutionName ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                            </p>
+                          </div>
+                        )}
+                        <div className="flex justify-between items-center">
+                          <p className={getValues('phoneNumber') && !errors.phoneNumber ? "line-through text-muted" : "text-white"}>
+                            Phone Number {getValues('phoneNumber') && !errors.phoneNumber ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+
+                        <div className="flex justify-between items-center">
+                          <p className={getValues('followIG')[0] && !errors.followIG ? "line-through text-muted" : "text-white"}>
+                            Instagram Follow Proof {getValues('followIG')[0] && !errors.followIG ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+                      </div>
+
+                      {isValid && isDirty ? (
+                        <div className="mt-8 text-lg">
+                          <p className="text-azure-m">Thanks! You can submit the form.</p>
+                        </div>
+                      ) : (
+                        <div className="mt-8 text-lg">
+                          <p className="">Please <span className="text-amber-500">recheck</span> all required fields.</p>
                         </div>
                       )}
-
-                      {getValues('institutionType') === 'NON_ITB' && (
-                        <div className="flex justify-between items-center">
-                          <p className={getValues('institutionName') && !errors.institutionName ? "line-through text-muted" : "text-red-500"}>Institution Name</p>
-                        </div>
-                      )}
-                      <div className="flex justify-between items-center">
-                        <p className={getValues('phoneNumber') && !errors.phoneNumber ? "line-through text-muted" : "text-red-500"}>Phone Number</p>
-                      </div>
-
-                      <div className="flex justify-between items-center">
-                        <p className={getValues('followIG')[0] && !errors.followIG ? "line-through text-muted" : "text-red-500"}>Instagram Follow Proof</p>
-                      </div>
                     </div>
-
-                    {isValid && isDirty ? (
-                      <div className="mt-8 text-lg">
-                        <p className="text-azure-m">Thanks! You can submit the form.</p>
-                      </div>
-                    ) : (
-                      <div className="mt-8 text-lg">
-                        <p className="">Please <span className="text-amber-500">recheck</span> all required fields.</p>
-                      </div>
-                    )}
                   </div>
-                </div>
-              </CarouselItem>
-            </CarouselContent>
-            <div className="flex w-full justify-between mt-4 md:mt-16 md:pl-20">
-              <PrevButton onClick={() => {
-                setStep(step - 1);
-              }} />
-              {step < pageLength ? (<NextButton onClick={() => {
-                setStep(step + 1);
-              }} />) : (
-                <GradientButton className='min-w-28' onClick={() => {
-                  handleSubmit(onSubmit)();
-                }}
-                  disabled={!isValid || !isDirty || isSubmitting} type='submit'
-                >
-                  Register
+                </CarouselItem>
+              </CarouselContent>
+              <div className="flex w-full justify-between mt-4 md:mt-16 md:pl-20">
+                <PrevButton onClick={() => {
+                  setStep(step - 1);
+                }} />
+                {step < pageLength ? (<NextButton onClick={() => {
+                  setStep(step + 1);
+                }} />) : (
+                  <GradientButton className='min-w-28' onClick={() => {
+                    handleSubmit(onSubmit)();
+                  }}
+                    disabled={!isValid || !isDirty || isSubmitting} type='submit'
+                  >
+                    Register
+                  </GradientButton>
+                )}
+              </div>
+            </Carousel>
+          }
+
+          {isDone &&
+            <div className="flex flex-col items-center justify-center text-center space-y-8 md:pl-20 max-w-[60vw]">
+                <title.h3 className="font-medium">
+                Hi, <span className="text-azure-m">{getValues('name').split(" ")[0]}</span>.
+                Thanks for registering <span className="text-mauve-m">{event}</span>.
+                <br />
+                May you enjoy your day at <span className="text-amber-500">Mechanical Festival 2025</span> 🎉🎉🎉!
+                </title.h3>
+              <Link href="/">
+                <GradientButton className="min-w-28" variant='outline'>
+                  Back to Home
                 </GradientButton>
-              )}
+              </Link>
             </div>
-          </Carousel>
+          }
         </div>
       </div>
     </div>
