@@ -1,8 +1,12 @@
 'use server';
 
-import { authActionClient } from '@/lib/safe-action';
+import { actionClient, authActionClient } from '@/lib/safe-action';
 import { prisma } from '@/server/prisma';
-import { addTeacherSchema, registerSchema } from '@/lib/schema';
+import {
+  addTeacherSchema,
+  eventRegistrationSchema,
+  registerSchema,
+} from '@/lib/schema';
 import { cloudinary } from '@/lib/cloudinary';
 import { z } from 'zod';
 
@@ -142,3 +146,65 @@ export const updateVerified = authActionClient
       throw new Error('Failed to update verification status');
     }
   });
+
+export const registerEvent = actionClient
+  .metadata({ actionName: 'registerEvent' })
+  .schema(eventRegistrationSchema)
+  .action(
+    async ({
+      parsedInput: {
+        name,
+        eventName,
+        institutionType,
+        institutionName,
+        nim,
+        followIG,
+        phoneNumber,
+      },
+    }) => {
+      try {
+        const arrayBuffer = await followIG[0].arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        let data: object | null = null;
+
+        await new Promise(async (resolve, reject) => {
+          cloudinary.uploader
+            .upload_stream(
+              {
+                public_id: `follow-ig-proof-${name}-${phoneNumber}`,
+                resource_type: 'image',
+              },
+              async (err, callResult) => {
+                if (err || !callResult) {
+                  reject(err);
+                  return;
+                }
+
+                const { secure_url } = callResult;
+                data = await prisma.eventRegistration.create({
+                  data: {
+                    name,
+                    eventName,
+                    institutionType,
+                    institutionName,
+                    nim,
+                    phoneNumber,
+                    followIG: secure_url,
+                  },
+                });
+              }
+            )
+            .end(buffer);
+          resolve(data);
+        });
+
+        return data;
+      } catch (e) {
+        if (e instanceof Error) {
+          throw e;
+        }
+        throw new Error('Failed to register for the event');
+      }
+    }
+  );

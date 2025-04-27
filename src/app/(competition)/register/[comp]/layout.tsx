@@ -1,4 +1,4 @@
-export default async function ReggisterLayout({
+export default async function RegisterLayout({
   children,
   params,
 }: Readonly<{

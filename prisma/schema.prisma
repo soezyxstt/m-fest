@@ -19,6 +19,17 @@ enum Gender {
   P
 }
 
+enum EventName {
+  M_EXPO
+  M_TALKS
+}
+
+enum EventRegInstitution {
+  ITB
+  NON_ITB
+  UMUM
+}
+
 model Profile {
   id       String  @id @default(uuid())
   email    String  @unique
@@ -109,7 +120,7 @@ model Teacher {
   teamId      String   @unique
 }
 
-model MRunReggistration {
+model MRunRegistration {
   id               String   @id @default(uuid())
   name             String
   gender           Gender
@@ -124,4 +135,17 @@ model MRunReggistration {
   payment          String
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+model EventRegistration {
+  id              String              @id @default(uuid())
+  name            String
+  institutionType EventRegInstitution
+  nim             String?
+  institutionName String?
+  phoneNumber     String              @unique
+  followIG        String
+  eventName       EventName
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
 }

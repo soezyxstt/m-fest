@@ -1,4 +1,5 @@
 import { CompetitionName } from '@prisma/client';
+import { EventName, EventRegInstitution } from '@prisma/client';
 import { z } from 'zod';
 
 export const updateProfileSchema = z.object({
@@ -57,3 +58,48 @@ export const addTeacherSchema = z.object({
   NUPTK: z.string(),
   gender: z.enum(['L', 'P']),
 });
+
+export const eventRegistrationSchema = z
+  .object({
+    name: z.string().min(3).max(50),
+    institutionType: z.nativeEnum(EventRegInstitution),
+    nim: z.string().length(8).optional(),
+    institutionName: z.string().min(3).optional(),
+    phoneNumber: z.string().min(8).max(15),
+    followIG: z
+      .instanceof(File)
+      .array()
+      .refine(
+        (file) =>
+          [
+            'image/png',
+            'image/jpeg',
+            'image/jpg',
+            'image/svg+xml',
+            'image/gif',
+          ].includes(file[0].type),
+        { message: 'Invalid image file type' }
+      ),
+    eventName: z.nativeEnum(EventName),
+  })
+  .refine(
+    (data) => {
+      if (data.institutionType === EventRegInstitution.ITB) {
+        return !!data.nim;
+      }
+      return true;
+    },
+    { message: 'NIM is required for ITB students', path: ['nim'] }
+  )
+  .refine(
+    (data) => {
+      if (data.institutionType === EventRegInstitution.NON_ITB) {
+        return !!data.institutionName;
+      }
+      return true;
+    },
+    {
+      message: 'Institution name is required for non-ITB participants',
+      path: ['institutionName'],
+    }
+  );
