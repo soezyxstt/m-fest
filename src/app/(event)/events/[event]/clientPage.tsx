@@ -131,7 +131,6 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* The Actual Form */}
@@ -141,10 +140,9 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                 <CarouselItem>
                   <div className='md:pl-20 space-y-6'>
                     <div className='text-muted text-sm'>Step {step}</div>
-                    <title.h2 className='text-3xl font-medium mb-12'>
-                      Please confirm that you are registering for <strong className='text-azure-m'>{event}</strong> and <span className="text-mauve-m">you&apos;re not gay nor a bot
-                      </span>.
-                    </title.h2>
+                    <title.h3 className='font-medium mb-12'>
+                      Welcome to the <span className='text-azure-m'>{event}</span> RSVP! We&apos;re excited you&apos;re joining us. Please <span className='text-amber-500'>confirm</span> you&apos;re ready to <span className='text-mauve-m'>register for the event</span>.
+                    </title.h3>
                     <p className="">Click next button to continue</p>
                   </div>
                 </CarouselItem>

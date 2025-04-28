@@ -1,6 +1,6 @@
 "use client";
 
-import { CompetitionName } from '@prisma/client';
+import { CompetitionName, EventRegInstitution } from '@prisma/client';
 import { ColumnDef } from "@tanstack/react-table";
 import WrapperImage from './image';
 import { CheckForm } from './form';
@@ -107,4 +107,19 @@ export const accountColumn: ColumnDef<Account>[] = [
       key={row.original.id + "twibbon"}
     />
   }
+]
+
+export const eventColumn: ColumnDef<{ name: string, phoneNumber: string, institutionType: EventRegInstitution, nim: string | null, institutionName: string | null, followIG: string, updatedAt: Date }>[] = [
+  { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'phoneNumber', header: () => <div className="text-nowrap">Phone Number</div> },
+  { accessorKey: 'institutionType', header: 'Institution' },
+  { accessorKey: 'nim', header: 'NIM' },
+  { accessorKey: 'institutionName', header: 'Campus' },
+  {
+    accessorKey: 'followIG', header: () => <div className="text-nowrap">SS Follow IG</div>, cell: ({ row }) => <WrapperImage
+      src={row.getValue("followIG")}
+      key={row.original.name + "followIG"}
+    />
+  },
+  { accessorKey: 'updatedAt', header: () => <div className="text-nowrap">Updated At</div>, cell: ({ row }) => new Date(row.getValue("updatedAt")).toLocaleDateString() }
 ]
