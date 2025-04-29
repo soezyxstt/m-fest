@@ -1,9 +1,9 @@
-import { DataTable } from '@/components/data-table';
 import { prisma } from '@/server/prisma';
 import { EventName } from '@prisma/client';
 import { unstable_cache } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { eventColumn } from '../columns';
+import DataTableExcel from './data-table-excel';
 
 const getRegistrations = unstable_cache(
   async (eventName: EventName) => await prisma.eventRegistration.findMany({
@@ -27,8 +27,8 @@ export default async function EventAdminPage({
   }
 
   return (
-    <main className='h-screen p-8 md:p-16 text-white'>
-      <DataTable data={registrations} columns={eventColumn} />
+    <main className='h-screen pt-2 p-8 md:p-16 text-white'>
+      <DataTableExcel data={registrations} columns={eventColumn} title={event + '-registrant'} />
     </main>
   )
 }
