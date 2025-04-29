@@ -113,8 +113,8 @@ export const eventColumn: ColumnDef<{ name: string, phoneNumber: string, institu
   { accessorKey: 'name', header: 'Name' },
   { accessorKey: 'phoneNumber', header: () => <div className="text-nowrap">Phone Number</div> },
   { accessorKey: 'institutionType', header: 'Institution' },
-  { accessorKey: 'nim', header: 'NIM' },
-  { accessorKey: 'institutionName', header: 'Campus' },
+  { accessorKey: 'nim', header: 'NIM', cell: ({row}) => row.getValue("nim") ? row.getValue("nim") : "N/A" },
+  { accessorKey: 'institutionName', header: 'Campus', cell: ({row}) => row.getValue("institutionName") ? row.getValue("institutionName") : "N/A" },
   {
     accessorKey: 'followIG', header: () => <div className="text-nowrap">SS Follow IG</div>, cell: ({ row }) => <WrapperImage
       src={row.getValue("followIG")}

@@ -12,7 +12,7 @@ const getRegistrations = unstable_cache(
     }
   }),
   ['getRegistrationsAdmin'],
-  { revalidate: 60 * 5 } // Set revalidate to 0 for immediate cache invalidation
+  { revalidate: 30 } // Set revalidate to 0 for immediate cache invalidation
 )
 
 export default async function EventAdminPage({
