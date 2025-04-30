@@ -111,6 +111,7 @@ export const accountColumn: ColumnDef<Account>[] = [
 
 export const eventColumn: ColumnDef<{ name: string, phoneNumber: string, institutionType: EventRegInstitution, nim: string | null, institutionName: string | null, followIG: string, updatedAt: Date }>[] = [
   { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'email', header: 'Email' },
   { accessorKey: 'phoneNumber', header: () => <div className="text-nowrap">Phone Number</div> },
   { accessorKey: 'institutionType', header: 'Institution' },
   { accessorKey: 'nim', header: 'NIM', cell: ({row}) => row.getValue("nim") ? row.getValue("nim") : "N/A" },

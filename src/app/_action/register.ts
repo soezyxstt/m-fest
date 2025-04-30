@@ -160,6 +160,7 @@ export const registerEvent = actionClient
         nim,
         followIG,
         phoneNumber,
+        email
       },
     }) => {
       try {
@@ -190,6 +191,7 @@ export const registerEvent = actionClient
                     institutionName,
                     nim,
                     phoneNumber,
+                    email,
                     followIG: secure_url,
                   },
                 });

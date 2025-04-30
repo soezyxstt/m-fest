@@ -28,6 +28,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
       nim: '',
       institutionName: undefined,
       phoneNumber: '',
+      email: '',
       followIG: [],
       eventName: event.toUpperCase().replace('-', '_') as EventName,
     },
@@ -244,6 +245,31 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                           )}
                         </div>
                       )}
+                      <div className="space-y-1">
+                        <Input
+                          placeholder='email'
+                          type='email'
+                          {...register('email', {
+                            required: "Email is required",
+                            pattern: {
+                              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                              message: "Invalid email address"
+                            },
+                            validate: value => {
+                              // Basic email format validation
+                              if (!value.includes('@') || !value.includes('.')) {
+                                return 'Please enter a valid email address';
+                              }
+                              return true;
+                            }
+                          })}
+                        />
+                        {errors.email && (
+                          <p className="text-xs text-red-500 ml-1">
+                            {errors.email.message || 'Please enter a valid email address'}
+                          </p>
+                        )}
+                      </div>
                       <div className="space-y-1">
                         <Input
                           placeholder='phone number'

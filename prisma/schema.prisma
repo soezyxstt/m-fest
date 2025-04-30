@@ -141,6 +141,7 @@ model EventRegistration {
   id              String              @id @default(uuid())
   name            String
   institutionType EventRegInstitution
+  email           String?
   nim             String?
   institutionName String?
   phoneNumber     String              @unique
