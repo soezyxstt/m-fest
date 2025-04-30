@@ -137,7 +137,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
           {/* The Actual Form */}
           {isDone ||
             <Carousel>
-              <CarouselContent className='max-w-[60vw]'>
+              <CarouselContent className='md:max-w-[60vw] max-w-[72.5vw] max-md:px-[1.25vw]'>
                 <CarouselItem>
                   <div className='md:pl-20 space-y-6'>
                     <div className='text-muted text-sm'>Step {step}</div>

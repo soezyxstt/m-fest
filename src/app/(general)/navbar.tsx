@@ -159,7 +159,7 @@ export default function Navbar() {
                           </CommandGroup>
                           <CommandGroup heading='Events'>
                             <CommandItem asChild>
-                              <Link href='/register/m-care' className='text-muted'>M-Care</Link>
+                              <Link href='/events/m-care' className='text-muted'>M-Care</Link>
                             </CommandItem>
                             <CommandItem asChild>
                               <Link href='https://bit.ly/RegistrasiMRUN2025' target='_blank' className='text-muted'>M-Run</Link>
@@ -168,7 +168,7 @@ export default function Navbar() {
                               <Link href='https://bit.ly/RegistrasiETU' target='_blank' className='text-muted'>Engine Tune Up</Link>
                             </CommandItem>
                             <CommandItem asChild>
-                              <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
+                              <Link href='/events/m-expo' className='text-muted'>M-Expo</Link>
                             </CommandItem>
                             <CommandItem asChild>
                               <Link href='https://docs.google.com/forms/d/e/1FAIpQLSeinpkZItMdCGmDloI6HQm8TUJWV3foEx_Yadx3TckAsJ8WAQ/viewform?usp=sharing' className='text-muted'>
@@ -176,10 +176,10 @@ export default function Navbar() {
                               </Link>
                             </CommandItem>
                             <CommandItem asChild>
-                              <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
+                              <Link href='/events/m-talks' className='text-muted'>M-Talks</Link>
                             </CommandItem>
                             <CommandItem asChild>
-                              <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
+                              <Link href='/events/ceremony' className='text-muted'>Ceremony</Link>
                             </CommandItem>
                           </CommandGroup>
                         </CommandList>
@@ -274,7 +274,7 @@ export default function Navbar() {
                   <DropdownMenuLabel className='text-white'>Events</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/m-care' className='text-muted'>M-Care</Link>
+                    <Link href='/events/m-care' className='text-muted'>M-Care</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
                     <Link href='https://bit.ly/RegistrasiMRUN2025' target='_blank' className='text-muted'>M-Run</Link>
@@ -283,16 +283,16 @@ export default function Navbar() {
                     <Link href='https://bit.ly/RegistrasiETU' target='_blank' className='text-muted'>Engine Tune Up</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/m-expo' className='text-muted'>M-Expo</Link>
+                    <Link href='/events/m-expo' className='text-muted'>M-Expo</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
                     <Link href='https://docs.google.com/forms/d/e/1FAIpQLSeinpkZItMdCGmDloI6HQm8TUJWV3foEx_Yadx3TckAsJ8WAQ/viewform?usp=sharing' className='text-muted'>Solidarity Forever Summit</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/m-talks' className='text-muted'>M-Talks</Link>
+                    <Link href='/events/m-talks' className='text-muted'>M-Talks</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem className='cursor-pointer' asChild>
-                    <Link href='/register/ceremony' className='text-muted'>Ceremony</Link>
+                    <Link href='/events/ceremony' className='text-muted'>Ceremony</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
