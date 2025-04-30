@@ -228,7 +228,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                           <Input
                             placeholder='institution name e.g Institut Teknologi Bandung'
                             {...register('institutionName', {
-                              minLength: 3,
+                              minLength: 2,
                               validate: value => {
                                 if (!value) return 'Institution name is required';
                                 return universities.some(uni =>
