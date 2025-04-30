@@ -27,8 +27,8 @@ export default async function EventAdminPage({
   }
 
   return (
-    <main className='min-h-screen pt-2 p-8 md:p-16 text-white bg-fixed'>
-      <DataTableExcel data={registrations} columns={eventColumn} title={event + '-registrant'} />
+    <main className='min-h-screen pt-2 md:pt-8 p-8 md:p-16 text-white bg-fixed'>
+      <DataTableExcel datas={registrations} data={registrations} columns={eventColumn} title={event + '-registrant'} />
     </main>
   )
 }
