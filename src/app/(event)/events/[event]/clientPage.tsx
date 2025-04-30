@@ -476,127 +476,236 @@ export const nims = [
 ]
 
 export const universities = [
-  // Universitas & Institut Terkenal (Nasional & Bandung) - Sebagian besar sudah ada di list sebelumnya
   "universitas indonesia",
+  "UI",
   "universitas gadjah mada",
-  "institut teknologi bandung", // Bandung
-  "universitas padjadjaran", // Bandung (termasuk Jatinangor)
+  "UGM",
+  "institut teknologi bandung",
+  "ITB",
+  "universitas padjadjaran",
+  "Unpad",
   "institut pertanian bogor",
-  "ipb university",
+  "IPB",
+  "ipb university", // Duplikat IPB, disertakan sesuai list awal
+  "IPB",
   "universitas airlangga",
+  "Unair",
   "institut teknologi sepuluh nopember",
+  "ITS",
   "universitas brawijaya",
+  "UB",
   "universitas diponegoro",
+  "Undip",
   "universitas sebelas maret",
+  "UNS",
   "universitas hasanuddin",
+  "Unhas",
   "universitas sumatera utara",
+  "USU",
   "universitas andalas",
-  "universitas pendidikan indonesia", // Bandung
+  "Unand",
+  "universitas pendidikan indonesia",
+  "UPI",
   "universitas negeri yogyakarta",
+  "UNY",
   "universitas negeri malang",
+  "UM",
   "universitas negeri semarang",
+  "Unnes",
   "universitas syiah kuala",
+  "USK",
   "universitas udayana",
+  "Unud",
   "universitas lampung",
+  "Unila",
   "universitas sriwijaya",
+  "Unsri",
   "universitas jenderal soedirman",
+  "Unsoed",
   "universitas jember",
+  "Unej",
   "universitas negeri surabaya",
+  "Unesa",
   "universitas negeri jakarta",
+  "UNJ",
   "universitas terbuka",
-  "universitas bina nusantara", // BINUS (Ada kampus Bandung)
+  "UT",
+  "universitas bina nusantara",
+  "Binus",
   "universitas pelita harapan",
+  "UPH",
   "universitas katolik indonesia atma jaya",
+  "Unika Atma Jaya",
   "universitas trisakti",
+  "Usakti",
   "universitas tarumanagara",
+  "Untar",
   "universitas muhammadiyah yogyakarta",
+  "UMY",
   "universitas islam indonesia",
+  "UII",
   "universitas gunadarma",
-  "universitas telkom", // Bandung (Kab. Bandung)
+  "Gundar", // Atau UG
+  "universitas telkom",
+  "Tel-U",
   "universitas presiden",
+  "President University", // Atau PU
   "universitas negeri padang",
+  "UNP",
   "universitas jambi",
+  "Unja",
   "universitas sam ratulangi",
+  "Unsrat",
   "universitas lambung mangkurat",
+  "ULM",
   "universitas mulawarman",
+  "Unmul",
   "universitas mataram",
+  "Unram",
   "universitas riau",
+  "Unri",
   "universitas cenderawasih",
+  "Uncen",
   "universitas pattimura",
+  "Unpatti",
   "universitas tanjungpura",
+  "Untan",
   "universitas palangka raya",
+  "UPR",
   "universitas tadulako",
+  "Untad",
   "universitas halu oleo",
+  "UHO",
   "universitas bengkulu",
+  "Unib",
   "universitas sultan ageng tirtayasa",
+  "Untirta",
   "universitas trunojoyo madura",
+  "UTM",
   "universitas malikussaleh",
+  "Unimal",
   "universitas negeri gorontalo",
+  "UNG",
   "universitas pendidikan ganesha",
+  "Undiksha",
   "universitas bangka belitung",
+  "UBB",
   "universitas borneo tarakan",
+  "UBT",
   "institut teknologi sumatera",
+  "ITERA",
   "upn veteran jakarta",
+  "UPNVJ",
   "upn veteran yogyakarta",
+  "UPNVYK",
   "upn veteran jawa timur",
-  "universitas islam bandung", // Bandung
-  "universitas katolik parahyangan", // Bandung
-  "universitas kristen maranatha", // Bandung
-  "universitas pasundan", // Bandung
-  "universitas komputer indonesia", // Bandung
-  "universitas widyatama", // Bandung
+  "UPN Jatim",
+  "universitas islam bandung",
+  "Unisba",
+  "universitas katolik parahyangan",
+  "Unpar",
+  "universitas kristen maranatha",
+  "UKM", // Atau Maranatha
+  "universitas pasundan",
+  "Unpas",
+  "universitas komputer indonesia",
+  "Unikom",
+  "universitas widyatama",
+  "Widyatama", // Atau Utama
   "universitas ahmad dahlan",
+  "UAD",
   "universitas muhammadiyah malang",
+  "UMM",
   "universitas kristen satya wacana",
+  "UKSW",
   "institut seni indonesia yogyakarta",
+  "ISI Yogyakarta",
   "institut seni indonesia surakarta",
+  "ISI Surakarta",
   "institut seni indonesia denpasar",
+  "ISI Denpasar",
   "institut seni indonesia padang panjang",
-  "institut seni budaya indonesia bandung", // Bandung
+  "ISI Padang Panjang",
+  "institut seni budaya indonesia bandung",
+  "ISBI Bandung",
   "institut seni budaya indonesia aceh",
-  "universitas jenderal achmad yani", // Cimahi (Dekat Bandung)
-
-  // Tambahan Universitas & Institut di Bandung & Sekitarnya
-  "universitas islam negeri sunan gunung djati", // Bandung
-  "institut teknologi nasional bandung", // Bandung (Itenas)
-  "universitas islam nusantara", // Bandung (Uninus)
-  "universitas langlangbuana", // Bandung (Unla)
-  "universitas nurtanio bandung", // Bandung (Unnur)
-  "universitas advent indonesia", // Bandung (Kab. Bandung Barat - Unai)
-  "universitas nasional pasim", // Bandung
-  "universitas sangga buana ypkp", // Bandung
-  "universitas al-ghifari", // Bandung
-  "universitas muhammadiyah bandung", // Bandung
-  "universitas kebangsaan republik indonesia", // Bandung (UKRI)
-  "universitas informatika dan bisnis indonesia", // Bandung (Unibi)
-  "institut teknologi harapan bangsa", // Bandung (ITHB)
-  "universitas logistik dan bisnis internasional", // Bandung (ULBI - Eks Poltekpos)
-  "universitas bale bandung", // Bandung (Kab. Bandung - Unibba)
-  "ars university", // Bandung
-  "international women university", // Bandung (IWU)
-  "universitas bina sarana informatika", // Bandung (UBSI Bandung)
-  "institut teknologi sains bandung", // Bandung (ITSB)
-  "universitas winaya mukti", // Bandung (Unwim)
-  "universitas teknologi digital", // Bandung (Digitech University)
-  "institut agama islam persis bandung", // Bandung
-
-  // Tambahan Politeknik & Sekolah Tinggi Terkenal di Bandung
-  "politeknik negeri bandung", // Bandung (Polban)
-  "politeknik manufaktur bandung", // Bandung (Polman Bandung)
-  "politeknik pariwisata nhi bandung", // Bandung (Poltekpar NHI - Eks STPB)
-  "sekolah tinggi hukum bandung", // Bandung (STHB)
-  "sekolah tinggi ilmu ekonomi ekuitas", // Bandung (STIE Ekuitas)
-  "sekolah tinggi ilmu kesehatan immanuel bandung", // Bandung (STIKes Immanuel)
-  "sekolah tinggi ilmu kesehatan dharma husada bandung", // Bandung (STIKes Dharma Husada)
-  "sekolah tinggi ilmu kesehatan aisyiyah bandung", // Bandung (STIKes 'Aisyiyah)
-  "stkip pasundan", // Cimahi/Bandung
-  "stmik bandung", // Bandung
-  "stmik lpkia bandung", // Bandung
-  "sekolah tinggi ilmu administrasi bandung", // Bandung (STIA Bandung)
-  "sekolah tinggi ilmu komunikasi bandung", // Bandung (STIKOM Bandung)
-  "sekolah tinggi manajemen bandung", // Bandung (STMB)
-  "sekolah tinggi teknologi bandung", // Bandung (STTB)
-  "stie inaba", // Bandung
-
-  // ...dan masih banyak lagi institusi lainnya (akademi, sekolah tinggi yang lebih kecil, dll.)
-]
+  "ISBI Aceh",
+  "universitas jenderal achmad yani",
+  "Unjani",
+  "universitas islam negeri sunan gunung djati",
+  "UIN SGD", // Atau UIN Bandung
+  "institut teknologi nasional bandung",
+  "Itenas",
+  "universitas islam nusantara",
+  "Uninus",
+  "universitas langlangbuana",
+  "Unla",
+  "universitas nurtanio bandung",
+  "Unnur",
+  "universitas advent indonesia",
+  "Unai",
+  "universitas nasional pasim",
+  "Unas PASIM",
+  "universitas sangga buana ypkp",
+  "USB YPKP",
+  "universitas al-ghifari",
+  "Unfari",
+  "universitas muhammadiyah bandung",
+  "UMBandung",
+  "universitas kebangsaan republik indonesia",
+  "UKRI",
+  "universitas informatika dan bisnis indonesia",
+  "Unibi",
+  "institut teknologi harapan bangsa",
+  "ITHB",
+  "universitas logistik dan bisnis internasional",
+  "ULBI",
+  "universitas bale bandung",
+  "Unibba",
+  "ars university",
+  "ARS University",
+  "international women university",
+  "IWU",
+  "universitas bina sarana informatika",
+  "UBSI",
+  "institut teknologi sains bandung",
+  "ITSB",
+  "universitas winaya mukti",
+  "Unwim",
+  "universitas teknologi digital",
+  "UTDI", // Atau Digitech University
+  "institut agama islam persis bandung",
+  "IAI Persis",
+  "politeknik negeri bandung",
+  "Polban",
+  "politeknik manufaktur bandung",
+  "Polman Bandung",
+  "politeknik pariwisata nhi bandung",
+  "Poltekpar NHI", // Atau NHI Bandung
+  "sekolah tinggi hukum bandung",
+  "STHB",
+  "sekolah tinggi ilmu ekonomi ekuitas",
+  "STIE Ekuitas",
+  "sekolah tinggi ilmu kesehatan immanuel bandung",
+  "STIKes Immanuel",
+  "sekolah tinggi ilmu kesehatan dharma husada bandung",
+  "STIKes Dharma Husada",
+  "sekolah tinggi ilmu kesehatan aisyiyah bandung",
+  "STIKes 'Aisyiyah Bandung",
+  "stkip pasundan",
+  "STKIP Pasundan",
+  "stmik bandung",
+  "STMIK Bandung",
+  "stmik lpkia bandung",
+  "STMIK LPKIA",
+  "sekolah tinggi ilmu administrasi bandung",
+  "STIA Bandung",
+  "sekolah tinggi ilmu komunikasi bandung",
+  "STIKOM Bandung",
+  "sekolah tinggi manajemen bandung",
+  "STMB",
+  "sekolah tinggi teknologi bandung",
+  "STTB",
+  "stie inaba",
+  "STIE Inaba",
+];
