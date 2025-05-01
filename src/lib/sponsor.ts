@@ -1,6 +1,7 @@
 export const platinumSponsors = [
   'PT Medco Energi Internasional Tbk',
   'PT Bakrie Pipe',
+  'Yayasan Solidarity Forever',
 ];
 
 export const goldSponsors = ['PT GS Battery', 'PT Pupuk Kalimantan Timur'];
@@ -12,23 +13,42 @@ export const silverSponsors = [
   'PT Sagatrade Murni',
   'PT Arkha Jayati Persada',
   'PT Melu Bangun Wiweka',
+  'Astra Vision',
+  'Geolyra Energy',
+  'PHE',
+  'PNRE',
+  'PT Komatsu Indonesia',
 ];
 
-export const bronzeSponsors = ['PT Gexcon', 'PT Aerozeta'];
+export const bronzeSponsors = ['PT Gexcon', 'PT Aerozeta', 'Goser', 'Revolutek', 'SP MPS'];
 
 export const supportingSponsors = [
   'PT LAPI ITB',
   'PT Geodipa',
   'Yayasan Persada Hati',
+  'Pertamina Enduro'
 ];
 
 export const collaborativeSponsors = [
-  'Himpunan Mahasiswa Teknik Kimia ITB',
-  'Himpunan Mahasiswa Teknik Pertambangan ITB',
-  'Himpunan Mahasiswa Teknik Perminyakan ITB',
-  'Himpunan Mahasiswa Teknik Metalurgi ITB',
-  'AIChE ITB Student Chapter',
-  'SPE ITB Student Chapter',
+  'Bentley',
+  'Himatika',
+  'IAFMI',
+  'Neutron Bandung',
+  'PT Harbour Energy',
+  'PT Lestari',
+  'PT My Eco',
+  'PT Paragon Corp'
+];
+
+export const medpartnerSponsors = [
+  '8EH',
+  'Acara Bandung Transparent',
+  'Event Bandung',
+  'Fourier',
+  'itbreceh',
+  'Jagat Event',
+  'LFM',
+  'Mahasiswa Teknik Mesin'
 ];
 
 /**
@@ -46,6 +66,7 @@ export function getImageFilename(
     | 'bronze'
     | 'collaborative'
     | 'supporting_technician'
+    | 'media'
 ): string {
   return '/sponsor/' + type + '/' + sponsorName.replace(/\s+/g, '_') + '.png';
 }

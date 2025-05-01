@@ -160,7 +160,9 @@ export const registerEvent = actionClient
         nim,
         followIG,
         phoneNumber,
-        email
+        email,
+        day1,
+        day2,
       },
     }) => {
       try {
@@ -168,6 +170,8 @@ export const registerEvent = actionClient
         const buffer = Buffer.from(arrayBuffer);
 
         let data: object | null = null;
+
+        console.log("xxx");
 
         await new Promise(async (resolve, reject) => {
           cloudinary.uploader
@@ -193,6 +197,7 @@ export const registerEvent = actionClient
                     phoneNumber,
                     email,
                     followIG: secure_url,
+                    day: day1 ? day2 ? "BOTH" : "DAY_1" : "DAY_2",
                   },
                 });
               }
@@ -207,6 +212,43 @@ export const registerEvent = actionClient
           throw e;
         }
         throw new Error('Failed to register for the event');
+      }
+    }
+  );
+
+export const updateEventRegistration = actionClient
+  .metadata({ actionName: 'updateEventRegistration' })
+  .schema(
+    z.object({
+      id: z.string(),
+      checked: z.boolean(),
+    })
+  )
+  .action(
+    async ({
+      parsedInput: {
+        id,
+        checked
+      },
+    }) => {
+      try {
+        const data = await prisma.eventRegistration.update({
+          where: { id },
+          data: {
+            checked,
+          },
+        });
+
+        if (!data) {
+          throw new Error('Failed to update event registration');
+        }
+
+        return data;
+      } catch (e) {
+        if (e instanceof Error) {
+          throw e;
+        }
+        throw new Error('Failed to update event registration');
       }
     }
   );

@@ -17,10 +17,12 @@ import { EventName, EventRegInstitution } from "@prisma/client"
 import { useAction } from 'next-safe-action/hooks';
 import { registerEvent } from '@/app/_action/register';
 import { toast } from 'sonner';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 export default function ClientPage({ event, regs }: { event: string, regs: { name: string, nim: string | null, phoneNumber: string }[] }) {
   const [isDone, setIsDone] = useState(false);
-  const { register, handleSubmit, watch, setValue, getValues, formState: { errors, isDirty, isValid, isSubmitting } } = useForm<z.infer<typeof eventRegistrationSchema>>({
+  const { register, handleSubmit, watch, setValue, getValues, formState: { errors, isValid, isSubmitting } } = useForm<z.infer<typeof eventRegistrationSchema>>({
     mode: 'onChange',
     defaultValues: {
       name: '',
@@ -31,6 +33,8 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
       email: '',
       followIG: [],
       eventName: event.toUpperCase().replace('-', '_') as EventName,
+      day1: true,
+      day2: true,
     },
   });
 
@@ -137,7 +141,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
           {/* The Actual Form */}
           {isDone ||
             <Carousel>
-              <CarouselContent className='md:max-w-[60vw] max-w-[72.5vw] max-md:px-[1.25vw]'>
+              <CarouselContent className='md:max-w-[60vw] max-w-[72.5vw] max-md:px-[1.25vw] flex items-center'>
                 <CarouselItem>
                   <div className='md:pl-20 space-y-6'>
                     <div className='text-muted text-sm'>Step {step}</div>
@@ -290,6 +294,32 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                           </p>
                         )}
                       </div>
+                      <div className='flex max-md:flex-col md:flex md:items-center gap-2 md:gap-4'>
+                        <Label className=' whitespace-nowrap text-nowrap text-muted'>Day to come: </Label>
+
+                        <div className='flex gap-4 items-center w-full'>
+                          <div className="flex gap-3 w-full border border-[#333] p-2 rounded-md shadow items-center">
+                            <Checkbox id='day-1' {...register('day1')} checked={watch('day1')} onCheckedChange={(v) => {
+                              setValue('day1', v as boolean);
+                              if (!v) {
+                                setValue('day2', true);
+                              }
+                            }} />
+                            <Label htmlFor='day-1' className=' max-md:text-xs'>Friday, 2 May</Label>
+                          </div>
+                          <div className="flex gap-3 w-full border border-[#333] p-2 rounded-md shadow items-center">
+                            <Checkbox id='day-2' {...register('day2')} checked={watch('day2')}
+                              onCheckedChange={(v) => {
+                                setValue('day2', v as boolean);
+                                if (!v) {
+                                  setValue('day1', true);
+                                }
+                              }}
+                            />
+                            <Label htmlFor='day-2' className=' max-md:text-xs'>Saturday, 3 May</Label>
+                          </div>
+                        </div>
+                      </div>
                       <Input {...register('followIG')} type='file' accept='image/*' className='hidden' id='follow_ig' />
                       <label role='button' htmlFor="follow_ig" className='flex h-9 items-center w-full rounded-md border border-input bg-transparent px-3 py-1 text-xs shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-stone-400 placeholder:text-muted focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm text-muted cursor-pointer'>{!!watch('followIG')[0] ? getValues('followIG')[0].name : "screenshot of following mfestitb"}</label>
                     </div>
@@ -328,9 +358,23 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                             </p>
                           </div>
                         )}
+
+                        <div className="flex justify-between items-center">
+                          <p className={getValues('email') && !errors.email ? "line-through text-muted" : "text-white"}>
+                            Email {getValues('email') && !errors.email ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+
                         <div className="flex justify-between items-center">
                           <p className={getValues('phoneNumber') && !errors.phoneNumber ? "line-through text-muted" : "text-white"}>
                             Phone Number {getValues('phoneNumber') && !errors.phoneNumber ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                          </p>
+                        </div>
+                      
+                        <div className="flex justify-between items-center">
+                          <p className={(watch('day1') || watch('day2')) ? "line-through text-muted" : "text-white"}>
+                            Day to come {(watch('day1') || watch('day2')) ? <span className="text-green-500">✓</span> : <span className="text-red-500">✕</span>}
+                            {!(watch('day1') || watch('day2')) && <span className="text-xs text-red-500 ml-2">At least one day must be selected</span>}
                           </p>
                         </div>
 
@@ -341,7 +385,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                         </div>
                       </div>
 
-                      {isValid && isDirty ? (
+                      {isValid ? (
                         <div className="mt-8 text-lg">
                           <p className="text-azure-m">Thanks! You can submit the form.</p>
                         </div>
@@ -354,7 +398,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                   </div>
                 </CarouselItem>
               </CarouselContent>
-              <div className="flex w-full justify-between mt-4 md:mt-16 md:pl-20">
+              <div className="flex w-full justify-between mt-8 md:mt-16 md:pl-20">
                 <PrevButton onClick={() => {
                   setStep(step - 1);
                 }} />
@@ -364,7 +408,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                   <GradientButton className='min-w-28' onClick={() => {
                     handleSubmit(onSubmit)();
                   }}
-                    disabled={!isValid || !isDirty || isSubmitting} type='submit'
+                    disabled={!isValid || isSubmitting} type='submit'
                     variant='glow'
                   >
                     Register

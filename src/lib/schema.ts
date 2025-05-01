@@ -67,6 +67,8 @@ export const eventRegistrationSchema = z
     email: z.string().email(),
     institutionName: z.string().optional(),
     phoneNumber: z.string().min(8).max(15),
+    day1: z.boolean().default(false),
+    day2: z.boolean().default(false),
     followIG: z
       .instanceof(File)
       .array()
@@ -102,5 +104,14 @@ export const eventRegistrationSchema = z
     {
       message: 'Institution name is required for non-ITB participants',
       path: ['institutionName'],
+    }
+  )
+  .refine(
+    (data) => {
+      return data.day1 || data.day2;
+    },
+    {
+      message: 'At least 1 day must be checked',
+      path: ['day1', 'day2'],
     }
   );

@@ -1,9 +1,10 @@
 "use client";
 
-import { CompetitionName, EventRegInstitution } from '@prisma/client';
+import { CompetitionName, EventDay, EventRegInstitution } from '@prisma/client';
 import { ColumnDef } from "@tanstack/react-table";
 import WrapperImage from './image';
 import { CheckForm } from './form';
+import CheckboxForm from './[event]/checkbox-form';
 // import { DataTableColumnHeader } from '@/components/column-header';
 
 export type Registration = {
@@ -109,13 +110,15 @@ export const accountColumn: ColumnDef<Account>[] = [
   }
 ]
 
-export const eventColumn: ColumnDef<{ name: string, phoneNumber: string, institutionType: EventRegInstitution, nim: string | null, institutionName: string | null, followIG: string, updatedAt: Date }>[] = [
+export const eventColumn: ColumnDef<{ name: string, phoneNumber: string, institutionType: EventRegInstitution, nim: string | null, institutionName: string | null, followIG: string, updatedAt: Date, email: string | null, day: EventDay | null, id: string, checked: boolean }>[] = [
   { accessorKey: 'name', header: 'Name' },
+  { accessorKey: 'checked', header: "Checked", cell: ({row}) => <CheckboxForm checked={row.getValue("checked")} id={row.original.id} /> },
   { accessorKey: 'email', header: 'Email' },
+  { accessorKey: 'day', header: 'Day', cell: ({ row }) => typeof (row.getValue('day')) === "string" ? (row.getValue('day') as string).replace("_", " ") : "-" },
   { accessorKey: 'phoneNumber', header: () => <div className="text-nowrap">Phone Number</div> },
   { accessorKey: 'institutionType', header: 'Institution' },
-  { accessorKey: 'nim', header: 'NIM', cell: ({row}) => row.getValue("nim") ? row.getValue("nim") : "N/A" },
-  { accessorKey: 'institutionName', header: 'Campus', cell: ({row}) => row.getValue("institutionName") ? row.getValue("institutionName") : "N/A" },
+  { accessorKey: 'nim', header: 'NIM', cell: ({ row }) => row.getValue("nim") ? row.getValue("nim") : "N/A" },
+  { accessorKey: 'institutionName', header: 'Campus', cell: ({ row }) => row.getValue("institutionName") ? row.getValue("institutionName") : "N/A" },
   {
     accessorKey: 'followIG', header: () => <div className="text-nowrap">SS Follow IG</div>, cell: ({ row }) => <WrapperImage
       src={row.getValue("followIG")}

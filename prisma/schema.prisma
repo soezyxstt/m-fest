@@ -137,6 +137,12 @@ model MRunRegistration {
   updatedAt        DateTime @updatedAt
 }
 
+enum EventDay {
+  DAY_1
+  DAY_2
+  BOTH
+}
+
 model EventRegistration {
   id              String              @id @default(uuid())
   name            String
@@ -147,6 +153,8 @@ model EventRegistration {
   phoneNumber     String              @unique
   followIG        String
   eventName       EventName
+  day             EventDay?
+  checked         Boolean             @default(false)
   createdAt       DateTime            @default(now())
   updatedAt       DateTime            @updatedAt
 }

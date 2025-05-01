@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { title } from '@/components/ui/text/title'
-import { bronzeSponsors, getImageFilename, goldSponsors, platinumSponsors, silverSponsors } from '@/lib/sponsor'
+import { bronzeSponsors, getImageFilename, goldSponsors, platinumSponsors, silverSponsors, supportingSponsors, collaborativeSponsors, medpartnerSponsors } from '@/lib/sponsor'
 
 export default async function Sponsor() {
   return (
@@ -38,6 +38,33 @@ export default async function Sponsor() {
         <div className="flex gap-4">
           {bronzeSponsors.map((sponsor, index) => (
             <SponsorItem key={index} title={sponsor} src={getImageFilename(sponsor, 'bronze')} size="sm" />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-8 items-center mt-12">
+        <title.h2>Collaborative Sponsors</title.h2>
+        <div className="flex flex-wrap justify-center w-full items-center gap-6">
+          {collaborativeSponsors.map((sponsor, index) => (
+            <SponsorItem key={index} title={sponsor} src={getImageFilename(sponsor, 'collaborative')} size="sm" />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-8 items-center mt-12">
+        <title.h2>Supporting Sponsors</title.h2>
+        <div className="flex flex-wrap justify-center w-full items-center gap-6">
+          {supportingSponsors.map((sponsor, index) => (
+            <SponsorItem key={index} title={sponsor} src={getImageFilename(sponsor, 'supporting_technician')} size="sm" />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-8 items-center mt-12">
+        <title.h2>Media Partners</title.h2>
+        <div className="flex flex-wrap justify-center w-full items-center gap-6">
+          {medpartnerSponsors.map((sponsor, index) => (
+            <SponsorItem key={index} title={sponsor} src={getImageFilename(sponsor, 'media')} size="sm" />
           ))}
         </div>
       </div>
