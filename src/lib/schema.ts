@@ -63,9 +63,9 @@ export const eventRegistrationSchema = z
   .object({
     name: z.string().min(3).max(50),
     institutionType: z.nativeEnum(EventRegInstitution),
-    nim: z.string().length(8).optional(),
+    nim: z.string().optional(),
     email: z.string().email(),
-    institutionName: z.string().min(3).optional(),
+    institutionName: z.string().optional(),
     phoneNumber: z.string().min(8).max(15),
     followIG: z
       .instanceof(File)
