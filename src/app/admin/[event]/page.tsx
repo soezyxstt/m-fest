@@ -4,16 +4,18 @@ import { EventName } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { eventColumn } from '../columns';
 import DataTableExcel from './data-table-excel';
+import { cache } from 'react';
 
-// const getRegistrations = unstable_cache(
-//   async (eventName: EventName) => await prisma.eventRegistration.findMany({
-//     where: {
-//       eventName: eventName,
-//     }
-//   }),
-//   ['getRegistrationsAdmin'],
-//   { revalidate: false } // Set revalidate to 0 for immediate cache invalidation
-// )
+const getRegistrations = cache(
+  async (eventName: EventName) => await prisma.eventRegistration.findMany({
+    where: {
+      eventName: eventName,
+    },
+    orderBy: {
+      name: 'asc',
+    },
+  })
+)
 
 export default async function EventAdminPage({
   params,
@@ -21,11 +23,7 @@ export default async function EventAdminPage({
   params: Promise<{ event: string }>;
 }>) {
   const { event } = await params;
-  const registrations = await prisma.eventRegistration.findMany({
-    where: {
-      eventName: event.replace(/-/g, '_').toUpperCase() as EventName,
-    }
-  });
+  const registrations = await getRegistrations(event.replace(/-/g, '_').toUpperCase() as EventName);
   if (!['m-talks', 'm-expo'].includes(event.toLowerCase())) {
     redirect('/404')
   }
