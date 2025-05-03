@@ -150,7 +150,7 @@ model EventRegistration {
   email           String?
   nim             String?
   institutionName String?
-  phoneNumber     String              @unique
+  phoneNumber     String             
   followIG        String
   eventName       EventName
   day             EventDay?

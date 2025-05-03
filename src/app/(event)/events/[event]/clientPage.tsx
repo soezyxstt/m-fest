@@ -20,9 +20,9 @@ import { toast } from 'sonner';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 
-export default function ClientPage({ event, regs }: { event: string, regs: { name: string, nim: string | null, phoneNumber: string }[] }) {
+export default function ClientPage({ event }: { event: string, regs: { name: string, nim: string | null, phoneNumber: string }[] }) {
   const [isDone, setIsDone] = useState(false);
-  const { register, handleSubmit, watch, setValue, getValues, formState: { errors, isValid, isSubmitting } } = useForm<z.infer<typeof eventRegistrationSchema>>({
+  const { register, handleSubmit, watch, setValue, getValues, formState: { errors, isValid, isSubmitting, isSubmitted } } = useForm<z.infer<typeof eventRegistrationSchema>>({
     mode: 'onChange',
     defaultValues: {
       name: '',
@@ -38,13 +38,11 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
     },
   });
 
-  const { execute } = useAction(registerEvent, {
+  const { execute, isExecuting, isPending } = useAction(registerEvent, {
     onSuccess: () => {
       toast.success(`Congrats, ${getValues('name').split(" ")[0]}. The registration successful!`);
 
-      setTimeout(() => {
-        setIsDone(true);
-      }, 2000);
+      setIsDone(true);
     },
     onError: () => {
       toast.error('Failed to register');
@@ -168,10 +166,6 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                               hasFullName: value => {
                                 const words = value.trim().split(/\s+/);
                                 return words.length >= 2 || 'Please enter your full name (first and last name)';
-                              },
-                              notRegistered: value => {
-                                const nameExists = regs.some(reg => reg.name === value);
-                                return !nameExists || 'This name is already registered for this event';
                               }
                             }
                           })}
@@ -207,10 +201,6 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                                 message: 'NIM must be exactly 8 characters'
                               },
                               validate: value => {
-                                // Check if the NIM exists in regs array
-                                const nimExists = regs.some(reg => reg.nim === value);
-                                if (nimExists) return 'This NIM is already registered';
-
                                 // Check if the first 3 digits are valid
                                 const firstThreeDigits = value?.substring(0, 3);
                                 const isValidNIM = nims.includes(firstThreeDigits!);
@@ -281,11 +271,6 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                           {...register('phoneNumber', {
                             minLength: 8,
                             maxLength: 15,
-                            validate: value => {
-                              // Check if the phone number exists in regs array
-                              const phoneExists = regs.some(reg => reg.phoneNumber === value);
-                              return !phoneExists || 'This phone number is already registered';
-                            }
                           })}
                         />
                         {errors.phoneNumber && (
@@ -299,7 +284,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
 
                         <div className='flex gap-4 items-center w-full'>
                           <div className="flex gap-3 w-full border border-[#333] p-2 rounded-md shadow items-center">
-                            <Checkbox id='day-1' {...register('day1')} checked={watch('day1')} onCheckedChange={(v) => {
+                            <Checkbox id='day-1' {...register('day1')} checked={getValues('day1')} onCheckedChange={(v) => {
                               setValue('day1', v as boolean);
                               if (!v) {
                                 setValue('day2', true);
@@ -308,7 +293,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                             <Label htmlFor='day-1' className=' max-md:text-xs'>Friday, 2 May</Label>
                           </div>
                           <div className="flex gap-3 w-full border border-[#333] p-2 rounded-md shadow items-center">
-                            <Checkbox id='day-2' {...register('day2')} checked={watch('day2')}
+                            <Checkbox id='day-2' {...register('day2')} checked={getValues('day2')}
                               onCheckedChange={(v) => {
                                 setValue('day2', v as boolean);
                                 if (!v) {
@@ -408,7 +393,7 @@ export default function ClientPage({ event, regs }: { event: string, regs: { nam
                   <GradientButton className='min-w-28' onClick={() => {
                     handleSubmit(onSubmit)();
                   }}
-                    disabled={!isValid || isSubmitting} type='submit'
+                    disabled={!isValid || isSubmitting || isExecuting || isPending || isSubmitted} type='submit'
                     variant='glow'
                   >
                     Register
