@@ -9,16 +9,7 @@ import { cache } from 'react';
 const getRegistrations = cache(
   async (eventName: EventName) => await prisma.eventRegistration.findMany({
     where: {
-      OR: [
-        {
-          eventName: eventName,
-          day: 'BOTH',
-         },
-        {
-          eventName: eventName,
-          day: 'DAY_2',
-         },
-      ]
+      eventName,
     },
     orderBy: {
       name: 'asc',
