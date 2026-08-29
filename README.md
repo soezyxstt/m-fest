@@ -1,61 +1,40 @@
 # Mechanical Festival 2025
 
-Full-stack event and competition platform for **Mechanical Festival 2025** — *Innovate Ideas. Create Impact*.
+Full-stack event and competition platform for Mechanical Festival 2025.
 
-The application combines the public event website with authenticated participant flows, competition pages, dashboards, and administrative tooling in a single Next.js codebase.
+The app combines the public event site, competition flows, participant dashboards, authentication, and admin tools in one Next.js codebase.
 
-## Product areas
+## Features
 
-- Public event landing page
-- Event timeline and FAQ
-- Competition-specific routes
-- Authentication
-- Participant dashboard
-- Administrative interface
-- Media upload workflows
-
-## Engineering highlights
-
-- Route-group architecture separating public, auth, competition, and dashboard experiences
-- Database-backed workflows using Prisma
-- Authentication integrated into the application
-- Admin and participant-facing surfaces in one full-stack application
-- Cloudinary-based media handling
-- Form validation and server actions
-- Motion-rich responsive event UI
+- Public event pages, timeline, and FAQ
+- Competition-specific flows
+- Authentication and participant dashboard
+- Admin interface
+- Media uploads
 
 ## Stack
 
-- **Next.js 15**
-- **React 19 + TypeScript**
-- **Prisma**
-- **NextAuth / Auth.js**
-- **Cloudinary**
-- **React Hook Form + Zod**
-- **Tailwind CSS**
-- **Motion / Lenis / tsparticles**
+`Next.js 15` `React 19` `TypeScript` `Prisma` `Auth.js` `Cloudinary` `Zod` `Tailwind CSS`
 
-## High-level structure
+## Structure
 
 ```text
 src/app/
-├── (general)      # Public event experience
+├── (general)      # Public pages
 ├── (auth)         # Authentication
 ├── (competition)  # Competition flows
 ├── (dashboard)    # Participant dashboard
-├── admin/          # Administrative tooling
+├── admin/          # Admin tools
 └── api/            # Server endpoints
 ```
 
-## Local development
+## Development
 
-Configure the database, authentication, and media environment variables, then run:
+Configure the required database, auth, and media environment variables, then run:
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Context
-
-Built for Mechanical Festival 2025 as an operational event platform rather than a standalone landing-page demo.
+Built as an operational platform for Mechanical Festival 2025.
